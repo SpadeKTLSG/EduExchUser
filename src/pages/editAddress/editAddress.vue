@@ -5,59 +5,59 @@
       <view class="section">
         <text>收 货 人</text>
         <input
-          placeholder="姓名"
-          type="text"
-          maxlength="15"
-          :value="receiver"
-          @input="onReceiverInput"
+            placeholder="姓名"
+            type="text"
+            maxlength="15"
+            :value="receiver"
+            @input="onReceiverInput"
         >
       </view>
       <view class="section">
         <text>手机号码</text>
         <input
-          placeholder="11位手机号码"
-          type="number"
-          maxlength="11"
-          :value="mobile"
-          @input="onMobileInput"
+            placeholder="11位手机号码"
+            type="number"
+            maxlength="11"
+            :value="mobile"
+            @input="onMobileInput"
         >
       </view>
       <view
-        class="section"
-        @tap="translate"
+          class="section"
+          @tap="translate"
       >
         <text>所在地区</text>
         <view class="pca">
           {{ province }} {{ city }} {{ area }}
         </view>
         <view
-          class="animation-element-wrapper"
-          :animation="animation"
-          :style="'visibility:' + (show ? 'visible':'hidden')"
-          @tap.stop="hiddenFloatView"
+            class="animation-element-wrapper"
+            :animation="animation"
+            :style="'visibility:' + (show ? 'visible':'hidden')"
+            @tap.stop="hiddenFloatView"
         >
           <view
-            class="animation-element"
-            @tap.stop="nono"
+              class="animation-element"
+              @tap.stop="nono"
           >
             <text
-              class="right-bt"
-              @tap.stop="hiddenFloatView"
+                class="right-bt"
+                @tap.stop="hiddenFloatView"
             >
               确定
             </text>
-            <view class="line" />
+            <view class="line"/>
             <picker-view
-              indicator-style="height: 50rpx;"
-              :value="valArr"
-              @change="bindChange"
-              @tap.stop="nono"
+                indicator-style="height: 50rpx;"
+                :value="valArr"
+                @change="bindChange"
+                @tap.stop="nono"
             >
               <!--省-->
               <picker-view-column>
                 <view
-                  v-for="(item, indexs) in provArray"
-                  :key="indexs"
+                    v-for="(item, indexs) in provArray"
+                    :key="indexs"
                 >
                   {{ item.areaName }}
                 </view>
@@ -65,8 +65,8 @@
               <!--地级市-->
               <picker-view-column>
                 <view
-                  v-for="(item, indexss) in cityArray"
-                  :key="indexss"
+                    v-for="(item, indexss) in cityArray"
+                    :key="indexss"
                 >
                   {{ item.areaName }}
                 </view>
@@ -74,8 +74,8 @@
               <!--区县-->
               <picker-view-column>
                 <view
-                  v-for="(item, indexsss) in areaArray"
-                  :key="indexsss"
+                    v-for="(item, indexsss) in areaArray"
+                    :key="indexsss"
                 >
                   {{ item.areaName }}
                 </view>
@@ -85,16 +85,16 @@
         </view>
 
         <view class="arrow">
-          <image src="@/static/images/icon/more.png" />
+          <image src="@/static/images/icon/more.png"/>
         </view>
       </view>
       <view class="section">
         <text>详细地址</text>
         <input
-          placeholder="如楼号/单元/门牌号"
-          type="text"
-          :value="addr"
-          @input="onAddrInput"
+            placeholder="如楼号/单元/门牌号"
+            type="text"
+            :value="addr"
+            @input="onAddrInput"
         >
       </view>
     </view>
@@ -102,16 +102,16 @@
     <!-- 功能按钮 -->
     <view class="btn-box">
       <view
-        class="keep btn"
-        @tap="onSaveAddr"
+          class="keep btn"
+          @tap="onSaveAddr"
       >
         <text>保存收货地址</text>
       </view>
 
       <view
-        v-if="addrId!=0"
-        class="clear btn"
-        @tap="onDeleteAddr"
+          v-if="addrId!=0"
+          class="clear btn"
+          @tap="onDeleteAddr"
       >
         <text>删除收货地址</text>
       </view>
@@ -139,20 +139,20 @@ onLoad((options) => {
       url: '/p/address/addrInfo/' + options.addrId,
       method: 'GET'
     })
-      .then(({ data }) => {
-        province.value = data.province
-        city.value = data.city
-        area.value = data.area
-        provinceId.value = data.provinceId
-        cityId.value = data.cityId
-        areaId.value = data.areaId
-        receiver.value = data.receiver
-        mobile.value = data.mobile
-        addr.value = data.addr
-        addrId.value = options.addrId
-        initCityData(data.provinceId, data.cityId, data.areaId)
-        uni.hideLoading()
-      })
+        .then(({ data }) => {
+          province.value = data.province
+          city.value = data.city
+          area.value = data.area
+          provinceId.value = data.provinceId
+          cityId.value = data.cityId
+          areaId.value = data.areaId
+          receiver.value = data.receiver
+          mobile.value = data.mobile
+          addr.value = data.addr
+          addrId.value = options.addrId
+          initCityData(data.provinceId, data.cityId, data.areaId)
+          uni.hideLoading()
+        })
   } else {
     initCityData(provinceId.value, cityId.value, areaId.value)
   }
@@ -169,18 +169,18 @@ const initCityData = (provinceId, cityId, areaId) => {
       pid: 0
     }
   })
-    .then(({ data }) => {
-      provArray.value = data
-      if (provinceId) {
-        for (const index in data) {
-          if (data[index].areaId === provinceId) {
-            valArr.value = [parseInt(index), valArr.value[1], valArr.value[2]]
+      .then(({ data }) => {
+        provArray.value = data
+        if (provinceId) {
+          for (const index in data) {
+            if (data[index].areaId === provinceId) {
+              valArr.value = [parseInt(index), valArr.value[1], valArr.value[2]]
+            }
           }
         }
-      }
-      getCityArray(provinceId || data[0].areaId, cityId, areaId)
-      uni.hideLoading()
-    })
+        getCityArray(provinceId || data[0].areaId, cityId, areaId)
+        uni.hideLoading()
+      })
 }
 
 let indexArr = [18, 0, 0]
@@ -271,18 +271,18 @@ const getCityArray = (provinceId, cityId, areaId) => {
       pid: provinceId
     }
   })
-    .then(({ data }) => {
-      cityArray.value = data
-      if (cityId) {
-        for (const index in data) {
-          if (data[index].areaId == cityId) {
-            valArr.value = [valArr.value[0], parseInt(index), valArr.value[2]]
+      .then(({ data }) => {
+        cityArray.value = data
+        if (cityId) {
+          for (const index in data) {
+            if (data[index].areaId == cityId) {
+              valArr.value = [valArr.value[0], parseInt(index), valArr.value[2]]
+            }
           }
         }
-      }
-      getAreaArray(cityId || data[0].areaId, areaId)
-      uni.hideLoading()
-    })
+        getAreaArray(cityId || data[0].areaId, areaId)
+        uni.hideLoading()
+      })
 }
 
 /**
@@ -384,12 +384,12 @@ const onSaveAddr = () => {
       addrId: addrId.value
     }
   })
-    .then(() => {
-      uni.hideLoading()
-      uni.navigateBack({
-        delta: 1
+      .then(() => {
+        uni.hideLoading()
+        uni.navigateBack({
+          delta: 1
+        })
       })
-    })
 }
 const onReceiverInput = (e) => {
   receiver.value = e.detail.value
@@ -418,12 +418,12 @@ const onDeleteAddr = () => {
           url: '/p/address/deleteAddr/' + addrIdParam,
           method: 'DELETE'
         })
-          .then(() => {
-            uni.hideLoading()
-            uni.navigateBack({
-              delta: 1
+            .then(() => {
+              uni.hideLoading()
+              uni.navigateBack({
+                delta: 1
+              })
             })
-          })
       }
     }
   })

@@ -1,7 +1,7 @@
 <template>
   <view class="register">
     <view class="con">
-      <image src="@/static/logo.png" />
+      <image src="@/static/logo.png"/>
       <!-- 登录 -->
       <view class="login-form">
         <view :class="['item',errorTips==1? 'error':'']">
@@ -10,16 +10,16 @@
               账号
             </text>
             <input
-              type="text"
-              data-type="account"
-              placeholder-class="inp-palcehoder"
-              placeholder="请输入账号名称"
-              @input="getInputVal"
+                type="text"
+                data-type="account"
+                placeholder-class="inp-palcehoder"
+                placeholder="请输入账号名称"
+                @input="getInputVal"
             >
           </view>
           <view
-            v-if="errorTips==1"
-            class="error-text"
+              v-if="errorTips==1"
+              class="error-text"
           >
             <text class="warning-icon">
               !
@@ -33,16 +33,16 @@
               密码
             </text>
             <input
-              type="password"
-              data-type="password"
-              placeholder-class="inp-palcehoder"
-              placeholder="请输入密码"
-              @input="getInputVal"
+                type="password"
+                data-type="password"
+                placeholder-class="inp-palcehoder"
+                placeholder="请输入密码"
+                @input="getInputVal"
             >
           </view>
           <view
-            v-if="errorTips==2"
-            class="error-text"
+              v-if="errorTips==2"
+              class="error-text"
           >
             <text class="warning-icon">
               !
@@ -52,8 +52,8 @@
         </view>
         <view class="operate">
           <view
-            class="to-register"
-            @tap="toLogin"
+              class="to-register"
+              @tap="toLogin"
           >
             已有账号？
             <text>去登录></text>
@@ -63,14 +63,14 @@
 
       <view>
         <button
-          class="authorized-btn"
-          @tap="toRegister"
+            class="authorized-btn"
+            @tap="toRegister"
         >
           注册
         </button>
         <button
-          class="to-idx-btn"
-          @tap="toIndex"
+            class="to-idx-btn"
+            @tap="toIndex"
         >
           回到首页
         </button>
@@ -127,19 +127,19 @@ const toRegister = () => {
         passWord: encrypt(credentials.value)
       }
     })
-      .then(() => {
-        uni.hideLoading()
-        uni.showToast({
-          title: '注册成功，请登录',
-          icon: 'none',
-          duration: 1500
-        })
-        setTimeout(() => {
-          uni.navigateTo({
-            url: '/pages/accountLogin/accountLogin'
+        .then(() => {
+          uni.hideLoading()
+          uni.showToast({
+            title: '注册成功，请登录',
+            icon: 'none',
+            duration: 1500
           })
-        }, 1800)
-      })
+          setTimeout(() => {
+            uni.navigateTo({
+              url: '/pages/accountLogin/accountLogin'
+            })
+          }, 1800)
+        })
   }
 }
 /**

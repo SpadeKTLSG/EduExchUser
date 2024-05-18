@@ -4,21 +4,21 @@
     <view class="search-bar">
       <view class="search-box">
         <input
-          placeholder="输入关键字搜索"
-          class="sear-input"
-          confirm-type="search"
-          :value="prodName"
-          @confirm="toSearchProdPage"
-          @input="getSearchContent"
+            placeholder="输入关键字搜索"
+            class="sear-input"
+            confirm-type="search"
+            :value="prodName"
+            @confirm="toSearchProdPage"
+            @input="getSearchContent"
         >
         <image
-          src="@/static/images/icon/search.png"
-          class="search-img"
+            src="@/static/images/icon/search.png"
+            class="search-img"
         />
       </view>
       <text
-        class="search-hint"
-        @tap="goBackIndex"
+          class="search-hint"
+          @tap="goBackIndex"
       >
         取消
       </text>
@@ -31,25 +31,25 @@
           热门搜索
         </view>
         <view
-          v-if="hotSearchList && hotSearchList.length"
-          class="hot-search-tags"
+            v-if="hotSearchList && hotSearchList.length"
+            class="hot-search-tags"
         >
           <block
-            v-for="(item, index) in hotSearchList"
-            :key="index"
+              v-for="(item, index) in hotSearchList"
+              :key="index"
           >
             <text
-              class="tags"
-              :data-name="item.content"
-              @tap="onHistSearch"
+                class="tags"
+                :data-name="item.content"
+                @tap="onHistSearch"
             >
               {{ item.title }}
             </text>
           </block>
         </view>
         <view
-          v-else
-          class="search-tit-empty"
+            v-else
+            class="search-tit-empty"
         >
           暂无数据
         </view>
@@ -57,27 +57,27 @@
 
       <!-- 搜索历史 -->
       <view
-        v-if="recentSearch && recentSearch.length"
-        class="history-search"
+          v-if="recentSearch && recentSearch.length"
+          class="history-search"
       >
         <view class="title-text history-line">
           搜索历史
           <view class="clear-history">
             <image
-              src="@/static/images/icon/clear-his.png"
-              @tap="clearSearch"
+                src="@/static/images/icon/clear-his.png"
+                @tap="clearSearch"
             />
           </view>
         </view>
         <block
-          v-for="(item, index) in recentSearch"
-          :key="index"
+            v-for="(item, index) in recentSearch"
+            :key="index"
         >
           <view class="his-search-tags">
             <text
-              class="tags"
-              :data-name="item"
-              @tap="onHistSearch"
+                class="tags"
+                :data-name="item"
+                @tap="onHistSearch"
             >
               {{ item }}
             </text>
@@ -103,9 +103,9 @@ onShow(() => {
       sort: 1
     }
   })
-    .then(({ data }) => {
-      hotSearchList.value = data
-    })
+      .then(({ data }) => {
+        hotSearchList.value = data
+      })
   // 获取历史搜索
   getRecentSearch()
 })

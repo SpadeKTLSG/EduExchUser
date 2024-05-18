@@ -3,12 +3,12 @@
     <!-- 头部搜索区 -->
     <view class="search-bar">
       <view
-        class="search-box"
-        @tap="toSearchPage"
+          class="search-box"
+          @tap="toSearchPage"
       >
         <image
-          src="@/static/images/icon/search.png"
-          class="search-img"
+            src="@/static/images/icon/search.png"
+            class="search-img"
         />
         <text class="sear-input">
           搜索您想要的商品
@@ -19,25 +19,25 @@
     <view class="main">
       <!-- 左侧菜单start -->
       <scroll-view
-        scroll-y="true"
-        class="leftmenu"
+          scroll-y="true"
+          class="leftmenu"
       >
         <block
-          v-for="(item, index) in categoryList"
-          :key="index"
+            v-for="(item, index) in categoryList"
+            :key="index"
         >
           <view
-            :class="'menu-item ' + (selIndex==index?'active':'') + ' '"
-            :data-index="index"
-            :data-id="item.categoryId"
-            @tap="onMenuTab"
+              :class="'menu-item ' + (selIndex==index?'active':'') + ' '"
+              :data-index="index"
+              :data-id="item.categoryId"
+              @tap="onMenuTab"
           >
             {{ item.categoryName }}
           </view>
         </block>
         <view
-          v-if="!categoryList || !categoryList.length"
-          class="ca-empty"
+            v-if="!categoryList || !categoryList.length"
+            class="ca-empty"
         >
           {{ categoryList && categoryList.length ? '该分类下暂无商品' : '暂无商品' }}
         </view>
@@ -46,37 +46,37 @@
 
       <!-- 右侧内容start -->
       <scroll-view
-        scroll-y="true"
-        class="rightcontent"
+          scroll-y="true"
+          class="rightcontent"
       >
         <view class="adver-map">
           <view class="item-a">
             <image
-              :src="util.checkFileUrl(categoryImg)"
-              mode="widthFix"
+                :src="util.checkFileUrl(categoryImg)"
+                mode="widthFix"
             />
           </view>
         </view>
         <!-- 子分类 -->
         <view
-          v-if="subCategoryList.length"
-          class="th-cate-con"
+            v-if="subCategoryList.length"
+            class="th-cate-con"
         >
           <block
-            v-for="(thCateItem, index) in subCategoryList"
-            :key="index"
+              v-for="(thCateItem, index) in subCategoryList"
+              :key="index"
           >
             <view class="sub-category">
               <view
-                class="sub-category-item"
-                :data-categoryid="thCateItem.categoryId"
-                :data-parentid="thCateItem.parentId"
-                @tap="toCatePage"
+                  class="sub-category-item"
+                  :data-categoryid="thCateItem.categoryId"
+                  :data-parentid="thCateItem.parentId"
+                  @tap="toCatePage"
               >
                 <image
-                  :src="util.checkFileUrl(thCateItem.pic)"
-                  class="more-pic"
-                  mode="widthFix"
+                    :src="util.checkFileUrl(thCateItem.pic)"
+                    class="more-pic"
+                    mode="widthFix"
                 />
                 <text>{{ thCateItem.categoryName }}</text>
               </view>
@@ -84,8 +84,8 @@
           </block>
         </view>
         <view
-          v-else
-          class="cont-item empty"
+            v-else
+            class="cont-item empty"
         >
           该分类下暂无子分类~
         </view>
@@ -97,6 +97,7 @@
 
 <script setup>
 import util from '@/utils/util.js'
+
 const categoryList = ref([])
 const subCategoryList = ref([])
 const categoryImg = ref('')
@@ -113,12 +114,12 @@ onLoad(() => {
       parentId: ''
     }
   })
-    .then(({ data }) => {
-      categoryImg.value = data[0].pic
-      categoryList.value = data
-      getProdList(data[0].categoryId)
-      parentId.value = categoryList.value[0].categoryId
-    })
+      .then(({ data }) => {
+        categoryImg.value = data[0].pic
+        categoryList.value = data
+        getProdList(data[0].categoryId)
+        parentId.value = categoryList.value[0].categoryId
+      })
 })
 
 const selIndex = ref(0)
@@ -151,9 +152,9 @@ const getProdList = (categoryId) => {
       parentId: categoryId
     }
   })
-    .then(({ data }) => {
-      subCategoryList.value = data
-    })
+      .then(({ data }) => {
+        subCategoryList.value = data
+      })
 }
 
 /**

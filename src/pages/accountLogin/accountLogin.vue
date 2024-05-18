@@ -1,6 +1,6 @@
 <template>
   <view class="con">
-    <image src="@/static/logo.png" />
+    <image src="@/static/logo.png"/>
     <!-- 登录 -->
     <view class="login-form">
       <view :class="['item',errorTips==1? 'error':'']">
@@ -9,16 +9,16 @@
             账号
           </text>
           <input
-            type="text"
-            data-type="account"
-            placeholder-class="inp-palcehoder"
-            placeholder="请输入用户名"
-            @input="getInputVal"
+              type="text"
+              data-type="account"
+              placeholder-class="inp-palcehoder"
+              placeholder="请输入用户名"
+              @input="getInputVal"
           >
         </view>
         <view
-          v-if="errorTips==1"
-          class="error-text"
+            v-if="errorTips==1"
+            class="error-text"
         >
           <text class="warning-icon">
             !
@@ -32,16 +32,16 @@
             密码
           </text>
           <input
-            type="password"
-            data-type="password"
-            placeholder-class="inp-palcehoder"
-            placeholder="请输入密码"
-            @input="getInputVal"
+              type="password"
+              data-type="password"
+              placeholder-class="inp-palcehoder"
+              placeholder="请输入密码"
+              @input="getInputVal"
           >
         </view>
         <view
-          v-if="errorTips==2"
-          class="error-text"
+            v-if="errorTips==2"
+            class="error-text"
         >
           <text class="warning-icon">
             !
@@ -51,8 +51,8 @@
       </view>
       <view class="operate">
         <view
-          class="to-register"
-          @tap="toRegitser"
+            class="to-register"
+            @tap="toRegitser"
         >
           还没有账号？
           <text>去注册></text>
@@ -62,14 +62,14 @@
 
     <view>
       <button
-        class="authorized-btn"
-        @tap="login"
+          class="authorized-btn"
+          @tap="login"
       >
         登录
       </button>
       <button
-        class="to-idx-btn"
-        @tap="toIndex"
+          class="to-idx-btn"
+          @tap="toIndex"
       >
         回到首页
       </button>
@@ -93,10 +93,10 @@ onShow(() => {
 const principal = ref('') // 账号
 const errorTips = ref(0) // 错误提示
 watch(
-  () => principal.value,
-  () => {
-    errorTips.value = 0
-  }
+    () => principal.value,
+    () => {
+      errorTips.value = 0
+    }
 )
 
 const credentials = ref('') // 密码
@@ -130,21 +130,21 @@ const login = () => {
         passWord: encrypt(credentials.value)
       }
     })
-      .then(({ data }) => {
-        http.loginSuccess(data, () => {
-          uni.showToast({
-            title: '登录成功',
-            icon: 'none',
-            complete: () => {
-              setTimeout(() => {
-                wx.switchTab({
-                  url: '/pages/index/index'
-                })
-              }, 1000)
-            }
+        .then(({ data }) => {
+          http.loginSuccess(data, () => {
+            uni.showToast({
+              title: '登录成功',
+              icon: 'none',
+              complete: () => {
+                setTimeout(() => {
+                  wx.switchTab({
+                    url: '/pages/index/index'
+                  })
+                }, 1000)
+              }
+            })
           })
         })
-      })
   }
 }
 

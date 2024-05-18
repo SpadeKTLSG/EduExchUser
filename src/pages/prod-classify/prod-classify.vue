@@ -2,14 +2,14 @@
   <view class="container">
     <view>
       <block
-        v-for="(item, index) in prodList"
-        :key="index"
+          v-for="(item, index) in prodList"
+          :key="index"
       >
-        <production :item="item" />
+        <production :item="item"/>
       </block>
       <view
-        v-if="!prodList.length"
-        class="empty"
+          v-if="!prodList.length"
+          class="empty"
       >
         暂无数据
       </view>
@@ -131,18 +131,18 @@ const getActProd = (url) => {
       size: size.value
     }
   })
-    .then(({ data }) => {
-      let list
-      if (data.current === 1) {
-        list = data.records
-      } else {
-        list = prodList.value
-        list = list.concat(data.records)
-      }
-      prodList.value = list
-      pages.value = data.pages
-      uni.hideLoading()
-    })
+      .then(({ data }) => {
+        let list
+        if (data.current === 1) {
+          list = data.records
+        } else {
+          list = prodList.value
+          list = list.concat(data.records)
+        }
+        prodList.value = list
+        pages.value = data.pages
+        uni.hideLoading()
+      })
 }
 
 /**
@@ -158,18 +158,18 @@ const getCollectionProd = () => {
       size: size.value
     }
   })
-    .then(({ data }) => {
-      let list
-      if (data.current == 1) {
-        list = data.records
-      } else {
-        list = prodList.value
-        list = list.concat(data.records)
-      }
-      prodList.value = list
-      pages.value = data.pages
-      uni.hideLoading()
-    })
+      .then(({ data }) => {
+        let list
+        if (data.current == 1) {
+          list = data.records
+        } else {
+          list = prodList.value
+          list = list.concat(data.records)
+        }
+        prodList.value = list
+        pages.value = data.pages
+        uni.hideLoading()
+      })
 }
 
 /**
@@ -186,17 +186,17 @@ const getTagProd = () => {
       size: size.value
     }
   })
-    .then(({ data }) => {
-      let list
-      if (data.current === 1) {
-        list = data.records
-      } else {
-        list = prodList.value.concat(data.records)
-      }
-      prodList.value = list
-      pages.value = data.pages
-      uni.hideLoading()
-    })
+      .then(({ data }) => {
+        let list
+        if (data.current === 1) {
+          list = data.records
+        } else {
+          list = prodList.value.concat(data.records)
+        }
+        prodList.value = list
+        pages.value = data.pages
+        uni.hideLoading()
+      })
 }
 
 /**
@@ -213,17 +213,17 @@ const getProdByCouponId = (id) => {
       size: size.value
     }
   })
-    .then(({ data }) => {
-      let list
-      if (data.current === 1) {
-        list = data.records
-      } else {
-        list = prodList.value.concat(data.records)
-      }
-      prodList.value = list
-      pages.value = data.pages
-      uni.hideLoading()
-    })
+      .then(({ data }) => {
+        let list
+        if (data.current === 1) {
+          list = data.records
+        } else {
+          list = prodList.value.concat(data.records)
+        }
+        prodList.value = list
+        pages.value = data.pages
+        uni.hideLoading()
+      })
 }
 </script>
 

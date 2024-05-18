@@ -3,12 +3,12 @@
   <view class="container">
     <view class="wrapper">
       <view
-        class="deliveryInfo"
-        style="background:url(http://jiales.gz-yami.com/delivery-bg.png) center center no-repeat #fff;"
+          class="deliveryInfo"
+          style="background:url(http://jiales.gz-yami.com/delivery-bg.png) center center no-repeat #fff;"
       >
         <view
-          class="icon-express"
-          style="background:url(http://jiales.gz-yami.com/delivery-car.png) no-repeat;background-size:100% 100%;"
+            class="icon-express"
+            style="background:url(http://jiales.gz-yami.com/delivery-car.png) no-repeat;background-size:100% 100%;"
         />
         <view class="infoWarp">
           <view class="companyname">
@@ -30,17 +30,17 @@
         </view>
       </view>
       <view
-        v-if="dvyData.length"
-        class="deliveryDetail"
+          v-if="dvyData.length"
+          class="deliveryDetail"
       >
         <block
-          v-for="(item, index) in dvyData"
-          :key="index"
+            v-for="(item, index) in dvyData"
+            :key="index"
         >
           <view :class="'detailItem ' + (index==0?'lastest':'')">
             <view class="dot">
-              <image src="@/static/images/icon/delive-dot.png" />
-              <image src="@/static/images/icon/dot.png" />
+              <image src="@/static/images/icon/delive-dot.png"/>
+              <image src="@/static/images/icon/dot.png"/>
             </view>
             <view class="detail">
               <view class="desc">
@@ -54,8 +54,8 @@
         </block>
       </view>
       <view
-        v-else
-        class="empty-space"
+          v-else
+          class="empty-space"
       >
         暂无配送信息
       </view>
@@ -79,12 +79,12 @@ onLoad((options) => {
       orderNumber: options.orderNum
     }
   })
-    .then(({ data }) => {
-      companyName.value = data.companyName
-      dvyFlowId.value = data.dvyFlowId
-      dvyData.value = data.data
-      uni.hideLoading()
-    })
+      .then(({ data }) => {
+        companyName.value = data.companyName
+        dvyFlowId.value = data.dvyFlowId
+        dvyData.value = data.data
+        uni.hideLoading()
+      })
 })
 </script>
 

@@ -1,8 +1,10 @@
 .recent-news {
   background: #fff;
+
   .news-item {
     padding: 20rpx 20rpx 0 20rpx;
     position: relative;
+
     &::after {
       content: " ";
       width: 100%;
@@ -12,10 +14,12 @@
       display: block;
       position: absolute;
     }
+
     .news-item-title {
       font-size: 28rpx;
       text-align: left;
     }
+
     .news-item-date {
       font-size: 24rpx;
       color: #999;
@@ -24,6 +28,7 @@
       margin-bottom: 20rpx;
     }
   }
+
   .empty {
     display: block;
     padding-top: 200rpx;

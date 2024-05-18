@@ -8,6 +8,7 @@ http.getCartCount()
 uni-page-head {
   display: none;
 }
+
 /* 轮播图指示点 */
 uni-swiper .uni-swiper-dots-horizontal {
   bottom: 20px !important;

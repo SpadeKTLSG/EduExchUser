@@ -9,14 +9,17 @@ swiper {
   height: 350rpx;
   overflow: hidden;
 }
+
 swiper.pic-swiper {
   margin-top: 75rpx;
   padding: 10rpx 0;
   background: #fff;
   height: 422rpx;
+
   .img-box {
     font-size: 0;
   }
+
   .banner {
     position: absolute;
     width: 690rpx;
@@ -27,16 +30,20 @@ swiper.pic-swiper {
     box-shadow: 0 4px 10px 0 rgba(83, 83, 83, 0.288);
   }
 }
+
 swiper-item {
   font-size: 26rpx;
   font-weight: bold;
 }
+
 .wx-swiper-dots {
   margin-bottom: 15rpx;
 }
+
 .banner-item {
   box-sizing: border-box;
 }
+
 .container {
   .bg-sear {
     position: fixed;
@@ -49,6 +56,7 @@ swiper-item {
     top: 0;
   }
 }
+
 .bg-sear {
   .section {
     display: flex;
@@ -62,11 +70,13 @@ swiper-item {
     margin: auto;
     left: 4%;
     background: #f7f7f7;
+
     .placeholder {
       display: block;
       font-size: 24rpx;
       color: #999;
     }
+
     .search-img {
       width: 32rpx;
       height: 32rpx;
@@ -79,12 +89,14 @@ swiper-item {
 .content {
   background: #fff;
 }
+
 .cat-item {
   display: flex;
   justify-content: space-between;
   background: #fff;
   padding-top: 20rpx;
   padding-bottom: 30rpx;
+
   .item {
     text-align: center;
     width: 25%;
@@ -92,10 +104,12 @@ swiper-item {
     flex-direction: column;
     margin: auto;
     align-items: center;
+
     image {
       width: 75rpx;
       height: 75rpx;
     }
+
     text {
       font-size: 26rpx;
       margin-top: 20rpx;
@@ -113,6 +127,7 @@ swiper-item {
   box-sizing: border-box;
   box-shadow: 0 16rpx 32rpx 0 rgba(7, 17, 27, 0.05);
   border: 2rpx solid #fafafa;
+
   .hornpng {
     width: 77rpx;
     height: 36rpx;
@@ -121,9 +136,11 @@ swiper-item {
     top: 27rpx;
     margin-right: 8rpx;
   }
+
   .swiper-cont {
     height: 90rpx;
     line-height: 90rpx;
+
     .items {
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -133,6 +150,7 @@ swiper-item {
     }
   }
 }
+
 .arrow {
   width: 15rpx;
   height: 15rpx;
@@ -153,10 +171,12 @@ swiper-item {
   padding: 40rpx 0 10rpx 30rpx;
   color: #333;
   background: #fff;
+
   .more-prod-cont {
     color: #999;
     display: inline-block;
     text-align: right;
+
     .more {
       position: absolute;
       right: 30rpx;
@@ -167,6 +187,7 @@ swiper-item {
       height: 44rpx;
       line-height: 44rpx;
     }
+
     .arrow {
       top: 58rpx;
       right: 30rpx;
@@ -175,10 +196,12 @@ swiper-item {
     }
   }
 }
+
 .up-to-date {
   .title {
     color: #fff;
     background: none;
+
     .more-prod-cont {
       .more {
         position: absolute;
@@ -194,22 +217,26 @@ swiper-item {
       }
     }
   }
+
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAABxCAYAAACkwXoWAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzggNzkuMTU5ODI0LCAyMDE2LzA5LzE0LTAxOjA5OjAxICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+IEmuOgAAAZBJREFUeJzt1DEBwCAAwLAxYfhEGXJABkcTBb065trnAwj6XwcAvGKAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGRdKykDj9OUNYkAAAAASUVORK5CYII=");
   background-position: top;
   background-size: 100% 332rpx;
   background-repeat: no-repeat;
   background-color: #fff;
+
   .item-cont {
     margin: auto;
     height: auto;
     width: calc(100% - 40rpx);
     display: flex;
     flex-wrap: wrap;
+
     &::before {
       clear: both;
       height: 0;
       overflow: hidden;
     }
+
     .prod-item {
       border-radius: 10rpx;
       width: 220rpx;
@@ -217,12 +244,14 @@ swiper-item {
       display: inline-block;
       margin: 0 8rpx;
       margin-bottom: 20rpx;
-      box-shadow: 0rpx 6rpx 8rpx rgba(58,134,185,0.2);
+      box-shadow: 0rpx 6rpx 8rpx rgba(58, 134, 185, 0.2);
+
       .imagecont {
         width: 100%;
         font-size: 0;
         width: 220rpx;
         height: 220rpx;
+
         .prodimg {
           width: 220rpx;
           height: 220rpx;
@@ -232,6 +261,7 @@ swiper-item {
           font-size: 0;
         }
       }
+
       .prod-text {
         font-size: 28rpx;
         overflow: hidden;
@@ -245,6 +275,7 @@ swiper-item {
         color: #000;
         padding: 0 10rpx;
       }
+
       .prod-price {
         font-size: 25rpx;
         color: #eb2444;
@@ -254,10 +285,12 @@ swiper-item {
     }
   }
 }
+
 .hotsale-item-cont {
   padding-bottom: 20rpx;
   background: #fff;
 }
+
 .more.prod-price {
   position: absolute;
   bottom: 20rpx;
@@ -271,26 +304,32 @@ swiper-item {
     background: #fff;
     padding-bottom: 20rpx;
     box-sizing: border-box;
-    box-shadow: 0rpx 6rpx 8rpx rgba(58,134,185,0.2);
+    box-shadow: 0rpx 6rpx 8rpx rgba(58, 134, 185, 0.2);
+
     &:nth-child(2n-1) {
       margin: 20rpx 10rpx 10rpx 20rpx;
     }
+
     &:nth-child(2n) {
       margin: 20rpx 20rpx 10rpx 10rpx;
     }
   }
 }
+
 .prod-items {
   .hot-imagecont {
     width: 341rpx;
     height: 341rpx;
+
     .hotsaleimg {
       width: 341rpx;
       height: 341rpx;
     }
+
     font-size: 0;
     text-align: center;
   }
+
   .hot-text {
     .hotprod-text {
       font-size: 28rpx;
@@ -298,8 +337,10 @@ swiper-item {
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     margin-top: 20rpx;
     padding: 0 10rpx;
+
     .prod-info {
       font-size: 22rpx;
       color: #999;
@@ -307,16 +348,19 @@ swiper-item {
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .prod-text-info {
       position: relative;
       height: 70rpx;
       line-height: 70rpx;
       font-family: Arial;
+
       .hotprod-price {
         display: inline;
         font-size: 26rpx;
         color: #eb2444;
       }
+
       .basket-img {
         width: 50rpx;
         height: 50rpx;
@@ -328,6 +372,7 @@ swiper-item {
     }
   }
 }
+
 .more-prod {
   .prod-text-right {
     .prod-info {
@@ -339,6 +384,7 @@ swiper-item {
     }
   }
 }
+
 .singal-price {
   display: inline;
   font-size: 20rpx;
@@ -350,21 +396,25 @@ swiper-item {
 /* 更多宝贝 */
 .more-prod {
   background: #fff;
+
   .prod-show {
     .show-item {
       .more-prod-pic {
         width: 250rpx;
         height: 250rpx;
+
         .more-pic {
           max-width: 100%;
           max-height: 100%;
         }
       }
+
       position: relative;
       display: flex;
       padding: 20rpx;
       justify-content: flex-start;
       border-top: 2rpx solid #f4f4f4;
+
       .prod-text-right {
         margin-left: 30rpx;
         width: 72%;
@@ -372,6 +422,7 @@ swiper-item {
         display: flex;
         flex-direction: column;
         justify-content: center;
+
         .go-to-buy {
           font-size: 26rpx;
           background: #fff2f5;
@@ -383,6 +434,7 @@ swiper-item {
           right: 20rpx;
           bottom: 20rpx;
         }
+
         .prod-text.more {
           margin: 0;
           font-size: 28rpx;
@@ -394,6 +446,7 @@ swiper-item {
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
         }
+
         .more.prod-price {
           font-size: 28rpx;
           font-family: arial;
@@ -402,8 +455,10 @@ swiper-item {
     }
   }
 }
+
 .b-cart {
   margin-top: 30rpx;
+
   .basket-img {
     width: 50rpx;
     height: 50rpx;

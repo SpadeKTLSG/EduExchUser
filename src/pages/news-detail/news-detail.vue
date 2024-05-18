@@ -27,7 +27,7 @@ onLoad((options) => {
     url: '/shop/notice/info/' + options.id,
     method: 'GET'
   })
-      .then(({data}) => {
+      .then(({ data }) => {
         data.content = data.content.replace(/width=/gi, 'sss=')
         data.content = data.content.replace(/height=/gi, 'sss=')
         data.content = data.content.replace(/ \/>/gi, ' style="max-width:100% !important;display:block;" />')

@@ -7,6 +7,7 @@
   background: #fff;
   box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.07);
   z-index: 3;
+
   .search-box {
     position: relative;
     height: 60rpx;
@@ -16,6 +17,7 @@
     margin-left: 70rpx;
     border-radius: 50rpx;
     margin: 20rpx 0 20rpx 20rpx;
+
     .search-img {
       width: 32rpx;
       height: 32rpx;
@@ -25,6 +27,7 @@
       display: block;
     }
   }
+
   .search-hint {
     font-size: 28rpx;
     position: absolute;
@@ -33,6 +36,7 @@
     color: #eb2444;
   }
 }
+
 .sear-input {
   height: 60rpx;
   border-radius: 50rpx;
@@ -43,22 +47,26 @@
   background: #f7f7f7;
   font-size: 28rpx;
 }
+
 .search-display {
   background: #fff;
   padding: 20rpx;
   margin-top: 100rpx;
+
   .title-text {
     padding: 30rpx 0;
     font-size: 30rpx;
     color: #666;
   }
 }
+
 .hot-search {
   .hot-search-tags {
     overflow: hidden;
     font-size: 26rpx;
     text-align: center;
     padding-bottom: 30rpx;
+
     .tags {
       display: block;
       max-width: 100%;
@@ -75,16 +83,19 @@
     }
   }
 }
+
 .history-search {
   .title-text.history-line {
     position: relative;
     border-top: 2rpx solid #e1e1e1;
   }
+
   .his-search-tags {
     overflow: hidden;
     font-size: 26rpx;
     text-align: center;
     display: inline-block;
+
     .tags {
       max-width: 300rpx;
       overflow: hidden;
@@ -100,6 +111,7 @@
     }
   }
 }
+
 .clear-history {
   image {
     width: 32rpx;
@@ -109,6 +121,7 @@
     top: 30rpx;
   }
 }
+
 .search-tit-empty {
   display: block;
   margin: 0 auto;

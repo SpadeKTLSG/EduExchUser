@@ -145,7 +145,7 @@ const http = {
    * @param {Object} fn 登录成功后的回调
    */
   loginSuccess: (result, fn) => {
-  // 保存登陆信息
+    // 保存登陆信息
     wx.setStorageSync('loginResult', result)
     // 保存成功登录标识,token过期判断
     wx.setStorageSync('hadLogin', true)

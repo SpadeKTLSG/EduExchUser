@@ -3,24 +3,29 @@
   background: #fff;
   margin-bottom: 40rpx;
   box-sizing: border-box;
+
   .hot-imagecont {
     border-radius: 8rpx;
     text-align: center;
     font-size: 0;
   }
+
   .hot-text {
     margin-top: 20rpx;
+
     .prod-info {
       font-size: 20rpx;
       color: #777;
       padding: 0 20rpx;
       margin-top: 8rpx;
     }
+
     .prod-text-info {
       position: relative;
       height: 50rpx;
       line-height: 70rpx;
       font-family: Arial;
+
       .price {
         color: #eb2444;
         padding-left: 20rpx;
@@ -28,24 +33,28 @@
     }
   }
 }
+
 prod {
   &:nth-child(2n-1) {
     .prod-items {
       padding: 20rpx 10rpx 10rpx 20rpx;
     }
   }
+
   &:nth-child(2n) {
     .prod-items {
       padding: 20rpx 20rpx 10rpx 10rpx;
     }
   }
 }
+
 .hot-imagecont {
   .hotsaleimg {
     width: 100%;
     height: 345rpx;
   }
 }
+
 .hot-text {
   .hotprod-text {
     height: 76rpx;
@@ -61,6 +70,7 @@ prod {
     color: #000;
   }
 }
+
 .deadline-price {
   font-size: 22rpx;
   margin-right: 5rpx;

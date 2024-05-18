@@ -2,43 +2,43 @@
   <view class="container">
     <view class="prod-list">
       <block
-        v-for="(item, scIndex) in shopCartItemDiscounts"
-        :key="scIndex"
+          v-for="(item, scIndex) in shopCartItemDiscounts"
+          :key="scIndex"
       >
         <view class="prod-block">
           <view
-            v-if="item.chooseDiscountItemDto"
-            class="discount-tips"
+              v-if="item.chooseDiscountItemDto"
+              class="discount-tips"
           >
             <text class="text-block">
               {{ wxs.parseDiscount(item.chooseDiscountItemDto.discountRule) }}
             </text>
             <text class="text-list">
               {{
-                wxs.parseDiscountMsg(item.chooseDiscountItemDto.discountRule, item.chooseDiscountItemDto.needAmount, item.chooseDiscountItemDto.discount)
+              wxs.parseDiscountMsg(item.chooseDiscountItemDto.discountRule, item.chooseDiscountItemDto.needAmount, item.chooseDiscountItemDto.discount)
               }}
             </text>
           </view>
           <block
-            v-for="(prod, index) in item.shopCartItems"
-            :key="index"
+              v-for="(prod, index) in item.shopCartItems"
+              :key="index"
           >
             <view class="item">
               <view class="btn">
                 <label>
                   <checkbox
-                    :data-scindex="scIndex"
-                    :data-index="index"
-                    :value="prod.prodId"
-                    :checked="prod.checked"
-                    color="#105c3e"
-                    @tap="onSelectedItem"
+                      :data-scindex="scIndex"
+                      :data-index="index"
+                      :value="prod.prodId"
+                      :checked="prod.checked"
+                      color="#105c3e"
+                      @tap="onSelectedItem"
                   />
                 </label>
               </view>
               <view class="prodinfo">
                 <view class="pic">
-                  <image :src="prod.pic" />
+                  <image :src="prod.pic"/>
                 </view>
                 <view class="opt">
                   <view class="prod-name">
@@ -61,21 +61,21 @@
                     </view>
                     <view class="m-numSelector">
                       <view
-                        class="minus"
-                        :data-scindex="scIndex"
-                        :data-index="index"
-                        @tap="onCountMinus"
+                          class="minus"
+                          :data-scindex="scIndex"
+                          :data-index="index"
+                          @tap="onCountMinus"
                       />
                       <input
-                        type="number"
-                        :value="prod.prodCount"
-                        disabled
+                          type="number"
+                          :value="prod.prodCount"
+                          disabled
                       >
                       <view
-                        class="plus"
-                        :data-scindex="scIndex"
-                        :data-index="index"
-                        @tap="onCountPlus"
+                          class="plus"
+                          :data-scindex="scIndex"
+                          :data-index="index"
+                          @tap="onCountPlus"
                       />
                     </view>
                   </view>
@@ -88,11 +88,11 @@
     </view>
 
     <view
-      v-if="!shopCartItemDiscounts.length"
-      class="empty"
+        v-if="!shopCartItemDiscounts.length"
+        class="empty"
     >
       <view class="img">
-        <image src="@/static/images/tabbar/basket.png" />
+        <image src="@/static/images/tabbar/basket.png"/>
       </view>
       <view class="txt">
         您还没有添加任何商品哦~
@@ -101,20 +101,20 @@
 
     <!-- 底部按钮 -->
     <view
-      v-if="shopCartItemDiscounts.length>0"
-      class="cart-footer"
+        v-if="shopCartItemDiscounts.length>0"
+        class="cart-footer"
     >
       <view class="btn all">
         <checkbox
-          :checked="allChecked"
-          color="#f7d731;"
-          @tap="onSelAll"
+            :checked="allChecked"
+            color="#f7d731;"
+            @tap="onSelAll"
         />
         全选
       </view>
       <view
-        class="btn del"
-        @tap="onDelBasket"
+          class="btn del"
+          @tap="onDelBasket"
       >
         <text>删除</text>
       </view>
@@ -134,15 +134,15 @@
           </view>
         </view>
         <view
-          v-if="subtractMoney>0"
-          class="total-msg"
+            v-if="subtractMoney>0"
+            class="total-msg"
         >
           总额:￥{{ wxs.toPrice(totalMoney) }} 立减:￥{{ wxs.toPrice(subtractMoney) }}
         </view>
       </view>
       <view
-        class="btn settle"
-        @tap="toFirmOrder"
+          class="btn settle"
+          @tap="toFirmOrder"
       >
         <text>结算</text>
       </view>
@@ -170,23 +170,23 @@ const loadBasketData = () => {
     method: 'POST',
     data: {}
   })
-    .then(({ data }) => {
-      if (data && data.length > 0) {
-      // 默认不选中
-        const shopCartItemDiscountsParam = data[0].shopCartItemDiscounts
-        shopCartItemDiscountsParam.forEach(shopCartItemDiscount => {
-          shopCartItemDiscount.shopCartItems.forEach(shopCartItem => {
-            shopCartItem.checked = false
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          // 默认不选中
+          const shopCartItemDiscountsParam = data[0].shopCartItemDiscounts
+          shopCartItemDiscountsParam.forEach(shopCartItemDiscount => {
+            shopCartItemDiscount.shopCartItems.forEach(shopCartItem => {
+              shopCartItem.checked = false
+            })
           })
-        })
-        shopCartItemDiscounts.value = shopCartItemDiscountsParam
-        allChecked.value = false
-      } else {
-        shopCartItemDiscounts.value = []
-      }
-      calTotalPrice() // 计算总价
-      uni.hideLoading()
-    })
+          shopCartItemDiscounts.value = shopCartItemDiscountsParam
+          allChecked.value = false
+        } else {
+          shopCartItemDiscounts.value = []
+        }
+        calTotalPrice() // 计算总价
+        uni.hideLoading()
+      })
 }
 
 /**
@@ -293,13 +293,13 @@ const calTotalPrice = () => {
     method: 'POST',
     data: shopCartIds
   })
-    .then(({ data }) => {
-      if (!data) return
-      finalMoney.value = data.finalMoney
-      totalMoney.value = data.totalMoney
-      subtractMoney.value = data.subtractMoney
-      uni.hideLoading()
-    })
+      .then(({ data }) => {
+        if (!data) return
+        finalMoney.value = data.finalMoney
+        totalMoney.value = data.totalMoney
+        subtractMoney.value = data.subtractMoney
+        uni.hideLoading()
+      })
 }
 
 /**
@@ -342,13 +342,13 @@ const updateCount = (shopCartItemDiscountsParam, scindex, index, prodCount) => {
       shopId: 1
     }
   })
-    .then(() => {
-      shopCartItemDiscountsParam[scindex].shopCartItems[index].prodCount += prodCount
-      shopCartItemDiscounts.value = shopCartItemDiscountsParam
-      calTotalPrice() // 计算总价
-      uni.hideLoading()
-      http.getCartCount() // 重新计算购物车总数量
-    })
+      .then(() => {
+        shopCartItemDiscountsParam[scindex].shopCartItems[index].prodCount += prodCount
+        shopCartItemDiscounts.value = shopCartItemDiscountsParam
+        calTotalPrice() // 计算总价
+        uni.hideLoading()
+        http.getCartCount() // 重新计算购物车总数量
+      })
 }
 
 /**
@@ -385,10 +385,10 @@ const onDelBasket = () => {
             method: 'DELETE',
             data: basketIds
           })
-            .then(() => {
-              uni.hideLoading()
-              loadBasketData()
-            })
+              .then(() => {
+                uni.hideLoading()
+                loadBasketData()
+              })
         }
       }
 

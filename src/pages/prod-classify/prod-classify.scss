@@ -2,6 +2,7 @@
   background: #fff;
   margin: 7px;
 }
+
 .line-fix {
   width: 100%;
   height: 2rpx;
@@ -9,16 +10,19 @@
   position: fixed;
   top: 0;
 }
+
 .tit-background {
   width: 100%;
   height: 20rpx;
   background: #f4f4f4;
 }
+
 .prod-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
 /* 空 */
 .empty {
   display: block;

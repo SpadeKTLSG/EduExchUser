@@ -3,12 +3,14 @@
   flex-direction: row;
   height: 100%;
 }
+
 .main {
   position: fixed;
   display: flex;
   overflow: hidden;
   height: 100%;
 }
+
 .search-bar {
   width: 100%;
   position: fixed;
@@ -19,6 +21,7 @@
   box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.07);
   z-index: 3;
   padding: 20rpx 0;
+
   .arrow {
     width: 20rpx;
     height: 20rpx;
@@ -29,6 +32,7 @@
     left: 30rpx;
     top: 41rpx;
   }
+
   .search-box {
     display: flex;
     justify-content: center;
@@ -40,12 +44,14 @@
     border-radius: 50rpx;
     text-align: center;
     margin: auto;
+
     .search-img {
       width: 32rpx;
       height: 32rpx;
       margin-right: 10rpx;
     }
   }
+
   .search-hint {
     font-size: 28rpx;
     position: absolute;
@@ -53,9 +59,11 @@
     top: 32rpx;
   }
 }
+
 .sear-input {
   font-size: 28rpx;
 }
+
 .leftmenu {
   width: 200rpx;
   height: 100%;
@@ -63,6 +71,7 @@
   background-color: #f5f6f7;
   overflow: scroll;
   z-index: 2;
+
   .ca-empty {
     padding-top: 400rpx;
     text-align: center;
@@ -70,6 +79,7 @@
     font-size: 24rpx;
   }
 }
+
 .menu-item {
   line-height: 90rpx;
   height: 90rpx;
@@ -78,6 +88,7 @@
   position: relative;
   color: #777;
   font-size: 28rpx;
+
   text.tips-num {
     position: absolute;
     top: 20rpx;
@@ -91,12 +102,14 @@
     line-height: 30rpx;
   }
 }
+
 .menu-item.active {
   color: #eb2444;
   font-size: 28rpx;
   font-weight: bold;
   position: relative;
   background: #fff;
+
   &:before {
     position: absolute;
     left: 0;
@@ -107,30 +120,36 @@
     background: #eb2444;
   }
 }
+
 .rightcontent {
   width: 550rpx;
   height: 100%;
   box-sizing: border-box;
   background-color: #fff;
   z-index: 1;
+
   .adver-map {
     width: auto;
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
     margin: 30rpx 20rpx 0;
+
     .item-a {
       display: block;
       font-size: 0;
       width: 100%;
+
       image {
         max-width: 100%;
       }
     }
   }
+
   .cont-item {
     padding: 0 20rpx 20rpx 20rpx;
     padding-bottom: 94rpx;
+
     .show-item {
       .more-prod-pic {
         text-align: center;
@@ -138,6 +157,7 @@
         height: 150rpx;
         line-height: 150rpx;
         font-size: 0;
+
         .more-pic {
           max-width: 100%;
           max-height: 100%;
@@ -145,10 +165,12 @@
           vertical-align: middle;
         }
       }
+
       position: relative;
       display: flex;
       justify-content: flex-start;
       padding: 20rpx 0;
+
       &::after {
         content: '';
         background-color: #f4f4f4;
@@ -161,9 +183,11 @@
         width: 510rpx;
         padding-left: 20rpx;
       }
+
       .prod-text-right {
         margin-left: 20rpx;
         width: 75%;
+
         .cate-prod-info {
           font-size: 22rpx;
           color: #999;
@@ -173,6 +197,7 @@
           -webkit-line-clamp: 1;
           overflow: hidden;
         }
+
         .prod-text.more {
           margin: 0;
           font-size: 28rpx;
@@ -185,6 +210,7 @@
           -webkit-box-orient: vertical;
           color: #000;
         }
+
         .prod-price.more {
           font-size: 28rpx;
           color: #eb2444;
@@ -194,10 +220,12 @@
     }
   }
 }
+
 .th-cate-con {
   display: flex;
   flex-wrap: wrap;
 }
+
 .sub-category {
   width: 33.33%;
   display: flex;
@@ -206,17 +234,20 @@
   box-sizing: border-box;
   align-items: center;
 }
+
 .sub-category-item {
-  >.more-pic {
+  > .more-pic {
     width: 120rpx;
     height: 120rpx;
     padding-bottom: 10rpx;
   }
+
   text {
     font-size: 25rpx;
     word-break: break-word;
   }
 }
+
 .cont-item.empty {
   display: block;
   font-size: 24rpx;
