@@ -1,7 +1,7 @@
 // 原  wxs/number.wxs 文件，使用时在 js中引入
 // const wxs = number()
 
-function number () {
+function number() {
   const wxs = {
     // 转换为价格的格式
     toPrice: (val) => {

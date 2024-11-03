@@ -4,12 +4,12 @@
       <view class="submit-order">
         <!-- 收货地址 -->
         <view
-            class="delivery-addr "
-            @tap="toAddrListPage"
+          class="delivery-addr "
+          @tap="toAddrListPage"
         >
           <view
-              v-if="!userAddr"
-              class="addr-bg "
+            v-if="!userAddr"
+            class="addr-bg "
           >
             <view class="add-addr">
               <view class="plus-sign-img">
@@ -20,8 +20,8 @@
             <view class="arrow empty"/>
           </view>
           <view
-              v-if="userAddr"
-              class="addr-bg whole"
+            v-if="userAddr"
+            class="addr-bg whole"
           >
             <view class="addr-icon">
               <image src="@/static/images/icon/addr.png"/>
@@ -44,13 +44,13 @@
         <!-- 商品详情 -->
         <view class="prod-item">
           <block
-              v-for="(item, index) in orderItems"
-              :key="index"
+            v-for="(item, index) in orderItems"
+            :key="index"
           >
             <view
-                class="item-cont"
-                :data-ordernum="item.primaryOrderNo"
-                @tap="toOrderDetailPage"
+              :data-ordernum="item.primaryOrderNo"
+              class="item-cont"
+              @tap="toOrderDetailPage"
             >
               <view class="prod-pic">
                 <image :src="item.pic"/>
@@ -105,15 +105,15 @@
         <view class="order-msg">
           <view class="msg-item">
             <view
-                class="item coupon"
-                @tap="showCouponPopup"
+              class="item coupon"
+              @tap="showCouponPopup"
             >
               <text class="item-tit">
                 优惠券：
               </text>
               <text
-                  v-if="!coupons.canUseCoupons"
-                  class="item-txt"
+                v-if="!coupons.canUseCoupons"
+                class="item-txt"
               >
                 暂无可用
               </text>
@@ -125,8 +125,8 @@
             <view class="item">
               <text>买家留言：</text>
               <input
-                  v-model="remarks"
-                  placeholder="给卖家留言"
+                v-model="remarks"
+                placeholder="给卖家留言"
               >
             </view>
           </view>
@@ -219,8 +219,8 @@
           </view>
         </view>
         <view
-            class="footer-box"
-            @tap="toPay"
+          class="footer-box"
+          @tap="toPay"
         >
           提交订单
         </view>
@@ -229,29 +229,29 @@
 
     <!-- 选择优惠券弹窗 -->
     <view
-        v-if="popupShow"
-        class="popup-hide"
+      v-if="popupShow"
+      class="popup-hide"
     >
       <view class="popup-box">
         <view class="popup-tit">
           <text>优惠券</text>
           <text
-              class="close"
-              @tap="closePopup"
+            class="close"
+            @tap="closePopup"
           />
         </view>
         <view class="coupon-tabs">
           <view
-              :class="'coupon-tab ' + (couponSts==1?'on':'')"
-              data-sts="1"
-              @tap="changeCouponSts"
+            :class="'coupon-tab ' + (couponSts==1?'on':'')"
+            data-sts="1"
+            @tap="changeCouponSts"
           >
             可用优惠券({{ coupons.canUseCoupons.length ? coupons.canUseCoupons.length : 0 }})
           </view>
           <view
-              :class="'coupon-tab ' + (couponSts==2?'on':'')"
-              data-sts="2"
-              @tap="changeCouponSts"
+            :class="'coupon-tab ' + (couponSts==2?'on':'')"
+            data-sts="2"
+            @tap="changeCouponSts"
           >
             不可用优惠券({{ coupons.unCanUseCoupons.length ? coupons.unCanUseCoupons.length : 0 }})
           </view>
@@ -259,34 +259,34 @@
         <view class="popup-cnt">
           <block v-if="couponSts == 1">
             <view
-                v-for="(item, index) in coupons.canUseCoupons"
-                :key="index"
+              v-for="(item, index) in coupons.canUseCoupons"
+              :key="index"
             >
               <coupon
-                  :item="item"
-                  order="true"
-                  can-use="true"
-                  @check-coupon="checkCoupon"
+                :item="item"
+                can-use="true"
+                order="true"
+                @check-coupon="checkCoupon"
               />
             </view>
           </block>
           <block v-if="couponSts == 2">
             <view
-                v-for="(item, index) in coupons.unCanUseCoupons"
-                :key="index"
+              v-for="(item, index) in coupons.unCanUseCoupons"
+              :key="index"
             >
               <coupon
-                  :item="item"
-                  order="true"
-                  can-use="false"
+                :item="item"
+                can-use="false"
+                order="true"
               />
             </view>
           </block>
           <view class="botm-empty"/>
         </view>
         <view
-            v-if="couponSts==1"
-            class="coupon-ok"
+          v-if="couponSts==1"
+          class="coupon-ok"
         >
           <text @tap="choosedCoupon">
             确定
@@ -352,40 +352,40 @@ const loadOrderData = () => {
       userChangeCoupon: 1
     }
   })
-      .then(({ data }) => {
-        uni.hideLoading()
-        let orderItemsData = []
-        data.shopCartOrders[0].shopCartItemDiscounts?.forEach(itemDiscount => {
-          orderItemsData = orderItems.value?.concat(itemDiscount.shopCartItems)
-        })
-        if (data.shopCartOrders[0].coupons) {
-          const canUseCoupons = []
-          const unCanUseCoupons = []
-          data.shopCartOrders[0].coupons?.forEach(coupon => {
-            if (coupon.canUse) {
-              canUseCoupons.push(coupon)
-            } else {
-              unCanUseCoupons.push(coupon)
-            }
-          })
-          coupons.value = {
-            totalLength: data.shopCartOrders[0].coupons.length,
-            canUseCoupons,
-            unCanUseCoupons
+    .then(({data}) => {
+      uni.hideLoading()
+      let orderItemsData = []
+      data.shopCartOrders[0].shopCartItemDiscounts?.forEach(itemDiscount => {
+        orderItemsData = orderItems.value?.concat(itemDiscount.shopCartItems)
+      })
+      if (data.shopCartOrders[0].coupons) {
+        const canUseCoupons = []
+        const unCanUseCoupons = []
+        data.shopCartOrders[0].coupons?.forEach(coupon => {
+          if (coupon.canUse) {
+            canUseCoupons.push(coupon)
+          } else {
+            unCanUseCoupons.push(coupon)
           }
+        })
+        coupons.value = {
+          totalLength: data.shopCartOrders[0].coupons.length,
+          canUseCoupons,
+          unCanUseCoupons
         }
-        orderItems.value = orderItemsData
-        actualTotal.value = data.actualTotal
-        total.value = data.total
-        totalCount.value = data.totalCount
-        userAddr.value = data.userAddr
-        transfee.value = data.shopCartOrders[0].transfee
-        shopReduce.value = data.shopCartOrders[0].shopReduce
-      })
-      .catch(err => {
-        uni.hideLoading()
-        chooseCouponErrHandle(err)
-      })
+      }
+      orderItems.value = orderItemsData
+      actualTotal.value = data.actualTotal
+      total.value = data.total
+      totalCount.value = data.totalCount
+      userAddr.value = data.userAddr
+      transfee.value = data.shopCartOrders[0].transfee
+      shopReduce.value = data.shopCartOrders[0].shopReduce
+    })
+    .catch(err => {
+      uni.hideLoading()
+      chooseCouponErrHandle(err)
+    })
 }
 
 /**
@@ -437,10 +437,10 @@ const submitOrder = () => {
       }]
     }
   })
-      .then(({ data }) => {
-        uni.hideLoading()
-        normalPay(data.orderNumbers)
-      })
+    .then(({data}) => {
+      uni.hideLoading()
+      normalPay(data.orderNumbers)
+    })
 }
 
 /**
@@ -458,25 +458,25 @@ const normalPay = (orderNumbers) => {
       orderNumbers
     }
   })
-      .then(({ data }) => {
-        uni.hideLoading()
-        if (data) {
-          uni.showToast({
-            title: '模拟支付成功',
-            icon: 'none'
+    .then(({data}) => {
+      uni.hideLoading()
+      if (data) {
+        uni.showToast({
+          title: '模拟支付成功',
+          icon: 'none'
+        })
+        setTimeout(() => {
+          uni.navigateTo({
+            url: '/pages/pay-result/pay-result?sts=1&orderNumbers=' + orderNumbers
           })
-          setTimeout(() => {
-            uni.navigateTo({
-              url: '/pages/pay-result/pay-result?sts=1&orderNumbers=' + orderNumbers
-            })
-          }, 1200)
-        } else {
-          uni.showToast({
-            title: '支付失败！',
-            icon: 'none'
-          })
-        }
-      })
+        }, 1200)
+      } else {
+        uni.showToast({
+          title: '支付失败！',
+          icon: 'none'
+        })
+      }
+    })
 }
 
 const couponSts = ref(1)
@@ -522,6 +522,6 @@ const checkCoupon = (e) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use './submit-order.scss';
 </style>

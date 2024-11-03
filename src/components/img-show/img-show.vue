@@ -1,20 +1,20 @@
 <template>
   <image
-      v-if="!isError && imgPath"
-      :src="imgPath"
-      :style="imgStyle"
-      :class="classList"
-      :mode="imgMode"
-      @error="imgError"
-      @load="imgLoad"
-      @tap="handleTap"
+    v-if="!isError && imgPath"
+    :class="classList"
+    :mode="imgMode"
+    :src="imgPath"
+    :style="imgStyle"
+    @error="imgError"
+    @load="imgLoad"
+    @tap="handleTap"
   />
   <image
-      v-else
-      :src="defaultImgPath"
-      :style="imgStyle"
-      :class="classList"
-      @tap="handleTap"
+    v-else
+    :class="classList"
+    :src="defaultImgPath"
+    :style="imgStyle"
+    @tap="handleTap"
   />
 </template>
 

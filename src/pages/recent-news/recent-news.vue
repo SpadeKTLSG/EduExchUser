@@ -2,13 +2,13 @@
   <view class="container">
     <view class="recent-news">
       <block
-          v-for="(item, index) in news"
-          :key="index"
+        v-for="(item, index) in news"
+        :key="index"
       >
         <view
-            class="news-item"
-            :data-id="item.id"
-            @tap="toNewsDetail"
+          :data-id="item.id"
+          class="news-item"
+          @tap="toNewsDetail"
         >
           <view class="news-item-title">
             {{ item.title }}
@@ -19,8 +19,8 @@
         </view>
       </block>
       <view
-          v-if="!news || !news.length"
-          class="empty"
+        v-if="!news || !news.length"
+        class="empty"
       >
         暂无数据
       </view>
@@ -39,9 +39,9 @@ onShow(() => {
     url: '/shop/notice/noticeList',
     method: 'GET'
   })
-      .then(({ data }) => {
-        news.value = data.records
-      })
+    .then(({data}) => {
+      news.value = data.records
+    })
 })
 
 /**
@@ -55,6 +55,6 @@ const toNewsDetail = (e) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use './recent-news.scss';
 </style>

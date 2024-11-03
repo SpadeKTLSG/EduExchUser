@@ -3,12 +3,12 @@
     <view class="bg-sear">
       <view class="scrolltop">
         <view
-            class="section"
-            @tap="toSearchPage"
+          class="section"
+          @tap="toSearchPage"
         >
           <image
-              src="@/static/images/icon/search.png"
-              class="search-img"
+            class="search-img"
+            src="@/static/images/icon/search.png"
           />
           <text class="placeholder">
             搜索
@@ -20,28 +20,28 @@
     <view class="content">
       <!-- swiper -->
       <swiper
-          :autoplay="autoplay"
-          :indicator-color="indicatorColor"
-          :interval="interval"
-          :duration="duration"
-          :indicator-active-color="indicatorActiveColor + ' '"
-          :circular="true"
-          class="pic-swiper"
-          indicator-dots
-          previous-margin="20rpx"
-          next-margin="20rpx"
+        :autoplay="autoplay"
+        :circular="true"
+        :duration="duration"
+        :indicator-active-color="indicatorActiveColor + ' '"
+        :indicator-color="indicatorColor"
+        :interval="interval"
+        class="pic-swiper"
+        indicator-dots
+        next-margin="20rpx"
+        previous-margin="20rpx"
       >
         <block
-            v-for="(item, index) in indexImgs"
-            :key="index"
+          v-for="(item, index) in indexImgs"
+          :key="index"
         >
           <swiper-item class="banner-item">
             <view class="img-box">
               <image
-                  :src="item.imgUrl"
-                  :data-prodid="item.relation"
-                  class="banner"
-                  @tap="toProdPage"
+                :data-prodid="item.relation"
+                :src="item.imgUrl"
+                class="banner"
+                @tap="toProdPage"
               />
             </view>
           </swiper-item>
@@ -51,32 +51,32 @@
 
       <view class="cat-item">
         <view
-            class="item"
-            data-sts="1"
-            @tap="toClassifyPage"
+          class="item"
+          data-sts="1"
+          @tap="toClassifyPage"
         >
           <image src="@/static/images/icon/newProd.png"/>
           <text>新品推荐</text>
         </view>
         <view
-            class="item"
-            data-sts="1"
-            @tap="toClassifyPage"
+          class="item"
+          data-sts="1"
+          @tap="toClassifyPage"
         >
           <image src="@/static/images/icon/timePrice.png"/>
           <text>限时特惠</text>
         </view>
         <view
-            class="item"
-            data-sts="3"
-            @tap="toClassifyPage"
+          class="item"
+          data-sts="3"
+          @tap="toClassifyPage"
         >
           <image src="@/static/images/icon/neweveryday.png"/>
           <text>每日疯抢</text>
         </view>
         <view
-            class="item"
-            @tap="toCouponCenter"
+          class="item"
+          @tap="toCouponCenter"
         >
           <image src="@/static/images/icon/newprods.png"/>
           <text>领优惠券</text>
@@ -85,24 +85,24 @@
 
       <!-- 消息播放 -->
       <view
-          v-if="news && news.length"
-          class="message-play"
-          @tap="onNewsPage"
+        v-if="news && news.length"
+        class="message-play"
+        @tap="onNewsPage"
       >
         <image
-            src="@/static/images/icon/horn.png"
-            class="hornpng"
+          class="hornpng"
+          src="@/static/images/icon/horn.png"
         />
         <swiper
-            :vertical="true"
-            :autoplay="true"
-            :circular="true"
-            duration="1000"
-            class="swiper-cont"
+          :autoplay="true"
+          :circular="true"
+          :vertical="true"
+          class="swiper-cont"
+          duration="1000"
         >
           <block
-              v-for="(item, index) in news"
-              :key="index"
+            v-for="(item, index) in news"
+            :key="index"
           >
             <swiper-item class="items">
               {{ item.title }}
@@ -114,26 +114,26 @@
     </view>
 
     <view
-        v-if="updata"
-        class="updata"
+      v-if="updata"
+      class="updata"
     >
       <block
-          v-for="(item, index) in taglist"
-          :key="index"
+        v-for="(item, index) in taglist"
+        :key="index"
       >
         <!-- 每日上新 -->
         <view
-            v-if="item.style==='2' && item.prods && item.prods.length"
-            class="up-to-date"
+          v-if="item.style==='2' && item.prods && item.prods.length"
+          class="up-to-date"
         >
           <view class="title">
             <text>{{ item.title }}</text>
             <view
-                class="more-prod-cont"
-                data-sts="0"
-                :data-id="item.id"
-                :data-title="item.title"
-                @tap="toClassifyPage"
+              :data-id="item.id"
+              :data-title="item.title"
+              class="more-prod-cont"
+              data-sts="0"
+              @tap="toClassifyPage"
             >
               <text class="more">
                 查看更多
@@ -142,19 +142,19 @@
           </view>
           <view class="item-cont">
             <block
-                v-for="(prod, index2) in item.prods"
-                :key="index2"
+              v-for="(prod, index2) in item.prods"
+              :key="index2"
             >
               <view
-                  class="prod-item"
-                  :data-prodid="prod.prodId"
-                  @tap="toProdPage"
+                :data-prodid="prod.prodId"
+                class="prod-item"
+                @tap="toProdPage"
               >
                 <view>
                   <view class="imagecont">
                     <img-show
-                        :src="prod.pic"
-                        :class-list="['prodimg']"
+                      :class-list="['prodimg']"
+                      :src="prod.pic"
                     />
                   </view>
                   <view class="prod-text">
@@ -179,17 +179,17 @@
 
         <!-- 商城热卖 -->
         <view
-            v-if="item.style==='1' && item.prods && item.prods.length"
-            class="hot-sale"
+          v-if="item.style==='1' && item.prods && item.prods.length"
+          class="hot-sale"
         >
           <view class="title">
             <text>{{ item.title }}</text>
             <view
-                class="more-prod-cont"
-                data-sts="0"
-                :data-id="item.id"
-                :data-title="item.title"
-                @tap="toClassifyPage"
+              :data-id="item.id"
+              :data-title="item.title"
+              class="more-prod-cont"
+              data-sts="0"
+              @tap="toClassifyPage"
             >
               <text class="more">
                 更多
@@ -199,18 +199,18 @@
           </view>
           <view class="hotsale-item-cont">
             <block
-                v-for="(prod, index2) in item.prods"
-                :key="index2"
+              v-for="(prod, index2) in item.prods"
+              :key="index2"
             >
               <view
-                  class="prod-items"
-                  :data-prodid="prod.prodId"
-                  @tap="toProdPage"
+                :data-prodid="prod.prodId"
+                class="prod-items"
+                @tap="toProdPage"
               >
                 <view class="hot-imagecont">
                   <img-show
-                      :src="prod.pic"
-                      :class-list="['hotsaleimg']"
+                    :class-list="['hotsaleimg']"
+                    :src="prod.pic"
                   />
                 </view>
                 <view class="hot-text">
@@ -233,8 +233,8 @@
                       </text>
                     </view>
                     <image
-                        src="@/static/images/tabbar/basket-sel.png"
-                        class="basket-img"
+                      class="basket-img"
+                      src="@/static/images/tabbar/basket-sel.png"
                     />
                   </view>
                 </view>
@@ -245,26 +245,26 @@
 
         <!-- 更多宝贝 -->
         <view
-            v-if="item.style==='0' && item.prods && item.prods.length"
-            class="more-prod"
+          v-if="item.style==='0' && item.prods && item.prods.length"
+          class="more-prod"
         >
           <view class="title">
             {{ item.title }}
           </view>
           <view class="prod-show">
             <block
-                v-for="(prod, index2) in item.prods"
-                :key="index2"
+              v-for="(prod, index2) in item.prods"
+              :key="index2"
             >
               <view
-                  class="show-item"
-                  :data-prodid="prod.prodId"
-                  @tap="toProdPage"
+                :data-prodid="prod.prodId"
+                class="show-item"
+                @tap="toProdPage"
               >
                 <view class="more-prod-pic">
                   <img-show
-                      :src="prod.pic"
-                      :class-list="['more-pic']"
+                    :class-list="['more-pic']"
+                    :src="prod.pic"
                   />
                 </view>
                 <view class="prod-text-right">
@@ -287,9 +287,9 @@
                       </text>
                     </view>
                     <image
-                        src="@/static/images/tabbar/basket-sel.png"
-                        class="basket-img"
-                        @tap.stop="addToCart(prod)"
+                      class="basket-img"
+                      src="@/static/images/tabbar/basket-sel.png"
+                      @tap.stop="addToCart(prod)"
                     />
                   </view>
                 </view>
@@ -321,7 +321,7 @@ onLoad(() => {
 onShow(() => {
   // #ifdef MP-WEIXIN
   uni.getSetting({
-    success (res) {
+    success(res) {
       if (!res.authSetting['scope.userInfo']) {
         uni.navigateTo({
           url: '/pages/login/login'
@@ -372,27 +372,27 @@ const addToCart = (item) => {
       prodId: item.prodId
     }
   })
-      .then(({ data }) => {
-        http.request({
-          url: '/p/shopCart/changeItem',
-          method: 'POST',
-          data: {
-            basketId: 0,
-            count: 1,
-            prodId: data.prodId,
-            shopId: data.shopId,
-            skuId: data.skuList[0].skuId
-          }
-        })
-            .then(() => {
-              uni.hideLoading()
-              http.getCartCount() // 重新计算购物车总数量
-              uni.showToast({
-                title: '加入购物车成功',
-                icon: 'none'
-              })
-            })
+    .then(({data}) => {
+      http.request({
+        url: '/p/shopCart/changeItem',
+        method: 'POST',
+        data: {
+          basketId: 0,
+          count: 1,
+          prodId: data.prodId,
+          shopId: data.shopId,
+          skuId: data.skuList[0].skuId
+        }
       })
+        .then(() => {
+          uni.hideLoading()
+          http.getCartCount() // 重新计算购物车总数量
+          uni.showToast({
+            title: '加入购物车成功',
+            icon: 'none'
+          })
+        })
+    })
 }
 
 const toCouponCenter = () => {
@@ -446,10 +446,10 @@ const getIndexImgs = () => {
     method: 'GET',
     data: {}
   })
-      .then(({ data }) => {
-        indexImgs.value = data
-        seq.value = data
-      })
+    .then(({data}) => {
+      indexImgs.value = data
+      seq.value = data
+    })
 }
 
 const getNoticeList = () => {
@@ -459,9 +459,9 @@ const getNoticeList = () => {
     method: 'GET',
     data: {}
   })
-      .then(({ data }) => {
-        news.value = data
-      })
+    .then(({data}) => {
+      news.value = data
+    })
 }
 
 /**
@@ -473,14 +473,14 @@ const getTag = () => {
     method: 'GET',
     data: {}
   })
-      .then(({ data }) => {
-        taglist.value = data
-        for (let i = 0; i < data.length; i++) {
-          updata.value = false
-          updata.value = true
-          getTagProd(data[i].id, i)
-        }
-      })
+    .then(({data}) => {
+      taglist.value = data
+      for (let i = 0; i < data.length; i++) {
+        updata.value = false
+        updata.value = true
+        getTagProd(data[i].id, i)
+      }
+    })
 }
 
 const getTagProd = (id, index) => {
@@ -492,16 +492,16 @@ const getTagProd = (id, index) => {
       size: 6
     }
   })
-      .then(({ data }) => {
-        updata.value = false
-        updata.value = true
-        const taglistParam = taglist.value
-        taglistParam[index].prods = data.records
-        taglist.value = taglistParam
-      })
+    .then(({data}) => {
+      updata.value = false
+      updata.value = true
+      const taglistParam = taglist.value
+      taglistParam[index].prods = data.records
+      taglist.value = taglistParam
+    })
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use './index.scss';
 </style>

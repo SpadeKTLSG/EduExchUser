@@ -2,13 +2,13 @@
   <view class="container">
     <!-- 用户信息 -->
     <view
-        v-if="isAuthInfo"
-        class="userinfo"
+      v-if="isAuthInfo"
+      class="userinfo"
     >
       <view class="userinfo-con">
         <view class="userinfo-avatar">
           <image
-              :src="
+            :src="
               loginResult.pic
                 ?
                   (loginResult.pic.indexOf('http') === -1 ? picDomain + loginResult.pic : loginResult.pic)
@@ -24,18 +24,18 @@
     </view>
 
     <view
-        v-if="!isAuthInfo"
-        class="userinfo-none"
+      v-if="!isAuthInfo"
+      class="userinfo-none"
     >
       <view
-          class="default-pic"
-          @tap="toLogin"
+        class="default-pic"
+        @tap="toLogin"
       >
         <image src="@/static/images/icon/head04.png"/>
       </view>
       <view
-          class="none-login"
-          @tap="toLogin"
+        class="none-login"
+        @tap="toLogin"
       >
         <button class="unlogin">
           未登录
@@ -55,9 +55,9 @@
             我的订单
           </text>
           <view
-              class="checkmore"
-              data-sts="0"
-              @tap="toOrderListPage"
+            class="checkmore"
+            data-sts="0"
+            @tap="toOrderListPage"
           >
             <text>查看全部</text>
             <text class="arrowhead"/>
@@ -65,51 +65,51 @@
         </view>
         <view class="procedure">
           <view
-              class="items"
-              data-sts="1"
-              @tap="toOrderListPage"
+            class="items"
+            data-sts="1"
+            @tap="toOrderListPage"
           >
             <image src="@/static/images/icon/toPay.png"/>
             <text>待支付</text>
             <text
-                v-if="orderAmount.unPay>0"
-                class="num-badge"
+              v-if="orderAmount.unPay>0"
+              class="num-badge"
             >
               {{ orderAmount.unPay }}
             </text>
           </view>
           <view
-              class="items"
-              data-sts="2"
-              @tap="toOrderListPage"
+            class="items"
+            data-sts="2"
+            @tap="toOrderListPage"
           >
             <image src="@/static/images/icon/toDelivery.png"/>
             <text>待发货</text>
             <text
-                v-if="orderAmount.payed>0"
-                class="num-badge"
+              v-if="orderAmount.payed>0"
+              class="num-badge"
             >
               {{ orderAmount.payed }}
             </text>
           </view>
           <view
-              class="items"
-              data-sts="3"
-              @tap="toOrderListPage"
+            class="items"
+            data-sts="3"
+            @tap="toOrderListPage"
           >
             <image src="@/static/images/icon/toTake.png"/>
             <text>待收货</text>
             <text
-                v-if="orderAmount.consignment>0"
-                class="num-badge"
+              v-if="orderAmount.consignment>0"
+              class="num-badge"
             >
               {{ orderAmount.consignment }}
             </text>
           </view>
           <view
-              class="items"
-              data-sts="5"
-              @tap="toOrderListPage"
+            class="items"
+            data-sts="5"
+            @tap="toOrderListPage"
           >
             <image src="@/static/images/icon/toComment.png"/>
             <text>已完成</text>
@@ -120,18 +120,18 @@
 
       <view class="prod-col">
         <view
-            class="col-item"
-            @tap="myCollectionHandle"
+          class="col-item"
+          @tap="myCollectionHandle"
         >
           <view
-              v-if="loginResult"
-              class="num"
+            v-if="loginResult"
+            class="num"
           >
             {{ collectionCount }}
           </view>
           <view
-              v-else
-              class="num"
+            v-else
+            class="num"
           >
             --
           </view>
@@ -140,18 +140,18 @@
           </view>
         </view>
         <view
-            class="col-item"
-            @tap="handleTips"
+          class="col-item"
+          @tap="handleTips"
         >
           <view
-              v-if="loginResult"
-              class="num"
+            v-if="loginResult"
+            class="num"
           >
             5
           </view>
           <view
-              v-else
-              class="num"
+            v-else
+            class="num"
           >
             --
           </view>
@@ -160,18 +160,18 @@
           </view>
         </view>
         <view
-            class="col-item"
-            @tap="handleTips"
+          class="col-item"
+          @tap="handleTips"
         >
           <view
-              v-if="loginResult"
-              class="num"
+            v-if="loginResult"
+            class="num"
           >
             3
           </view>
           <view
-              v-else
-              class="num"
+            v-else
+            class="num"
           >
             --
           </view>
@@ -183,8 +183,8 @@
 
       <view class="my-menu">
         <view
-            class="memu-item"
-            @tap="toDistCenter"
+          class="memu-item"
+          @tap="toDistCenter"
         >
           <view class="i-name">
             <image src="@/static/images/icon/promotion.png"/>
@@ -193,8 +193,8 @@
           <view class="arrowhead"/>
         </view>
         <view
-            class="memu-item"
-            @tap="toCouponCenter"
+          class="memu-item"
+          @tap="toCouponCenter"
         >
           <view class="i-name">
             <image src="@/static/images/icon/getCoupon.png"/>
@@ -203,8 +203,8 @@
           <view class="arrowhead"/>
         </view>
         <view
-            class="memu-item"
-            @tap="toMyCouponPage"
+          class="memu-item"
+          @tap="toMyCouponPage"
         >
           <view class="i-name">
             <image src="@/static/images/icon/myCoupon.png"/>
@@ -213,8 +213,8 @@
           <view class="arrowhead"/>
         </view>
         <view
-            class="memu-item"
-            @tap="toAddressList"
+          class="memu-item"
+          @tap="toAddressList"
         >
           <view class="i-name">
             <image src="@/static/images/icon/myAddr.png"/>
@@ -226,9 +226,9 @@
       <!--end 列表项 -->
 
       <view
-          v-if="isAuthInfo"
-          class="log-out"
-          @tap="logout"
+        v-if="isAuthInfo"
+        class="log-out"
+        @tap="logout"
       >
         <view class="log-out-n">
           <text>退出登录</text>
@@ -258,10 +258,10 @@ onShow(() => {
       method: 'GET',
       data: {}
     })
-        .then(({ data }) => {
-          uni.hideLoading()
-          orderAmount.value = data
-        })
+      .then(({data}) => {
+        uni.hideLoading()
+        orderAmount.value = data
+      })
     showCollectionCount()
   }
 })
@@ -314,10 +314,10 @@ const showCollectionCount = () => {
     method: 'GET',
     data: {}
   })
-      .then(({ data }) => {
-        uni.hideLoading()
-        collectionCount.value = data
-      })
+    .then(({data}) => {
+      uni.hideLoading()
+      collectionCount.value = data
+    })
 }
 
 /**
@@ -352,24 +352,24 @@ const logout = () => {
     url: '/logOut',
     method: 'post'
   })
-      .then(() => {
-        util.removeTabBadge()
-        uni.removeStorageSync('loginResult')
-        uni.removeStorageSync('token')
-        uni.showToast({
-          title: '退出成功',
-          icon: 'none'
-        })
-        orderAmount.value = ''
-        setTimeout(() => {
-          uni.switchTab({
-            url: '/pages/index/index'
-          })
-        }, 1000)
+    .then(() => {
+      util.removeTabBadge()
+      uni.removeStorageSync('loginResult')
+      uni.removeStorageSync('token')
+      uni.showToast({
+        title: '退出成功',
+        icon: 'none'
       })
+      orderAmount.value = ''
+      setTimeout(() => {
+        uni.switchTab({
+          url: '/pages/index/index'
+        })
+      }, 1000)
+    })
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use './user.scss';
 </style>

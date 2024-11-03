@@ -2,20 +2,20 @@
   <view class="Mall4j container">
     <!-- 顶部子分类tab -->
     <scroll-view
-        scroll-x="true"
-        class="category-tit"
-        :scroll-into-view="intoView"
-        :scroll-with-animation="true"
+      :scroll-into-view="intoView"
+      :scroll-with-animation="true"
+      class="category-tit"
+      scroll-x="true"
     >
       <block
-          v-for="(item, index) in subCategoryList"
-          :key="index"
+        v-for="(item, index) in subCategoryList"
+        :key="index"
       >
         <view
-            :id="'sw' + item.categoryId"
-            :class="'category-item ' + (item.categoryId==categoryId? 'on':'')"
-            :data-id="item.categoryId"
-            @tap="onSubCategoryTap"
+          :id="'sw' + item.categoryId"
+          :class="'category-item ' + (item.categoryId==categoryId? 'on':'')"
+          :data-id="item.categoryId"
+          @tap="onSubCategoryTap"
         >
           {{ item.categoryName }}
         </view>
@@ -25,18 +25,18 @@
     <view class="prod-item">
       <block v-if="prodList.length">
         <block
-            v-for="(prod, key) in prodList"
-            :key="key"
+          v-for="(prod, key) in prodList"
+          :key="key"
         >
           <view
-              class="prod-items"
-              :data-prodid="prod.prodId"
-              @tap="toProdPage"
+            :data-prodid="prod.prodId"
+            class="prod-items"
+            @tap="toProdPage"
           >
             <view class="hot-imagecont">
               <image
-                  :src="prod.pic"
-                  class="hotsaleimg"
+                :src="prod.pic"
+                class="hotsaleimg"
               />
             </view>
             <view class="hot-text">
@@ -64,8 +64,8 @@
         </block>
       </block>
       <view
-          v-else
-          class="empty-wrap"
+        v-else
+        class="empty-wrap"
       >
         暂无商品数据~
       </view>
@@ -113,12 +113,12 @@ const getSubCategory = () => {
       parentId: parentId.value
     }
   })
-      .then(({ data }) => {
-        subCategoryList.value = data
-        nextTick(() => {
-          intoView.value = 'sw' + categoryId.value
-        })
+    .then(({data}) => {
+      subCategoryList.value = data
+      nextTick(() => {
+        intoView.value = 'sw' + categoryId.value
       })
+    })
 }
 
 const prodList = ref([])
@@ -140,12 +140,12 @@ const getProdList = () => {
       isAllProdType: true
     }
   })
-      .then(({ data }) => {
-        isLoaded.value = true
-        prodList.value = data.current == 1 ? data.records : prodList.value.concat(data.records)
-        current.value = data.current
-        pages.value = data.pages
-      })
+    .then(({data}) => {
+      isLoaded.value = true
+      prodList.value = data.current == 1 ? data.records : prodList.value.concat(data.records)
+      current.value = data.current
+      pages.value = data.pages
+    })
 }
 
 /**

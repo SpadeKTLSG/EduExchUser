@@ -10,16 +10,16 @@
               账号
             </text>
             <input
-                type="text"
-                data-type="account"
-                placeholder-class="inp-palcehoder"
-                placeholder="请输入账号名称"
-                @input="getInputVal"
+              data-type="account"
+              placeholder="请输入账号名称"
+              placeholder-class="inp-palcehoder"
+              type="text"
+              @input="getInputVal"
             >
           </view>
           <view
-              v-if="errorTips==1"
-              class="error-text"
+            v-if="errorTips==1"
+            class="error-text"
           >
             <text class="warning-icon">
               !
@@ -33,16 +33,16 @@
               密码
             </text>
             <input
-                type="password"
-                data-type="password"
-                placeholder-class="inp-palcehoder"
-                placeholder="请输入密码"
-                @input="getInputVal"
+              data-type="password"
+              placeholder="请输入密码"
+              placeholder-class="inp-palcehoder"
+              type="password"
+              @input="getInputVal"
             >
           </view>
           <view
-              v-if="errorTips==2"
-              class="error-text"
+            v-if="errorTips==2"
+            class="error-text"
           >
             <text class="warning-icon">
               !
@@ -52,8 +52,8 @@
         </view>
         <view class="operate">
           <view
-              class="to-register"
-              @tap="toLogin"
+            class="to-register"
+            @tap="toLogin"
           >
             已有账号？
             <text>去登录></text>
@@ -63,14 +63,14 @@
 
       <view>
         <button
-            class="authorized-btn"
-            @tap="toRegister"
+          class="authorized-btn"
+          @tap="toRegister"
         >
           注册
         </button>
         <button
-            class="to-idx-btn"
-            @tap="toIndex"
+          class="to-idx-btn"
+          @tap="toIndex"
         >
           回到首页
         </button>
@@ -80,7 +80,7 @@
 </template>
 
 <script setup>
-import { encrypt } from '@/utils/crypto.js'
+import {encrypt} from '@/utils/crypto.js'
 
 /**
  * 生命周期函数--监听页面显示
@@ -127,19 +127,19 @@ const toRegister = () => {
         passWord: encrypt(credentials.value)
       }
     })
-        .then(() => {
-          uni.hideLoading()
-          uni.showToast({
-            title: '注册成功，请登录',
-            icon: 'none',
-            duration: 1500
-          })
-          setTimeout(() => {
-            uni.navigateTo({
-              url: '/pages/accountLogin/accountLogin'
-            })
-          }, 1800)
+      .then(() => {
+        uni.hideLoading()
+        uni.showToast({
+          title: '注册成功，请登录',
+          icon: 'none',
+          duration: 1500
         })
+        setTimeout(() => {
+          uni.navigateTo({
+            url: '/pages/accountLogin/accountLogin'
+          })
+        }, 1800)
+      })
   }
 }
 /**

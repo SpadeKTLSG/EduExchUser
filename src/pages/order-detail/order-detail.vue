@@ -2,8 +2,8 @@
   <view class="container">
     <view class="order-detail">
       <view
-          v-if="userAddrDto"
-          class="delivery-addr"
+        v-if="userAddrDto"
+        class="delivery-addr"
       >
         <view class="user-info">
           <text class="item">
@@ -15,24 +15,24 @@
         </view>
         <view class="addr">
           {{ userAddrDto.province }}{{ userAddrDto.city }}{{ userAddrDto.area }}{{
-          userAddrDto.area
+            userAddrDto.area
           }}{{ userAddrDto.addr }}
         </view>
       </view>
 
       <!-- 商品信息 -->
       <view
-          v-if="orderItemDtos"
-          class="prod-item"
+        v-if="orderItemDtos"
+        class="prod-item"
       >
         <block
-            v-for="(item, index) in orderItemDtos"
-            :key="index"
+          v-for="(item, index) in orderItemDtos"
+          :key="index"
         >
           <view
-              class="item-cont"
-              :data-prodid="item.prodId"
-              @tap="toProdPage"
+            :data-prodid="item.prodId"
+            class="item-cont"
+            @tap="toProdPage"
           >
             <view class="prod-pic">
               <image :src="item.pic"/>
@@ -107,8 +107,8 @@
           </view>
           <view class="item">
             <text
-                v-if="!!remarks"
-                class="item-tit"
+              v-if="!!remarks"
+              class="item-tit"
             >
               订单备注：
             </text>
@@ -188,13 +188,13 @@
 
       <!-- 底部栏 -->
       <view
-          v-if="status==5||status==6"
-          class="order-detail-footer"
+        v-if="status==5||status==6"
+        class="order-detail-footer"
       >
         <text
-            v-if="status==5||status==6"
-            class="dele-order"
-            @tap="delOrderList"
+          v-if="status==5||status==6"
+          class="dele-order"
+          @tap="delOrderList"
         >
           删除订单
         </text>
@@ -246,19 +246,19 @@ const loadOrderDetail = (orderNum) => {
       orderNumber: orderNum
     }
   })
-      .then(({ data }) => {
-        orderNumber.value = orderNum
-        actualTotal.value = data.actualTotal
-        userAddrDto.value = data.userAddrDto
-        remarks.value = data.remarks
-        orderItemDtos.value = data.orderItemDtos
-        createTime.value = data.createTime
-        status.value = data.status
-        transfee.value = data.transfee
-        reduceAmount.value = data.reduceAmount
-        total.value = data.total
-        uni.hideLoading()
-      })
+    .then(({data}) => {
+      orderNumber.value = orderNum
+      actualTotal.value = data.actualTotal
+      userAddrDto.value = data.userAddrDto
+      remarks.value = data.remarks
+      orderItemDtos.value = data.orderItemDtos
+      createTime.value = data.createTime
+      status.value = data.status
+      transfee.value = data.transfee
+      reduceAmount.value = data.reduceAmount
+      total.value = data.total
+      uni.hideLoading()
+    })
 }
 
 /**
@@ -269,31 +269,31 @@ const delOrderList = () => {
     title: '',
     content: '确定要删除此订单吗？',
     confirmColor: '#eb2444',
-    success (res) {
+    success(res) {
       if (res.confirm) {
         uni.showLoading()
         http.request({
           url: '/p/myOrder/' + orderNumber.value,
           method: 'DELETE'
         })
-            .then(() => {
-              uni.hideLoading()
-              uni.showToast({
-                title: res || '删除成功',
-                icon: 'none'
-              })
-              setTimeout(() => {
-                uni.redirectTo({
-                  url: '/pages/orderList/orderList'
-                })
-              }, 1000)
+          .then(() => {
+            uni.hideLoading()
+            uni.showToast({
+              title: res || '删除成功',
+              icon: 'none'
             })
+            setTimeout(() => {
+              uni.redirectTo({
+                url: '/pages/orderList/orderList'
+              })
+            }, 1000)
+          })
       }
     }
   })
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use './order-detail.scss';
 </style>

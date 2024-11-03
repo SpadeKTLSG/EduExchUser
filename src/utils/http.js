@@ -118,7 +118,7 @@ const http = {
       dontTrunLogin: true,
       data: {}
     })
-      .then(({ data }) => {
+      .then(({data}) => {
         if (data > 0) {
           uni.setTabBarBadge({
             index: 2,
