@@ -15,7 +15,7 @@
             </text>
             <text class="text-list">
               {{
-                wxs.parseDiscountMsg(item.chooseDiscountItemDto.discountRule, item.chooseDiscountItemDto.needAmount, item.chooseDiscountItemDto.discount)
+              wxs.parseDiscountMsg(item.chooseDiscountItemDto.discountRule, item.chooseDiscountItemDto.needAmount, item.chooseDiscountItemDto.discount)
               }}
             </text>
           </view>
