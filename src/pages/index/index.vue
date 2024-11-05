@@ -303,6 +303,8 @@
 </template>
 
 <script setup>
+import ImgShow from "@/components/img-show/img-show.vue";
+
 const wxs = number()
 const indicatorColor = ref('#d1e5fb')
 const indicatorActiveColor = ref('#1b7dec')
@@ -318,6 +320,7 @@ const updata = ref(true)
 onLoad(() => {
   getAllData()
 })
+
 onShow(() => {
   // #ifdef MP-WEIXIN
   uni.getSetting({

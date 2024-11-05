@@ -1,5 +1,5 @@
 {
-  "name": "EduExchUser",
+  "name": "eduexch",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -42,13 +42,6 @@
     "@dcloudio/uni-cli-shared": "3.0.0-3080720230703001",
     "@dcloudio/uni-stacktracey": "3.0.0-3080720230703001",
     "@dcloudio/vite-plugin-uni": "3.0.0-3080720230703001",
-    "eslint": "^8.38.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.7.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-vue": "^9.10.0",
-    "eslint-plugin-vue-scoped-css": "^2.4.0",
     "lint-staged": "13.2.2",
     "sass": "^1.61.0",
     "unplugin-auto-import": "^0.15.2",
