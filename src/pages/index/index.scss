@@ -242,12 +242,10 @@ swiper-item {
       width: 220rpx;
       background: #fff;
       display: inline-block;
-      margin: 0 8rpx;
-      margin-bottom: 20rpx;
+      margin: 0 8rpx 20rpx;
       box-shadow: 0rpx 6rpx 8rpx rgba(58, 134, 185, 0.2);
 
       .imagecont {
-        width: 100%;
         font-size: 0;
         width: 220rpx;
         height: 220rpx;
@@ -436,10 +434,9 @@ swiper-item {
         }
 
         .prod-text.more {
-          margin: 0;
           font-size: 28rpx;
           overflow: hidden;
-          margin-bottom: 20rpx;
+          margin: 0 0 20rpx;
           display: -webkit-box;
           word-break: break-all;
           display: -webkit-box;

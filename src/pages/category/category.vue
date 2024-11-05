@@ -27,7 +27,7 @@
           :key="index"
         >
           <view
-            :class="'menu-item ' + (selIndex==index?'active':'') + ' '"
+            :class="'menu-item ' + (selIndex===index?'active':'') + ' '"
             :data-id="item.categoryId"
             :data-index="index"
             @tap="onMenuTab"

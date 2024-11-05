@@ -3,35 +3,35 @@
     <!-- 头部菜单 -->
     <view class="order-tit">
       <text
-        :class="sts==0?'on':''"
+        :class="sts===0?'on':''"
         data-sts="0"
         @tap="onStsTap"
       >
         全部
       </text>
       <text
-        :class="sts==1?'on':''"
+        :class="sts===1?'on':''"
         data-sts="1"
         @tap="onStsTap"
       >
         待支付
       </text>
       <text
-        :class="sts==2?'on':''"
+        :class="sts===2?'on':''"
         data-sts="2"
         @tap="onStsTap"
       >
         待发货
       </text>
       <text
-        :class="sts==3?'on':''"
+        :class="sts===3?'on':''"
         data-sts="3"
         @tap="onStsTap"
       >
         待收货
       </text>
       <text
-        :class="sts==5?'on':''"
+        :class="sts===5?'on':''"
         data-sts="5"
         @tap="onStsTap"
       >
@@ -41,7 +41,7 @@
     <!-- end 头部菜单 -->
     <view class="main">
       <view
-        v-if="list.length==0"
+        v-if="list.length===0"
         class="empty"
       >
         还没有任何相关订单
@@ -56,15 +56,15 @@
             <text>订单编号：{{ item.orderNumber }}</text>
             <view class="order-state">
               <text
-                :class="'order-sts  ' + (item.status==1?'red':'') + '  ' + ((item.status==5||item.status==6)?'gray':'')"
+                :class="'order-sts  ' + (item.status===1?'red':'') + '  ' + ((item.status===5||item.status===6)?'gray':'')"
               >
                 {{
-                item.status == 1 ? '待支付' : (item.status == 2 ? '待发货' : (item.status == 3 ? '待收货' : (item.status == 5 ? '已完成' : '已取消')))
+                  item.status === 1 ? '待支付' : (item.status === 2 ? '待发货' : (item.status === 3 ? '待收货' : (item.status === 5 ? '已完成' : '已取消')))
                 }}
               </text>
 
               <view
-                v-if="item.status==5 || item.status==6"
+                v-if="item.status===5 || item.status===6"
                 class="clear-btn"
               >
                 <image
@@ -79,7 +79,7 @@
 
           <!-- 商品列表 -->
           <!-- 一个订单单个商品的显示 -->
-          <block v-if="item.orderItemDtos.length==1">
+          <block v-if="item.orderItemDtos.length===1">
             <block
               v-for="(prod, index2) in item.orderItemDtos"
               :key="index2"
@@ -167,7 +167,7 @@
           <view class="prod-foot">
             <view class="btn">
               <text
-                v-if="item.status==1"
+                v-if="item.status===1"
                 :data-ordernum="item.orderNumber"
                 class="button"
                 hover-class="none"
@@ -176,7 +176,7 @@
                 取消订单
               </text>
               <text
-                v-if="item.status==1"
+                v-if="item.status===1"
                 :data-ordernum="item.orderNumber"
                 class="button warn"
                 hover-class="none"
@@ -185,7 +185,7 @@
                 付款
               </text>
               <text
-                v-if="item.status==3 || item.status==5"
+                v-if="item.status===3 || item.status===5"
                 :data-ordernum="item.orderNumber"
                 class="button"
                 hover-class="none"
@@ -194,7 +194,7 @@
                 查看物流
               </text>
               <text
-                v-if="item.status==3"
+                v-if="item.status===3"
                 :data-ordernum="item.orderNumber"
                 class="button warn"
                 hover-class="none"
@@ -254,7 +254,7 @@ const loadOrderData = (sts, currentParam) => {
     }
   })
     .then(({data}) => {
-      let listParam = []
+      let listParam
       if (data.current === 1) {
         listParam = data.records
       } else {

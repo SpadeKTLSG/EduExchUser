@@ -30,7 +30,7 @@
       </view>
     </view>
 
-    <view v-if="sts == 1">
+    <view v-if="sts === 1">
       <view class="pay-sts succ">
         支付成功
       </view>

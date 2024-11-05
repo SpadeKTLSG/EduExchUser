@@ -22,32 +22,32 @@
           @tap="changeShowType"
         >
           <image
-            v-if="showType==1"
+            v-if="showType===1"
             src="@/static/images/icon/search-col.png"
           />
           <image
-            v-if="showType==2"
+            v-if="showType===2"
             src="@/static/images/icon/search-col2.png"
           />
         </view>
       </view>
       <view class="tabs">
         <text
-          :class="'tab-item complete ' + (sts==0?'on':'')"
+          :class="'tab-item complete ' + (sts===0?'on':'')"
           data-sts="0"
           @tap="onStsTap"
         >
           综合
         </text>
         <text
-          :class="'tab-item ' + (sts==1?'on':'')"
+          :class="'tab-item ' + (sts===1?'on':'')"
           data-sts="1"
           @tap="onStsTap"
         >
           销量
         </text>
         <text
-          :class="'tab-item ' + (sts==2?'on':'')"
+          :class="'tab-item ' + (sts===2?'on':'')"
           data-sts="2"
           @tap="onStsTap"
         >
@@ -60,7 +60,7 @@
     <view class="prod-list">
       <!-- 横向列表 -->
       <view
-        v-if="showType==1"
+        v-if="showType===1"
         class="prod-show"
       >
         <view class="hotsale-item-cont">
@@ -78,7 +78,7 @@
 
       <!-- 纵向列表 -->
       <view
-        v-if="showType==2"
+        v-if="showType===2"
         class="cont-item"
       >
         <block
@@ -122,7 +122,7 @@
       <!-- 空占位 -->
       <view
         v-if="!searchProdList.length"
-        :class="['empty',showType==1? 'empty-top':'']"
+        :class="['empty',showType===1? 'empty-top':'']"
       >
         暂无结果
       </view>
@@ -149,7 +149,7 @@ onShow(() => {
 
 const showType = ref(2)
 const changeShowType = () => {
-  if (showType.value == 1) {
+  if (showType.value === 1) {
     showType.value = 2
   } else {
     showType.value = 1

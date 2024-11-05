@@ -1,4 +1,4 @@
-page {
+.page {
   background: #f7f8fa;
 }
 
@@ -39,7 +39,6 @@ page {
   bottom: 0;
   height: 4rpx;
   background-color: #b4282d;
-  transition: transform 0.3s;
   transition: transform 0.3s, -webkit-transform 0.3s;
   box-sizing: border-box;
 }

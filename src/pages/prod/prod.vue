@@ -19,6 +19,7 @@
         </swiper-item>
       </block>
     </swiper>
+
     <!-- end  轮播图 -->
     <!-- 商品信息 -->
     <view class="prod-info">
@@ -327,35 +328,35 @@
       <view class="cmt-cont">
         <view class="cmt-tag">
           <text
-            :class="evaluate==-1?'selected':''"
+            :class="evaluate===-1?'selected':''"
             data-evaluate="-1"
             @tap="getProdCommPage"
           >
             全部({{ prodCommData.number }})
           </text>
           <text
-            :class="evaluate==0?'selected':''"
+            :class="evaluate===0?'selected':''"
             data-evaluate="0"
             @tap="getProdCommPage"
           >
             好评({{ prodCommData.praiseNumber }})
           </text>
           <text
-            :class="evaluate==1?'selected':''"
+            :class="evaluate===1?'selected':''"
             data-evaluate="1"
             @tap="getProdCommPage"
           >
             中评({{ prodCommData.secondaryNumber }})
           </text>
           <text
-            :class="evaluate==2?'selected':''"
+            :class="evaluate===2?'selected':''"
             data-evaluate="2"
             @tap="getProdCommPage"
           >
             差评({{ prodCommData.negativeNumber }})
           </text>
           <text
-            :class="evaluate==3?'selected':''"
+            :class="evaluate===3?'selected':''"
             data-evaluate="3"
             @tap="getProdCommPage"
           >
@@ -653,7 +654,7 @@ const groupSkuProp = (skuList, defaultPrice) => {
   let defaultSkuParam = null
   for (let i = 0; i < skuList.length; i++) {
     let isDefault = false
-    if (!defaultSkuParam && skuList[i].price == defaultPrice) {
+    if (!defaultSkuParam && skuList[i].price === defaultPrice) {
       defaultSkuParam = skuList[i]
       isDefault = true
     }
@@ -719,7 +720,7 @@ const parseSelectedObjToVals = (skuList) => {
   selectedPropObjList = selectedPropObjListParam
   let findSkuParam = false
   for (let i = 0; i < skuList.length; i++) {
-    if (skuList[i].properties == selectedPropertiesParam) {
+    if (skuList[i].properties === selectedPropertiesParam) {
       findSkuParam = true
       defaultSku.value = skuList[i]
       break
@@ -740,7 +741,7 @@ const isSkuLineItemNotOptional = (allProperties, selectedPropObjParam, key, item
   }
   properties = properties.substring(0, properties.length - 1)
   for (let i = 0; i < allProperties.length; i++) {
-    if (properties == allProperties[i]) {
+    if (properties === allProperties[i]) {
       return false
     }
   }

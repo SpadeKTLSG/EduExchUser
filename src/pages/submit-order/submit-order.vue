@@ -242,14 +242,14 @@
         </view>
         <view class="coupon-tabs">
           <view
-            :class="'coupon-tab ' + (couponSts==1?'on':'')"
+            :class="'coupon-tab ' + (couponSts===1?'on':'')"
             data-sts="1"
             @tap="changeCouponSts"
           >
             可用优惠券({{ coupons.canUseCoupons.length ? coupons.canUseCoupons.length : 0 }})
           </view>
           <view
-            :class="'coupon-tab ' + (couponSts==2?'on':'')"
+            :class="'coupon-tab ' + (couponSts===2?'on':'')"
             data-sts="2"
             @tap="changeCouponSts"
           >
@@ -257,7 +257,7 @@
           </view>
         </view>
         <view class="popup-cnt">
-          <block v-if="couponSts == 1">
+          <block v-if="couponSts === 1">
             <view
               v-for="(item, index) in coupons.canUseCoupons"
               :key="index"
@@ -270,7 +270,7 @@
               />
             </view>
           </block>
-          <block v-if="couponSts == 2">
+          <block v-if="couponSts === 2">
             <view
               v-for="(item, index) in coupons.unCanUseCoupons"
               :key="index"
@@ -285,7 +285,7 @@
           <view class="botm-empty"/>
         </view>
         <view
-          v-if="couponSts==1"
+          v-if="couponSts===1"
           class="coupon-ok"
         >
           <text @tap="choosedCoupon">
@@ -393,7 +393,7 @@ const loadOrderData = () => {
  */
 const chooseCouponErrHandle = (res) => {
   // 优惠券不能共用处理方法
-  if (res.statusCode == 601) {
+  if (res.statusCode === 601) {
     uni.showToast({
       title: res.data,
       icon: 'none',

@@ -188,11 +188,11 @@
 
       <!-- 底部栏 -->
       <view
-        v-if="status==5||status==6"
+        v-if="status===5||status===6"
         class="order-detail-footer"
       >
         <text
-          v-if="status==5||status==6"
+          v-if="status===5||status===6"
           class="dele-order"
           @tap="delOrderList"
         >

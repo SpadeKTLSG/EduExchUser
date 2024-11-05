@@ -80,7 +80,6 @@
 </template>
 
 <script setup>
-import {encrypt} from '@/utils/crypto.js'
 
 /**
  * 生命周期函数--监听页面显示
@@ -124,7 +123,7 @@ const toRegister = () => {
       method: 'post',
       data: {
         userName: principal.value,
-        passWord: encrypt(credentials.value)
+        passWord: credentials.value
       }
     })
       .then(() => {

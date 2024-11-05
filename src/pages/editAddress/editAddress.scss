@@ -29,7 +29,7 @@
       color: #333;
     }
 
-    picker {
+    .picker {
       width: 70%;
       padding: 0 30rpx;
     }
@@ -100,7 +100,7 @@
   justify-content: center;
 }
 
-picker-view {
+.picker-view {
   background-color: white;
   padding: 0;
   width: 100%;
@@ -121,7 +121,7 @@ picker-view {
   }
 }
 
-picker-view-column {
+.picker-view-column {
   view {
     vertical-align: middle;
     font-size: 28rpx;

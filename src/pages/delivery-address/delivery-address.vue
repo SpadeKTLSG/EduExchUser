@@ -48,7 +48,7 @@
             >
               <view class="box">
                 <radio
-                  :checked="item.commonAddr==1"
+                  :checked="item.commonAddr===1"
                   :data-addrid="item.addrId"
                   :value="item.prodId"
                   color="#eb2444"
@@ -142,7 +142,7 @@ const toEditAddress = (e) => {
  * 选择地址 跳转回提交订单页
  */
 const selAddrToOrder = (item) => {
-  if (order.value == 0) {
+  if (order.value === 0) {
     const pages = getCurrentPages() // 当前页面
     const prevPage = pages[pages.length - 2] // 上一页面
     prevPage.item = item // 直接给上一页面赋值

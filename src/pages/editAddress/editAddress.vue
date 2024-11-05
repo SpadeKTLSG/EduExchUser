@@ -109,7 +109,7 @@
       </view>
 
       <view
-        v-if="addrId!=0"
+        v-if="addrId!==0"
         class="clear btn"
         @tap="onDeleteAddr"
       >
@@ -193,14 +193,14 @@ const bindChange = (e) => {
   // 判断滑动的是第几个column
   const val = e.detail.value
   // 若省份column做了滑动则定位到地级市和区县第一位
-  if (indexArr[0] != val[0]) {
+  if (indexArr[0] !== val[0]) {
     val[1] = 0
     val[2] = 0 // 更新数据
     // 获取地级市数据
     getCityArray(provArray.value[val[0]].areaId)
   } else {
     // 若省份column未做滑动，地级市做了滑动则定位区县第一位
-    if (indexArr[1] != val[1]) {
+    if (indexArr[1] !== val[1]) {
       val[2] = 0 // 更新数据
       getAreaArray(cityArray.value[val[1]].areaId) // 获取区县数据
     }
@@ -222,7 +222,7 @@ const show = ref('')
  * 移动按钮点击事件
  */
 const translate = () => {
-  if (t == 0) {
+  if (t === 0) {
     moveY = 0
     show.value = true
     t = 1
@@ -275,7 +275,7 @@ const getCityArray = (provinceId, cityId, areaId) => {
       cityArray.value = data
       if (cityId) {
         for (const index in data) {
-          if (data[index].areaId == cityId) {
+          if (data[index].areaId === cityId) {
             valArr.value = [valArr.value[0], parseInt(index), valArr.value[2]]
           }
         }
@@ -299,7 +299,7 @@ const getAreaArray = (cityId, areaId) => {
     areaArray.value = data
     if (areaId) {
       for (const _index in data) {
-        if (data[_index].areaId == areaId) {
+        if (data[_index].areaId === areaId) {
           valArr.value = [valArr.value[0], valArr.value[1], parseInt(_index)]
         }
       }
@@ -341,7 +341,7 @@ const onSaveAddr = () => {
     return
   }
 
-  if (mobileParam.length != 11) {
+  if (mobileParam.length !== 11) {
     uni.showToast({
       title: '请输入正确的手机号码',
       icon: 'none'
@@ -362,7 +362,7 @@ const onSaveAddr = () => {
   let url = '/p/address/addAddr'
   let method = 'POST'
 
-  if (addrId.value != 0) {
+  if (addrId.value !== 0) {
     url = '/p/address/updateAddr'
     method = 'PUT'
   } // 添加或修改地址

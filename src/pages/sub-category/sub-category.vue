@@ -13,7 +13,7 @@
       >
         <view
           :id="'sw' + item.categoryId"
-          :class="'category-item ' + (item.categoryId==categoryId? 'on':'')"
+          :class="'category-item ' + (item.categoryId===categoryId? 'on':'')"
           :data-id="item.categoryId"
           @tap="onSubCategoryTap"
         >
@@ -142,7 +142,7 @@ const getProdList = () => {
   })
     .then(({data}) => {
       isLoaded.value = true
-      prodList.value = data.current == 1 ? data.records : prodList.value.concat(data.records)
+      prodList.value = data.current === 1 ? data.records : prodList.value.concat(data.records)
       current.value = data.current
       pages.value = data.pages
     })

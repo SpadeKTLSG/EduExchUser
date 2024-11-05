@@ -84,7 +84,7 @@
   line-height: 90rpx;
   height: 90rpx;
   text-align: center;
-  border-bottom: 2rpx silid #e3e3e3;
+  border-bottom: 2rpx solid #e3e3e3;
   position: relative;
   color: #777;
   font-size: 28rpx;
@@ -205,7 +205,6 @@
           word-break: break-all;
           overflow: hidden;
           text-overflow: ellipsis;
-          display: -webkit-box;
           -webkit-line-clamp: 1;
           -webkit-box-orient: vertical;
           color: #000;
