@@ -167,14 +167,14 @@
         class="btn icon"
         @tap="toHomePage"
       >
-        <image src="@/static/images/tabbar/homepage.png"/>
+        <image src="@/static/images/icon/homepage.png"/>
         首页
       </view>
       <view
         class="btn icon"
         @tap="toCartPage"
       >
-        <image src="@/static/images/tabbar/basket.png"/>
+        <image src="@/static/images/icon/basket.png"/>
         购物车
         <view
           v-if="totalCartNum>0"

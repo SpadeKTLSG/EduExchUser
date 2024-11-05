@@ -15,7 +15,7 @@
             </text>
             <text class="text-list">
               {{
-              wxs.parseDiscountMsg(item.chooseDiscountItemDto.discountRule, item.chooseDiscountItemDto.needAmount, item.chooseDiscountItemDto.discount)
+                wxs.parseDiscountMsg(item.chooseDiscountItemDto.discountRule, item.chooseDiscountItemDto.needAmount, item.chooseDiscountItemDto.discount)
               }}
             </text>
           </view>
@@ -92,7 +92,7 @@
       class="empty"
     >
       <view class="img">
-        <image src="@/static/images/tabbar/basket.png"/>
+        <image src="@/static/images/icon/basket.png"/>
       </view>
       <view class="txt">
         您还没有添加任何商品哦~

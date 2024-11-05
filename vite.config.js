@@ -17,9 +17,9 @@ export default defineConfig({
         'src/utils',
         'src/wxs/**'
       ],
-      dts: 'src/auto-imports.d.ts',
+      dts: 'auto-imports.d.ts',
       eslintrc: {
-        enabled: true
+        enabled: false
       }
     }),
     // 对h5 production环境打包时的特殊处理，否则uni-crazy-router在这个环境会异常

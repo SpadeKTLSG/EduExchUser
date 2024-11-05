@@ -182,16 +182,8 @@
       </view>
 
       <view class="my-menu">
-        <view
-          class="memu-item"
-          @tap="toDistCenter"
-        >
-          <view class="i-name">
-            <image src="@/static/images/icon/promotion.png"/>
-            <text>分销中心</text>
-          </view>
-          <view class="arrowhead"/>
-        </view>
+
+
         <view
           class="memu-item"
           @tap="toCouponCenter"
@@ -202,6 +194,7 @@
           </view>
           <view class="arrowhead"/>
         </view>
+
         <view
           class="memu-item"
           @tap="toMyCouponPage"
@@ -212,6 +205,7 @@
           </view>
           <view class="arrowhead"/>
         </view>
+
         <view
           class="memu-item"
           @tap="toAddressList"
@@ -222,7 +216,9 @@
           </view>
           <view class="arrowhead"/>
         </view>
+
       </view>
+
       <!--end 列表项 -->
 
       <view
@@ -266,12 +262,7 @@ onShow(() => {
   }
 })
 
-const toDistCenter = () => {
-  uni.showToast({
-    icon: 'none',
-    title: '该功能未开源'
-  })
-}
+
 const toCouponCenter = () => {
   uni.showToast({
     icon: 'none',
@@ -336,7 +327,7 @@ const myCollectionHandle = () => {
 }
 
 /**
- * 去登陆
+ * 登陆跳转
  */
 const toLogin = () => {
   uni.navigateTo({

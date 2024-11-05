@@ -234,7 +234,7 @@
                     </view>
                     <image
                       class="basket-img"
-                      src="@/static/images/tabbar/basket-sel.png"
+                      src="@/static/images/icon/basket-sel.png"
                     />
                   </view>
                 </view>
@@ -288,7 +288,7 @@
                     </view>
                     <image
                       class="basket-img"
-                      src="@/static/images/tabbar/basket-sel.png"
+                      src="@/static/images/icon/basket-sel.png"
                       @tap.stop="addToCart(prod)"
                     />
                   </view>
