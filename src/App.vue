@@ -10,7 +10,7 @@ uni-page-head {
 }
 
 /* 轮播图指示点 */
-uni-swiper .uni-swiper-dots-horizontal {
+uni-swiper . uni-swiper-dots-horizontal {
   bottom: 20px !important;
 }
 </style>
