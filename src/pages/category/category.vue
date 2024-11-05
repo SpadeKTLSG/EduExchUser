@@ -170,5 +170,5 @@ const toCatePage = (e) => {
 </script>
 
 <style lang="scss" scoped>
-@import "./category.scss";
+@use "./category.scss";
 </style>

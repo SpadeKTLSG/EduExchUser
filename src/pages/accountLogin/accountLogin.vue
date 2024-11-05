@@ -168,5 +168,5 @@ const toIndex = () => {
 </script>
 
 <style lang="scss" scoped>
-@import "./accountLogin.scss";
+@use "./accountLogin.scss";
 </style>

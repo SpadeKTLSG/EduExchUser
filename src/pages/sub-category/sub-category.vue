@@ -173,5 +173,5 @@ const toProdPage = (e) => {
 </script>
 
 <style lang="scss" scoped>
-@import "./sub-category.scss";
+@use "./sub-category.scss";
 </style>

@@ -107,6 +107,10 @@ const http = {
       })
     })
   },
+
+  /**
+   *  获取购物车数量
+   */
   getCartCount: () => {
     if (!uni.getStorageSync('Token')) {
       util.removeTabBadge()
@@ -133,12 +137,17 @@ const http = {
         }
       })
   },
+
+  /**
+   * 请求异常处理
+   */
   onRequestFail: (params, responseData) => {
     console.error('============== 请求异常 ==============')
     console.log('接口地址: ', params.url)
     console.log('异常信息: ', responseData)
     console.error('============== 请求异常 end ==========')
   },
+
   /**
    * 登录成功后执行
    * @param {Object} result  登录成功返回的数据

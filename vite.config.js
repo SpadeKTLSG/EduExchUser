@@ -15,7 +15,7 @@ export default defineConfig({
       ],
       dirs: [
         'src/utils',
-        'src/wxs/**'
+        'src/utils/wxs/**'
       ],
       dts: 'auto-imports.d.ts',
       eslintrc: {

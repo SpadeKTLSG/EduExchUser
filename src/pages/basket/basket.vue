@@ -398,5 +398,5 @@ const onDelBasket = () => {
 </script>
 
 <style lang="scss" scoped>
-@import "./basket.scss";
+@use "./basket.scss";
 </style>

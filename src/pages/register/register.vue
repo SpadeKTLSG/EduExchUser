@@ -162,5 +162,5 @@ const toIndex = () => {
 </script>
 
 <style lang="scss" scoped>
-@import "./register.scss";
+@use "./register.scss";
 </style>
