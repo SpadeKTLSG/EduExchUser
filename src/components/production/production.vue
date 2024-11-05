@@ -1,4 +1,5 @@
 <template>
+
   <view
     :data-prodid="item.prodId"
     class="prod-items"
@@ -60,13 +61,16 @@ const props = defineProps({
   }
 })
 
+
 const toProdPage = (e) => {
   const prodid = e.currentTarget.dataset.prodid
   uni.navigateTo({
     url: '/pages/prod/prod?prodid=' + prodid
   })
 }
+
 </script>
+
 
 <style lang="scss" scoped>
 .prod-items {

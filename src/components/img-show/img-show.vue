@@ -19,6 +19,13 @@
 </template>
 
 <script setup>
+
+const emit = defineEmits(['imgError', 'imgLoad', 'handleTap'])
+const isError = ref(false)
+
+/**
+ * 图片路径
+ */
 const props = defineProps({
   src: {
     type: String,
@@ -50,13 +57,13 @@ const props = defineProps({
 const imgPath = computed(() => {
   return util.checkFileUrl(props.src)
 })
+
 const defaultImgPath = computed(() => {
   if (props.defaultImgType) return '/static/images/icon/head04.png'
   return '/static/images/icon/def.png'
 })
 
-const emit = defineEmits(['imgError', 'imgLoad', 'handleTap'])
-const isError = ref(false)
+
 const imgError = () => {
   isError.value = true
   emit('imgError')
