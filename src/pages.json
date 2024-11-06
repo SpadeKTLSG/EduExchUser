@@ -122,7 +122,7 @@
     {
       "path": "pages/prod/prod",
       "style": {
-        "navigationBarTitleText": "商品详情"
+        "navigationBarTitleText": "详情"
       }
     },
     {
