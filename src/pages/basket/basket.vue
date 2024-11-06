@@ -15,6 +15,7 @@
             </text>
             <text class="text-list">
               {{
+                //fuck me
                 wxs.parseDiscountMsg(item.chooseDiscountItemDto.discountRule, item.chooseDiscountItemDto.needAmount, item.chooseDiscountItemDto.discount)
               }}
             </text>

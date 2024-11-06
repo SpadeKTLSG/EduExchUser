@@ -100,6 +100,7 @@
     <view class="updata">
       <!--      FIXME note: 这里的逻辑不对, 和我的拉取数据策略不一致, 需要未来大改. 这里是一起把所有商品都拉出来, 然后根据他们的
       所谓tag进行分组展示, 但是我的后端是, 直接把对应的Upshow和Hotsearch实体一起拉取出来, 放到对应的位置去, 因此实际上这个方案是没法实现的-->
+      <!--    FUTURE  后面直接改成拉取数据时候从对应仓库拉就行了.-->
 
       <block
         v-for="(item, index) in taglist"
@@ -215,6 +216,7 @@
         </view>
 
       </block>
+
     </view>
   </view>
 
@@ -395,7 +397,7 @@ const getIndexImgs = () => {
 
 
 /**
- * 加载商品标题分组列表 TODO
+ * 加载商品标题分组列表 TODO 要重写
  */
 const getTag = () => {
   http.request({

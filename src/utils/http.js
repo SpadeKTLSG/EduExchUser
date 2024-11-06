@@ -1,9 +1,10 @@
-/* eslint-disable no-console */
-// 全局请求封装
 import loginMethods from './login'
 
+// 全局请求封装 (发送 + 接受)
 const http = {
+
   request: async function (params) {
+
     // 请求参数处理
     if (Object.prototype.toString.call(params.data) === '[object Array]') {
       params.data = JSON.stringify(params.data)
@@ -15,6 +16,7 @@ const http = {
     if (!params.login && !getApp()?.globalData.isLanding && !params.isRefreshing) {
       await loginMethods.refreshToken()
     }
+
     // 发起请求
     return new Promise((resolve, reject) => {
       uni.request({
@@ -26,7 +28,10 @@ const http = {
         url: (params.domain ? params.domain : import.meta.env.VITE_APP_BASE_API) + params.url,
         data: params.data,
         method: params.method === undefined ? 'POST' : params.method,
+
+        //返回结果
         success: (res) => {
+
           const responseData = res.data
 
           // 请求小程序码
