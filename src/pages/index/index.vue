@@ -1,5 +1,7 @@
 <template>
   <view class="container">
+
+    <!-- 顶栏搜索框 -->
     <view class="bg-sear">
       <view class="scrolltop">
         <view
@@ -11,22 +13,24 @@
             src="@/static/images/icon/search.png"
           />
           <text class="placeholder">
-            搜索
+            点我搜索
           </text>
         </view>
       </view>
     </view>
 
+    <!-- 页面主功能 -->
     <view class="content">
-      <!-- swiper -->
+
+      <!-- 轮播图 -->
       <swiper
-        :autoplay="autoplay"
         :circular="true"
         :duration="duration"
         :indicator-active-color="indicatorActiveColor + ' '"
         :indicator-color="indicatorColor"
         :interval="interval"
         class="pic-swiper"
+        indicator-active-color="#d1e5fb"
         indicator-dots
         next-margin="20rpx"
         previous-margin="20rpx"
@@ -47,8 +51,8 @@
           </swiper-item>
         </block>
       </swiper>
-      <!-- end swiper -->
 
+      <!--核心首页功能-->
       <view class="cat-item">
         <view
           class="item"
@@ -81,50 +85,28 @@
           <image src="@/static/images/icon/newprods.png"/>
           <text>领优惠券</text>
         </view>
+        <view
+          class="item"
+          @tap="toCouponCenter"
+        >
+          <image src="@/static/images/icon/newprods.png"/>
+          <text>公告</text>
+        </view>
       </view>
 
-      <!-- 消息播放 -->
-      <view
-        v-if="news && news.length"
-        class="message-play"
-        @tap="onNewsPage"
-      >
-        <image
-          class="hornpng"
-          src="@/static/images/icon/horn.png"
-        />
-        <swiper
-          :autoplay="true"
-          :circular="true"
-          :vertical="true"
-          class="swiper-cont"
-          duration="1000"
-        >
-          <block
-            v-for="(item, index) in news"
-            :key="index"
-          >
-            <swiper-item class="items">
-              {{ item.title }}
-            </swiper-item>
-          </block>
-        </swiper>
-        <text class="arrow"/>
-      </view>
     </view>
 
-    <view
-      v-if="updata"
-      class="updata"
+    <!-- 首页展示商品 -->
+    <view v-if="updata"
+          class="updata"
     >
       <block
         v-for="(item, index) in taglist"
         :key="index"
       >
-        <!-- 每日上新 -->
-        <view
-          v-if="item.style==='2' && item.prods && item.prods.length"
-          class="up-to-date"
+        <!-- 提升表 -->
+        <view v-if="item.style==='2' && item.prods && item.prods.length"
+              class="up-to-date"
         >
           <view class="title">
             <text>{{ item.title }}</text>
@@ -197,6 +179,7 @@
               <text class="arrow"/>
             </view>
           </view>
+
           <view class="hotsale-item-cont">
             <block
               v-for="(prod, index2) in item.prods"
@@ -300,27 +283,32 @@
       </block>
     </view>
   </view>
+
 </template>
 
 <script setup>
-import ImgShow from "@/components/img-show/img-show.vue";
+import ImgShow from "@/components/img-show/img-show.vue"; // 图片展示组件
 
 const wxs = number()
 const indicatorColor = ref('#d1e5fb')
 const indicatorActiveColor = ref('#1b7dec')
-const autoplay = ref(true)
 const interval = ref(2000)
 const duration = ref(1000)
 const indexImgs = ref([])
 const seq = ref(0)
-const news = ref([])
 const taglist = ref([])
 const updata = ref(true)
+
 
 onLoad(() => {
   getAllData()
 })
 
+
+/**
+ * 页面显示时触发
+ * ! #ifdef 不是注释! 不要动它不然会崩溃
+ */
 onShow(() => {
   // #ifdef MP-WEIXIN
   uni.getSetting({
@@ -347,7 +335,6 @@ onPullDownRefresh(() => {
 const getAllData = () => {
   http.getCartCount()// 重新计算购物车总数量
   getIndexImgs()
-  getNoticeList()
   getTag()
 }
 
@@ -399,9 +386,15 @@ const addToCart = (item) => {
 }
 
 const toCouponCenter = () => {
+
   uni.showToast({
     icon: 'none',
-    title: '该功能未开源'
+    title: '该功能未实现, 跳转至公告列表页'
+  })
+  nextTick(() => {
+    uni.navigateTo({
+      url: '/pages/recent-news/recent-news'
+    })
   })
 }
 
@@ -415,7 +408,7 @@ const toSearchPage = () => {
 }
 
 /**
- * 跳转商品活动页面
+ * 跳转商品页面
  * @param e
  */
 const toClassifyPage = (e) => {
@@ -431,6 +424,7 @@ const toClassifyPage = (e) => {
     url
   })
 }
+
 /**
  * 跳转公告列表页面
  */
@@ -455,17 +449,6 @@ const getIndexImgs = () => {
     })
 }
 
-const getNoticeList = () => {
-  // 加载公告
-  http.request({
-    url: '/shop/notice/topNoticeList',
-    method: 'GET',
-    data: {}
-  })
-    .then(({data}) => {
-      news.value = data
-    })
-}
 
 /**
  * 加载商品标题分组列表
