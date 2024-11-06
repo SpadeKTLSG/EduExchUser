@@ -1,24 +1,31 @@
 <template>
   <image
-      v-if="!isError && imgPath"
-      :src="imgPath"
-      :style="imgStyle"
-      :class="classList"
-      :mode="imgMode"
-      @error="imgError"
-      @load="imgLoad"
-      @tap="handleTap"
+    v-if="!isError && imgPath"
+    :class="classList"
+    :mode="imgMode"
+    :src="imgPath"
+    :style="imgStyle"
+    @error="imgError"
+    @load="imgLoad"
+    @tap="handleTap"
   />
   <image
-      v-else
-      :src="defaultImgPath"
-      :style="imgStyle"
-      :class="classList"
-      @tap="handleTap"
+    v-else
+    :class="classList"
+    :src="defaultImgPath"
+    :style="imgStyle"
+    @tap="handleTap"
   />
 </template>
 
 <script setup>
+
+const emit = defineEmits(['imgError', 'imgLoad', 'handleTap'])
+const isError = ref(false)
+
+/**
+ * 图片路径
+ */
 const props = defineProps({
   src: {
     type: String,
@@ -50,13 +57,13 @@ const props = defineProps({
 const imgPath = computed(() => {
   return util.checkFileUrl(props.src)
 })
+
 const defaultImgPath = computed(() => {
   if (props.defaultImgType) return '/static/images/icon/head04.png'
   return '/static/images/icon/def.png'
 })
 
-const emit = defineEmits(['imgError', 'imgLoad', 'handleTap'])
-const isError = ref(false)
+
 const imgError = () => {
   isError.value = true
   emit('imgError')

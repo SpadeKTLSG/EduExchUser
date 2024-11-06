@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import {defineConfig} from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
 import path from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -15,11 +15,11 @@ export default defineConfig({
       ],
       dirs: [
         'src/utils',
-        'src/wxs/**'
+        'src/utils/wxs/**'
       ],
-      dts: 'src/auto-imports.d.ts',
+      dts: 'auto-imports.d.ts',
       eslintrc: {
-        enabled: true
+        enabled: false
       }
     }),
     // 对h5 production环境打包时的特殊处理，否则uni-crazy-router在这个环境会异常
@@ -27,7 +27,7 @@ export default defineConfig({
   ],
   server: {
     host: true,
-    port: 80,
+    port: 5000,
     open: true
   },
   resolve: {

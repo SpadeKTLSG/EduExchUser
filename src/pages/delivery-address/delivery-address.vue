@@ -2,8 +2,8 @@
   <view class="container">
     <view class="main">
       <view
-          v-if="addressList.length===0"
-          class="empty"
+        v-if="addressList.length===0"
+        class="empty"
       >
         <view class="img">
           <image src="http://jiales.gz-yami.com/addr.png"/>
@@ -14,13 +14,13 @@
       </view>
       <radio-group class="radio-group">
         <block
-            v-for="(item, index) in addressList"
-            :key="index"
+          v-for="(item, index) in addressList"
+          :key="index"
         >
           <view class="address">
             <view
-                class="personal"
-                @tap="selAddrToOrder(item)"
+              class="personal"
+              @tap="selAddrToOrder(item)"
             >
               <view class="info-tit">
                 <text class="name">
@@ -30,9 +30,9 @@
                   {{ item.mobile }}
                 </text>
                 <image
-                    src="@/static/images/icon/revise.png"
-                    :data-addrid="item.addrId"
-                    @tap.stop="toEditAddress"
+                  :data-addrid="item.addrId"
+                  src="@/static/images/icon/revise.png"
+                  @tap.stop="toEditAddress"
                 />
               </view>
               <view class="addr">
@@ -42,17 +42,17 @@
               </view>
             </view>
             <view
-                class="select-btn"
-                :data-addrid="item.addrId"
-                @tap="onDefaultAddr"
+              :data-addrid="item.addrId"
+              class="select-btn"
+              @tap="onDefaultAddr"
             >
               <view class="box">
                 <radio
-                    :value="item.prodId"
-                    :checked="item.commonAddr==1"
-                    color="#eb2444"
-                    :data-addrid="item.addrId"
-                    @tap="onDefaultAddr"
+                  :checked="item.commonAddr===1"
+                  :data-addrid="item.addrId"
+                  :value="item.prodId"
+                  color="#eb2444"
+                  @tap="onDefaultAddr"
                 />
                 设为默认地址
               </view>
@@ -62,8 +62,8 @@
       </radio-group>
     </view>
     <view
-        class="footer"
-        @tap="onAddAddr"
+      class="footer"
+      @tap="onAddAddr"
     >
       <text>新增收货地址</text>
     </view>
@@ -95,10 +95,10 @@ const onGetList = () => {
     url: '/p/address/list',
     method: 'GET'
   })
-      .then(({ data }) => {
-        addressList.value = data
-        uni.hideLoading()
-      })
+    .then(({data}) => {
+      addressList.value = data
+      uni.hideLoading()
+    })
 }
 
 /**
@@ -123,9 +123,9 @@ const onDefaultAddr = (e) => {
       addrId
     }
   })
-      .then(() => {
-        uni.hideLoading()
-      })
+    .then(() => {
+      uni.hideLoading()
+    })
 }
 
 /**
@@ -142,7 +142,7 @@ const toEditAddress = (e) => {
  * 选择地址 跳转回提交订单页
  */
 const selAddrToOrder = (item) => {
-  if (order.value == 0) {
+  if (order.value === 0) {
     const pages = getCurrentPages() // 当前页面
     const prevPage = pages[pages.length - 2] // 上一页面
     prevPage.item = item // 直接给上一页面赋值
@@ -155,6 +155,6 @@ const selAddrToOrder = (item) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use './delivery-address.scss';
 </style>

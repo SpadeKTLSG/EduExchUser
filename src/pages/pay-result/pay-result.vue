@@ -16,21 +16,21 @@
       </view>
       <view class="btns">
         <text
-            class="button checkorder"
-            @tap="toOrderList"
+          class="button checkorder"
+          @tap="toOrderList"
         >
           查看订单
         </text>
         <text
-            class="button payagain"
-            @tap="payAgain"
+          class="button payagain"
+          @tap="payAgain"
         >
           重新支付
         </text>
       </view>
     </view>
 
-    <view v-if="sts == 1">
+    <view v-if="sts === 1">
       <view class="pay-sts succ">
         支付成功
       </view>
@@ -39,14 +39,14 @@
       </view>
       <view class="btns">
         <text
-            class="button checkorder"
-            @tap="toOrderList"
+          class="button checkorder"
+          @tap="toOrderList"
         >
           查看订单
         </text>
         <text
-            class="button shopcontinue"
-            @tap="toIndex"
+          class="button shopcontinue"
+          @tap="toIndex"
         >
           继续购物
         </text>
@@ -88,24 +88,24 @@ const payAgain = () => {
       orderNumbers: orderNumbers.value
     }
   })
-      .then(({ data }) => {
-        uni.hideLoading()
-        uni.requestPayment({
-          timeStamp: data.timeStamp,
-          nonceStr: data.nonceStr,
-          package: data.packageValue,
-          signType: data.signType,
-          paySign: data.paySign,
-          success: () => {
-            uni.redirectTo({
-              url: '/pages/pay-result/pay-result?sts=1&orderNum=' + orderNumbers.value
-            })
-          }
-        })
+    .then(({data}) => {
+      uni.hideLoading()
+      uni.requestPayment({
+        timeStamp: data.timeStamp,
+        nonceStr: data.nonceStr,
+        package: data.packageValue,
+        signType: data.signType,
+        paySign: data.paySign,
+        success: () => {
+          uni.redirectTo({
+            url: '/pages/pay-result/pay-result?sts=1&orderNum=' + orderNumbers.value
+          })
+        }
       })
+    })
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use './pay-result.scss';
 </style>

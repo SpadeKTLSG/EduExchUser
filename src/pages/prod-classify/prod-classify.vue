@@ -2,14 +2,14 @@
   <view class="container">
     <view>
       <block
-          v-for="(item, index) in prodList"
-          :key="index"
+        v-for="(item, index) in prodList"
+        :key="index"
       >
         <production :item="item"/>
       </block>
       <view
-          v-if="!prodList.length"
-          class="empty"
+        v-if="!prodList.length"
+        class="empty"
       >
         暂无数据
       </view>
@@ -18,6 +18,8 @@
 </template>
 
 <script setup>
+import Production from "@/components/production/production.vue";
+
 const sts = ref(0)
 const title = ref('')
 const current = ref(1)
@@ -37,37 +39,37 @@ onLoad((options) => {
     tagid.value = options.tagid
   }
 
-  if (sts.value == 0) {
-    if (options.tagid == 1) {
+  if (sts.value === 0) {
+    if (options.tagid === 1) {
       uni.setNavigationBarTitle({
         title: '每日上新'
       })
-    } else if (options.tagid == 2) {
+    } else if (options.tagid === 2) {
       uni.setNavigationBarTitle({
         title: '商城热卖'
       })
-    } else if (options.tagid == 3) {
+    } else if (options.tagid === 3) {
       uni.setNavigationBarTitle({
         title: '更多宝贝'
       })
     }
-  } else if (sts.value == 1) {
+  } else if (sts.value === 1) {
     uni.setNavigationBarTitle({
       title: '新品推荐'
     })
-  } else if (sts.value == 2) {
+  } else if (sts.value === 2) {
     uni.setNavigationBarTitle({
       title: '限时特惠'
     })
-  } else if (sts.value == 3) {
+  } else if (sts.value === 3) {
     uni.setNavigationBarTitle({
       title: '每日疯抢'
     })
-  } else if (sts.value == 4) {
+  } else if (sts.value === 4) {
     uni.setNavigationBarTitle({
       title: '优惠券活动商品'
     })
-  } else if (sts.value == 5) {
+  } else if (sts.value === 5) {
     uni.setNavigationBarTitle({
       title: '我的收藏商品'
     })
@@ -96,25 +98,25 @@ onReachBottom(() => {
 const loadProdData = (options) => {
   const stsParam = sts.value
 
-  if (stsParam == 0) {
+  if (stsParam === 0) {
     // 分组标签商品列表
     getTagProd()
-  } else if (stsParam == 1) {
+  } else if (stsParam === 1) {
     // 新品推荐
     const url = '/prod/lastedProdPage'
     getActProd(url)
-  } else if (stsParam == 2) {
+  } else if (stsParam === 2) {
     // 限时特惠
     const url = '/prod/discountProdList'
     getActProd(url)
-  } else if (stsParam == 3) {
+  } else if (stsParam === 3) {
     // 每日疯抢
     const url = '/prod/moreBuyProdList'
     getActProd(url)
-  } else if (stsParam == 4) {
+  } else if (stsParam === 4) {
     // 优惠券商品列表
     getProdByCouponId(options.tagid)
-  } else if (stsParam == 5) {
+  } else if (stsParam === 5) {
     // 收藏商品列表
     getCollectionProd()
   }
@@ -131,18 +133,18 @@ const getActProd = (url) => {
       size: size.value
     }
   })
-      .then(({ data }) => {
-        let list
-        if (data.current === 1) {
-          list = data.records
-        } else {
-          list = prodList.value
-          list = list.concat(data.records)
-        }
-        prodList.value = list
-        pages.value = data.pages
-        uni.hideLoading()
-      })
+    .then(({data}) => {
+      let list
+      if (data.current === 1) {
+        list = data.records
+      } else {
+        list = prodList.value
+        list = list.concat(data.records)
+      }
+      prodList.value = list
+      pages.value = data.pages
+      uni.hideLoading()
+    })
 }
 
 /**
@@ -158,18 +160,18 @@ const getCollectionProd = () => {
       size: size.value
     }
   })
-      .then(({ data }) => {
-        let list
-        if (data.current == 1) {
-          list = data.records
-        } else {
-          list = prodList.value
-          list = list.concat(data.records)
-        }
-        prodList.value = list
-        pages.value = data.pages
-        uni.hideLoading()
-      })
+    .then(({data}) => {
+      let list
+      if (data.current === 1) {
+        list = data.records
+      } else {
+        list = prodList.value
+        list = list.concat(data.records)
+      }
+      prodList.value = list
+      pages.value = data.pages
+      uni.hideLoading()
+    })
 }
 
 /**
@@ -186,17 +188,17 @@ const getTagProd = () => {
       size: size.value
     }
   })
-      .then(({ data }) => {
-        let list
-        if (data.current === 1) {
-          list = data.records
-        } else {
-          list = prodList.value.concat(data.records)
-        }
-        prodList.value = list
-        pages.value = data.pages
-        uni.hideLoading()
-      })
+    .then(({data}) => {
+      let list
+      if (data.current === 1) {
+        list = data.records
+      } else {
+        list = prodList.value.concat(data.records)
+      }
+      prodList.value = list
+      pages.value = data.pages
+      uni.hideLoading()
+    })
 }
 
 /**
@@ -213,20 +215,20 @@ const getProdByCouponId = (id) => {
       size: size.value
     }
   })
-      .then(({ data }) => {
-        let list
-        if (data.current === 1) {
-          list = data.records
-        } else {
-          list = prodList.value.concat(data.records)
-        }
-        prodList.value = list
-        pages.value = data.pages
-        uni.hideLoading()
-      })
+    .then(({data}) => {
+      let list
+      if (data.current === 1) {
+        list = data.records
+      } else {
+        list = prodList.value.concat(data.records)
+      }
+      prodList.value = list
+      pages.value = data.pages
+      uni.hideLoading()
+    })
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use './prod-classify.scss';
 </style>

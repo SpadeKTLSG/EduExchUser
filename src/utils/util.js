@@ -37,6 +37,7 @@ const util = {
       index: 3
     })
   },
+
   /**
    * 获取链接上的参数
    */
@@ -44,6 +45,7 @@ const util = {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || ['', ''])[1]
       .replace(/\+/g, '%20')) || null
   },
+
   /**
    * 文件地址校验
    * @param fileUrl 获取到的文件路径

@@ -29,7 +29,7 @@
       color: #333;
     }
 
-    picker {
+    .picker {
       width: 70%;
       padding: 0 30rpx;
     }
@@ -66,12 +66,11 @@
     width: 60%;
     height: 80rpx;
     line-height: 80rpx;
-    margin: auto;
     text-align: center;
     border: 1rpx solid #eb2444;
     border-radius: 50rpx;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 1px 0 rgba(255, 255, 255, 0.3);
-    margin-top: 40rpx;
+    margin: 40rpx auto auto;
     color: #eb2444;
     background-color: #f8f0f1b6;
   }
@@ -100,7 +99,7 @@
   justify-content: center;
 }
 
-picker-view {
+.picker-view {
   background-color: white;
   padding: 0;
   width: 100%;
@@ -121,7 +120,7 @@ picker-view {
   }
 }
 
-picker-view-column {
+.picker-view-column {
   view {
     vertical-align: middle;
     font-size: 28rpx;

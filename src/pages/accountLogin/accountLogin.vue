@@ -1,24 +1,27 @@
 <template>
   <view class="con">
-    <image src="@/static/logo.png"/>
-    <!-- 登录 -->
+    <!--头像-->
+    <image src="@/static/images/icon/head04.png"/>
+
+    <!-- 登录表单 -->
     <view class="login-form">
-      <view :class="['item',errorTips==1? 'error':'']">
+
+      <view :class="['item',errorTips===1? 'error':'']">
         <view class="account">
           <text class="input-item">
             账号
           </text>
           <input
-              type="text"
-              data-type="account"
-              placeholder-class="inp-palcehoder"
-              placeholder="请输入用户名"
-              @input="getInputVal"
+            data-type="account"
+            placeholder="请输入用户名"
+            placeholder-class="inp-palcehoder"
+            type="text"
+            @input="getInputVal"
           >
         </view>
         <view
-            v-if="errorTips==1"
-            class="error-text"
+          v-if="errorTips===1"
+          class="error-text"
         >
           <text class="warning-icon">
             !
@@ -26,89 +29,95 @@
           请输入账号！
         </view>
       </view>
-      <view :class="['item',errorTips==2? 'error':'']">
+
+      <view :class="['item',errorTips===2 ? 'error':'']">
         <view class="account">
           <text class="input-item">
             密码
           </text>
           <input
-              type="password"
-              data-type="password"
-              placeholder-class="inp-palcehoder"
-              placeholder="请输入密码"
-              @input="getInputVal"
+            data-type="password"
+            placeholder="请输入密码"
+            placeholder-class="inp-palcehoder"
+            type="password"
+            @input="getInputVal"
           >
         </view>
+
         <view
-            v-if="errorTips==2"
-            class="error-text"
+          v-if="errorTips===2"
+          class="error-text"
         >
           <text class="warning-icon">
             !
           </text>
           请输入密码！
         </view>
+
       </view>
+
       <view class="operate">
         <view
-            class="to-register"
-            @tap="toRegitser"
+          class="to-register"
+          @tap="toRegitser"
         >
-          还没有账号？
-          <text>去注册></text>
+          还没有账号？click here
         </view>
       </view>
     </view>
 
+
+    <!-- 登录按钮 -->
     <view>
-      <button
-          class="authorized-btn"
-          @tap="login"
+      <button class="authorized-btn"
+              @tap="login"
       >
         登录
       </button>
-      <button
-          class="to-idx-btn"
-          @tap="toIndex"
+      <button class="to-idx-btn"
+              @tap="toHomepage"
       >
         回到首页
       </button>
     </view>
+
   </view>
 </template>
 
 <script setup>
-import { encrypt } from '@/utils/crypto.js'
 
-/**
- * 生命周期函数--监听页面显示
- */
+const account = ref('') // 账号
+const password = ref('') // 密码
+const errorTips = ref(0) // 错误提示
+
+
 onShow(() => {
-  // 头部导航标题
-  uni.setNavigationBarTitle({
+  uni.setNavigationBarTitle({  // 头部导航标题
     title: '用户登录'
   })
 })
 
-const principal = ref('') // 账号
-const errorTips = ref(0) // 错误提示
+
+/**
+ *  监听器, 当傻不隆冬的用户操作到密码位置时, 清理当前的错误提示计数器
+ */
 watch(
-    () => principal.value,
-    () => {
-      errorTips.value = 0
-    }
+  () => password.value,
+  () => {
+    errorTips.value = 0
+  }
 )
 
-const credentials = ref('') // 密码
+
 /**
- * 输入框的值
+ * 获取输入框的值
  */
 const getInputVal = (e) => {
   const type = e.currentTarget.dataset.type
-  if (type == 'account') {
-    principal.value = e.detail.value
-  } else if (type == 'password') {
-    credentials.value = e.detail.value
+  if (type === 'account') {
+    account.value = e.detail.value
+  } else if (type === 'password') {
+    password.value = e.detail.value
   }
 }
 
@@ -116,35 +125,38 @@ const getInputVal = (e) => {
  * 登录
  */
 const login = () => {
-  if (principal.value.length == 0) {
+  //校验
+  if (account.value.length === 0) {
     errorTips.value = 1
-  } else if (credentials.value.length == 0) {
+  } else if (password.value.length === 0) {
     errorTips.value = 2
   } else {
-    errorTips.value = 0
+    errorTips.value = 0 // 清空错误提示
+
     http.request({
       url: '/login',
       method: 'post',
       data: {
-        userName: principal.value,
-        passWord: encrypt(credentials.value)
+        userName: account.value,
+        passWord: password.value
       }
     })
-        .then(({ data }) => {
-          http.loginSuccess(data, () => {
-            uni.showToast({
-              title: '登录成功',
-              icon: 'none',
-              complete: () => {
-                setTimeout(() => {
-                  wx.switchTab({
-                    url: '/pages/index/index'
-                  })
-                }, 1000)
-              }
-            })
+      .then(({data}) => {
+        // 调用登陆后逻辑, 传入自定义方法fn
+        http.loginSuccess(data, () => {
+          uni.showToast({ // 展示提示
+            title: '登录成功',
+            icon: 'none',
+            complete: () => { //完成后操作
+              setTimeout(() => { //延迟操作
+                wx.switchTab({
+                  url: '/pages/index/index' //首页
+                })
+              }, 500)
+            }
           })
         })
+      })
   }
 }
 
@@ -160,13 +172,13 @@ const toRegitser = () => {
 /**
  * 回到首页
  */
-const toIndex = () => {
-  wx.switchTab({
+const toHomepage = () => {
+  wx.switchTab({ //切换页面
     url: '/pages/index/index'
   })
 }
 </script>
 
-<style scoped lang="scss">
-@import "./accountLogin.scss";
+<style lang="scss" scoped>
+@use "./accountLogin.scss";
 </style>

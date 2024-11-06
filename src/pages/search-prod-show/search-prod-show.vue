@@ -5,51 +5,51 @@
       <view class="search-bar">
         <view class="search-box">
           <input
-              placeholder="输入关键字搜索"
-              class="sear-input"
-              :value="prodName"
-              confirm-type="search"
-              @input="getSearchContent"
-              @confirm="toSearchConfirm"
+            :value="prodName"
+            class="sear-input"
+            confirm-type="search"
+            placeholder="输入关键字搜索"
+            @confirm="toSearchConfirm"
+            @input="getSearchContent"
           >
           <image
-              src="@/static/images/icon/search.png"
-              class="search-img"
+            class="search-img"
+            src="@/static/images/icon/search.png"
           />
         </view>
         <view
-            class="search-list-img"
-            @tap="changeShowType"
+          class="search-list-img"
+          @tap="changeShowType"
         >
           <image
-              v-if="showType==1"
-              src="@/static/images/icon/search-col.png"
+            v-if="showType===1"
+            src="@/static/images/icon/search-col.png"
           />
           <image
-              v-if="showType==2"
-              src="@/static/images/icon/search-col2.png"
+            v-if="showType===2"
+            src="@/static/images/icon/search-col2.png"
           />
         </view>
       </view>
       <view class="tabs">
         <text
-            :class="'tab-item complete ' + (sts==0?'on':'')"
-            data-sts="0"
-            @tap="onStsTap"
+          :class="'tab-item complete ' + (sts===0?'on':'')"
+          data-sts="0"
+          @tap="onStsTap"
         >
           综合
         </text>
         <text
-            :class="'tab-item ' + (sts==1?'on':'')"
-            data-sts="1"
-            @tap="onStsTap"
+          :class="'tab-item ' + (sts===1?'on':'')"
+          data-sts="1"
+          @tap="onStsTap"
         >
           销量
         </text>
         <text
-            :class="'tab-item ' + (sts==2?'on':'')"
-            data-sts="2"
-            @tap="onStsTap"
+          :class="'tab-item ' + (sts===2?'on':'')"
+          data-sts="2"
+          @tap="onStsTap"
         >
           价格
         </text>
@@ -60,17 +60,17 @@
     <view class="prod-list">
       <!-- 横向列表 -->
       <view
-          v-if="showType==1"
-          class="prod-show"
+        v-if="showType===1"
+        class="prod-show"
       >
         <view class="hotsale-item-cont">
           <block
-              v-for="(item, index) in searchProdList"
-              :key="index"
+            v-for="(item, index) in searchProdList"
+            :key="index"
           >
             <production
-                :item="item"
-                sts="6"
+              :item="item"
+              sts="6"
             />
           </block>
         </view>
@@ -78,22 +78,22 @@
 
       <!-- 纵向列表 -->
       <view
-          v-if="showType==2"
-          class="cont-item"
+        v-if="showType===2"
+        class="cont-item"
       >
         <block
-            v-for="(item, index) in searchProdList"
-            :key="index"
+          v-for="(item, index) in searchProdList"
+          :key="index"
         >
           <view
-              class="show-item"
-              :data-prodid="item.prodId"
-              @tap="toProdPage"
+            :data-prodid="item.prodId"
+            class="show-item"
+            @tap="toProdPage"
           >
             <view class="more-prod-pic">
               <image
-                  :src="item.pic"
-                  class="more-pic"
+                :src="item.pic"
+                class="more-pic"
               />
             </view>
             <view class="prod-text-right">
@@ -121,8 +121,8 @@
 
       <!-- 空占位 -->
       <view
-          v-if="!searchProdList.length"
-          :class="['empty',showType==1? 'empty-top':'']"
+        v-if="!searchProdList.length"
+        :class="['empty',showType===1? 'empty-top':'']"
       >
         暂无结果
       </view>
@@ -131,6 +131,8 @@
 </template>
 
 <script setup>
+import Production from "@/components/production/production.vue";
+
 const wxs = number()
 const prodName = ref('')
 /**
@@ -149,7 +151,7 @@ onShow(() => {
 
 const showType = ref(2)
 const changeShowType = () => {
-  if (showType.value == 1) {
+  if (showType.value === 1) {
     showType.value = 2
   } else {
     showType.value = 1
@@ -180,9 +182,9 @@ const toLoadData = () => {
       sort: sts.value
     }
   })
-      .then(({ data }) => {
-        searchProdList.value = data.records
-      })
+    .then(({data}) => {
+      searchProdList.value = data.records
+    })
 }
 
 /**
@@ -218,6 +220,6 @@ const toProdPage = (e) => {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use './search-prod-show.scss';
 </style>

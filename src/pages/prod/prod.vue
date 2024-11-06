@@ -3,22 +3,23 @@
   <view class="container">
     <!-- 轮播图 -->
     <swiper
-        :indicator-dots="indicatorDots"
-        :autoplay="autoplay"
-        :indicator-color="indicatorColor"
-        :interval="interval"
-        :duration="duration"
-        :indicator-active-color="indicatorActiveColor"
+      :autoplay="autoplay"
+      :duration="duration"
+      :indicator-active-color="indicatorActiveColor"
+      :indicator-color="indicatorColor"
+      :indicator-dots="indicatorDots"
+      :interval="interval"
     >
       <block
-          v-for="(item, index) in imgs"
-          :key="index"
+        v-for="(item, index) in imgs"
+        :key="index"
       >
         <swiper-item>
           <image :src="item"/>
         </swiper-item>
       </block>
     </swiper>
+
     <!-- end  轮播图 -->
     <!-- 商品信息 -->
     <view class="prod-info">
@@ -27,16 +28,16 @@
           {{ prodName }}
         </view>
         <view
-            class="col"
-            @tap="addOrCannelCollection"
+          class="col"
+          @tap="addOrCannelCollection"
         >
           <image
-              v-if="!isCollection"
-              src="@/static/images/icon/prod-col.png"
+            v-if="!isCollection"
+            src="@/static/images/icon/prod-col.png"
           />
           <image
-              v-if="isCollection"
-              src="@/static/images/icon/prod-col-red.png"
+            v-if="isCollection"
+            src="@/static/images/icon/prod-col-red.png"
           />
           收藏
         </view>
@@ -46,8 +47,8 @@
       </view>
       <view class="prod-price">
         <text
-            v-if="defaultSku && defaultSku.price"
-            class="price"
+          v-if="defaultSku && defaultSku.price"
+          class="price"
         >
           ￥
           <text class="price-num">
@@ -56,8 +57,8 @@
           .{{ wxs.parsePrice(defaultSku.price)[1] }}
         </text>
         <text
-            v-if="defaultSku && defaultSku.oriPrice"
-            class="ori-price"
+          v-if="defaultSku && defaultSku.oriPrice"
+          class="ori-price"
         >
           ￥{{ wxs.parsePrice(defaultSku.oriPrice)[0] }}.{{ wxs.parsePrice(defaultSku.oriPrice)[1] }}
         </text>
@@ -66,8 +67,8 @@
     </view>
     <!-- 已选规格 -->
     <view
-        class="sku"
-        @tap="showSku"
+      class="sku"
+      @tap="showSku"
     >
       <view class="sku-tit">
         已选
@@ -82,8 +83,8 @@
     <!-- 评价 -->
     <view class="cmt-wrap">
       <view
-          class="cmt-tit"
-          @tap="showComment"
+        class="cmt-tit"
+        @tap="showComment"
       >
         <view class="cmt-t">
           评价
@@ -98,8 +99,8 @@
       </view>
       <view class="cmt-cont">
         <view
-            class="cmt-tag"
-            @tap="showComment"
+          class="cmt-tag"
+          @tap="showComment"
         >
           <text>全部({{ prodCommData.number }})</text>
           <text>好评({{ prodCommData.praiseNumber }})</text>
@@ -109,9 +110,9 @@
         </view>
         <view class="cmt-items">
           <view
-              v-for="(item, index) in littleCommPage"
-              :key="index"
-              class="cmt-item"
+            v-for="(item, index) in littleCommPage"
+            :key="index"
+            class="cmt-item"
           >
             <view class="cmt-user">
               <text class="date">
@@ -119,8 +120,8 @@
               </text>
               <view class="cmt-user-info">
                 <image
-                    class="user-img"
-                    :src="item.pic"
+                  :src="item.pic"
+                  class="user-img"
                 />
                 <view class="nickname">
                   {{ item.nickName }}
@@ -131,21 +132,21 @@
               {{ item.content }}
             </view>
             <scroll-view
-                v-if="item.pics.length"
-                class="cmt-attr"
-                scroll-x="true"
+              v-if="item.pics.length"
+              class="cmt-attr"
+              scroll-x="true"
             >
               <image
-                  v-for="(commPic, index2) in item.pics"
-                  :key="index2"
-                  :src="commPic"
+                v-for="(commPic, index2) in item.pics"
+                :key="index2"
+                :src="commPic"
               />
             </scroll-view>
           </view>
         </view>
         <view
-            v-if="prodCommPage.records.length > 2"
-            class="cmt-more-v"
+          v-if="prodCommPage.records.length > 2"
+          class="cmt-more-v"
         >
           <text @tap="showComment">
             查看全部评价
@@ -164,34 +165,34 @@
     <!-- 底部按钮 -->
     <view class="cart-footer">
       <view
-          class="btn icon"
-          @tap="toHomePage"
+        class="btn icon"
+        @tap="toHomePage"
       >
-        <image src="@/static/images/tabbar/homepage.png"/>
+        <image src="@/static/images/icon/homepage.png"/>
         首页
       </view>
       <view
-          class="btn icon"
-          @tap="toCartPage"
+        class="btn icon"
+        @tap="toCartPage"
       >
-        <image src="@/static/images/tabbar/basket.png"/>
+        <image src="@/static/images/icon/basket.png"/>
         购物车
         <view
-            v-if="totalCartNum>0"
-            class="badge badge-1"
+          v-if="totalCartNum>0"
+          class="badge badge-1"
         >
           {{ totalCartNum }}
         </view>
       </view>
       <view
-          class="btn cart"
-          @tap="showSku"
+        class="btn cart"
+        @tap="showSku"
       >
         <text>加入购物车</text>
       </view>
       <view
-          class="btn buy"
-          @tap="showSku"
+        class="btn buy"
+        @tap="showSku"
       >
         <text>立即购买</text>
       </view>
@@ -200,20 +201,20 @@
 
     <!-- 规格弹窗 -->
     <view
-        v-if="skuShow"
-        class="pup-sku"
+      v-if="skuShow"
+      class="pup-sku"
     >
       <view class="pup-sku-main">
         <view class="pup-sku-header">
           <image
-              class="pup-sku-img"
-              :src="defaultSku.pic?defaultSku.pic:pic"
+            :src="defaultSku.pic?defaultSku.pic:pic"
+            class="pup-sku-img"
           />
           <view class="pup-sku-price">
             ￥
             <text
-                v-if="defaultSku && defaultSku.price"
-                class="pup-sku-price-int"
+              v-if="defaultSku && defaultSku.price"
+              class="pup-sku-price-int"
             >
               {{ wxs.parsePrice(defaultSku.price)[0] }}
             </text>
@@ -224,36 +225,36 @@
             {{ selectedProp.length > 0 ? selectedProp + '，' : '' }}{{ prodNum }}件
           </view>
           <view
-              class="close"
-              @tap="closePopup"
+            class="close"
+            @tap="closePopup"
           />
         </view>
         <view class="pup-sku-body">
           <view class="pup-sku-area">
             <view
-                v-if="skuList.length"
-                class="sku-box"
+              v-if="skuList.length"
+              class="sku-box"
             >
               <block
-                  v-for="(skuGroupItem, skuGroupItemIndex) in skuGroupList"
-                  :key="skuGroupItemIndex"
+                v-for="(skuGroupItem, skuGroupItemIndex) in skuGroupList"
+                :key="skuGroupItemIndex"
               >
                 <view
-                    v-for="(skuLine, key) in skuGroupItem"
-                    :key="key"
-                    class="items sku-text"
+                  v-for="(skuLine, key) in skuGroupItem"
+                  :key="key"
+                  class="items sku-text"
                 >
                   <text class="sku-kind">
                     {{ key }}
                   </text>
                   <view class="con">
                     <text
-                        v-for="skuLineItem in skuLine"
-                        :key="skuLineItem"
-                        class="sku-choose-item"
-                        :class="[selectedPropList.indexOf(key + ':' + skuLineItem) !== -1?'active':'',
+                      v-for="skuLineItem in skuLine"
+                      :key="skuLineItem"
+                      :class="[selectedPropList.indexOf(key + ':' + skuLineItem) !== -1?'active':'',
                                isSkuLineItemNotOptional(allProperties,selectedPropObj,key,skuLineItem,propKeys)? 'dashed' : '']"
-                        @click="toChooseItem(skuGroupItemIndex, skuLineItem, key)"
+                      class="sku-choose-item"
+                      @click="toChooseItem(skuGroupItemIndex, skuLineItem, key)"
                     >
                       {{ skuLineItem }}
                     </text>
@@ -265,21 +266,21 @@
           <view class="pup-sku-count">
             <view class="num-wrap">
               <view
-                  class="minus"
-                  @tap="onCountMinus"
+                class="minus"
+                @tap="onCountMinus"
               >
                 <text class="row"/>
               </view>
               <view class="text-wrap">
                 <input
-                    type="number"
-                    :value="prodNum"
-                    disabled
+                  :value="prodNum"
+                  disabled
+                  type="number"
                 >
               </view>
               <view
-                  class="plus"
-                  @tap="onCountPlus"
+                class="plus"
+                @tap="onCountPlus"
               >
                 <text class="row"/>
                 <text class="col"/>
@@ -292,14 +293,14 @@
         </view>
         <view class="pup-sku-footer">
           <view
-              class="btn cart"
-              @tap="addToCart"
+            class="btn cart"
+            @tap="addToCart"
           >
             加入购物车
           </view>
           <view
-              class="btn buy"
-              @tap="buyNow"
+            class="btn buy"
+            @tap="buyNow"
           >
             立即购买
           </view>
@@ -309,8 +310,8 @@
 
     <!-- 评价弹窗 -->
     <view
-        v-if="commentShow"
-        class="cmt-popup"
+      v-if="commentShow"
+      class="cmt-popup"
     >
       <view class="cmt-tit">
         <view class="cmt-t">
@@ -320,44 +321,44 @@
           </text>
         </view>
         <text
-            class="close"
-            @tap="closePopup"
+          class="close"
+          @tap="closePopup"
         />
       </view>
       <view class="cmt-cont">
         <view class="cmt-tag">
           <text
-              data-evaluate="-1"
-              :class="evaluate==-1?'selected':''"
-              @tap="getProdCommPage"
+            :class="evaluate===-1?'selected':''"
+            data-evaluate="-1"
+            @tap="getProdCommPage"
           >
             全部({{ prodCommData.number }})
           </text>
           <text
-              data-evaluate="0"
-              :class="evaluate==0?'selected':''"
-              @tap="getProdCommPage"
+            :class="evaluate===0?'selected':''"
+            data-evaluate="0"
+            @tap="getProdCommPage"
           >
             好评({{ prodCommData.praiseNumber }})
           </text>
           <text
-              data-evaluate="1"
-              :class="evaluate==1?'selected':''"
-              @tap="getProdCommPage"
+            :class="evaluate===1?'selected':''"
+            data-evaluate="1"
+            @tap="getProdCommPage"
           >
             中评({{ prodCommData.secondaryNumber }})
           </text>
           <text
-              data-evaluate="2"
-              :class="evaluate==2?'selected':''"
-              @tap="getProdCommPage"
+            :class="evaluate===2?'selected':''"
+            data-evaluate="2"
+            @tap="getProdCommPage"
           >
             差评({{ prodCommData.negativeNumber }})
           </text>
           <text
-              data-evaluate="3"
-              :class="evaluate==3?'selected':''"
-              @tap="getProdCommPage"
+            :class="evaluate===3?'selected':''"
+            data-evaluate="3"
+            @tap="getProdCommPage"
           >
             有图({{ prodCommData.picNumber }})
           </text>
@@ -365,9 +366,9 @@
         <view class="cmt-items">
           <block v-if="prodCommPage.records.length">
             <view
-                v-for="(item, index) in prodCommPage.records"
-                :key="index"
-                class="cmt-item"
+              v-for="(item, index) in prodCommPage.records"
+              :key="index"
+              class="cmt-item"
             >
               <view class="cmt-user">
                 <text class="date">
@@ -375,8 +376,8 @@
                 </text>
                 <view class="cmt-user-info">
                   <image
-                      class="user-img"
-                      :src="item.pic"
+                    :src="item.pic"
+                    class="user-img"
                   />
                   <view class="nickname">
                     {{ item.nickName }}
@@ -387,19 +388,19 @@
                 {{ item.content }}
               </view>
               <scroll-view
-                  v-if="item.pics.length"
-                  class="cmt-attr"
-                  scroll-x="true"
+                v-if="item.pics.length"
+                class="cmt-attr"
+                scroll-x="true"
               >
                 <image
-                    v-for="(commPic, index2) in item.pics"
-                    :key="index2"
-                    :src="commPic"
+                  v-for="(commPic, index2) in item.pics"
+                  :key="index2"
+                  :src="commPic"
                 />
               </scroll-view>
               <view
-                  v-if="item.replyContent"
-                  class="cmt-reply"
+                v-if="item.replyContent"
+                class="cmt-reply"
               >
                 <text class="reply-tit">
                   店铺回复：
@@ -409,15 +410,15 @@
             </view>
           </block>
           <view
-              v-if="!prodCommPage.records.length"
-              class="empty"
+            v-if="!prodCommPage.records.length"
+            class="empty"
           >
             暂无评价
           </view>
         </view>
         <view
-            v-if="prodCommPage.pages > prodCommPage.current"
-            class="load-more"
+          v-if="prodCommPage.pages > prodCommPage.current"
+          class="load-more"
         >
           <text @tap="getMoreCommPage">
             点击加载更多
@@ -482,10 +483,10 @@ const getCollection = () => {
       prodId
     }
   })
-      .then(({ data }) => {
-        isCollection.value = data
-        uni.hideLoading()
-      })
+    .then(({data}) => {
+      isCollection.value = data
+      uni.hideLoading()
+    })
 }
 
 /**
@@ -498,10 +499,10 @@ const addOrCannelCollection = () => {
     method: 'POST',
     data: prodId
   })
-      .then(() => {
-        isCollection.value = !isCollection.value
-        uni.hideLoading()
-      })
+    .then(() => {
+      isCollection.value = !isCollection.value
+      uni.hideLoading()
+    })
 }
 
 const skuList = ref([])
@@ -524,26 +525,26 @@ const getProdInfo = () => {
       prodId // userType: 0
     }
   })
-      .then(({ data }) => {
-        uni.hideLoading()
-        if (!data) {
-          setTimeout(() => {
-            uni.navigateBack()
-          }, 1000)
-          return
-        }
-        imgs.value = data.imgs?.split(',')
-        content.value = util.formatHtml(data.content)
-        price.value = data.price
-        prodName.value = data.prodName
-        prodId = data.prodId
-        brief.value = data.brief
-        skuList.value = data.skuList
-        pic.value = data.pic
-        // 组装sku
-        groupSkuProp(data.skuList, data.price)
-        uni.hideLoading()
-      })
+    .then(({data}) => {
+      uni.hideLoading()
+      if (!data) {
+        setTimeout(() => {
+          uni.navigateBack()
+        }, 1000)
+        return
+      }
+      imgs.value = data.imgs?.split(',')
+      content.value = util.formatHtml(data.content)
+      price.value = data.price
+      prodName.value = data.prodName
+      prodId = data.prodId
+      brief.value = data.brief
+      skuList.value = data.skuList
+      pic.value = data.pic
+      // 组装sku
+      groupSkuProp(data.skuList, data.price)
+      uni.hideLoading()
+    })
 }
 
 const prodCommData = ref({})
@@ -555,9 +556,9 @@ const getProdCommData = () => {
       prodId
     }
   })
-      .then(({ data }) => {
-        prodCommData.value = data
-      })
+    .then(({data}) => {
+      prodCommData.value = data
+    })
 }
 
 const prodCommPage = ref({
@@ -607,24 +608,24 @@ const getProdCommPage = (e) => {
       evaluate: evaluate.value
     }
   })
-      .then(({ data }) => {
-        data.records.forEach(item => {
-          if (item.pics) {
-            item.pics = item.pics.split(',')
-          }
-        })
-        let records = prodCommPage.value.records
-        records = records.concat(data.records)
-        // 如果商品详情中没有评论的数据，截取两条到商品详情页商品详情
-        prodCommPage.value = {
-          current: data.current,
-          pages: data.pages,
-          records
-        }
-        if (!littleCommPage.value.length) {
-          littleCommPage.value = records.slice(0, 2)
+    .then(({data}) => {
+      data.records.forEach(item => {
+        if (item.pics) {
+          item.pics = item.pics.split(',')
         }
       })
+      let records = prodCommPage.value.records
+      records = records.concat(data.records)
+      // 如果商品详情中没有评论的数据，截取两条到商品详情页商品详情
+      prodCommPage.value = {
+        current: data.current,
+        pages: data.pages,
+        records
+      }
+      if (!littleCommPage.value.length) {
+        littleCommPage.value = records.slice(0, 2)
+      }
+    })
 }
 let selectedPropObjList = null
 const skuGroup = ref({})
@@ -653,7 +654,7 @@ const groupSkuProp = (skuList, defaultPrice) => {
   let defaultSkuParam = null
   for (let i = 0; i < skuList.length; i++) {
     let isDefault = false
-    if (!defaultSkuParam && skuList[i].price == defaultPrice) {
+    if (!defaultSkuParam && skuList[i].price === defaultPrice) {
       defaultSkuParam = skuList[i]
       isDefault = true
     }
@@ -719,7 +720,7 @@ const parseSelectedObjToVals = (skuList) => {
   selectedPropObjList = selectedPropObjListParam
   let findSkuParam = false
   for (let i = 0; i < skuList.length; i++) {
-    if (skuList[i].properties == selectedPropertiesParam) {
+    if (skuList[i].properties === selectedPropertiesParam) {
       findSkuParam = true
       defaultSku.value = skuList[i]
       break
@@ -740,7 +741,7 @@ const isSkuLineItemNotOptional = (allProperties, selectedPropObjParam, key, item
   }
   properties = properties.substring(0, properties.length - 1)
   for (let i = 0; i < allProperties.length; i++) {
-    if (properties == allProperties[i]) {
+    if (properties === allProperties[i]) {
       return false
     }
   }
@@ -811,14 +812,14 @@ const addToCart = () => {
       skuId: defaultSku.value.skuId
     }
   })
-      .then(() => {
-        totalCartNum.value = totalCartNum.value + prodNum.value
-        uni.hideLoading()
-        uni.showToast({
-          title: '加入购物车成功',
-          icon: 'none'
-        })
+    .then(() => {
+      totalCartNum.value = totalCartNum.value + prodNum.value
+      uni.hideLoading()
+      uni.showToast({
+        title: '加入购物车成功',
+        icon: 'none'
       })
+    })
 }
 
 /**
@@ -870,6 +871,6 @@ const closePopup = () => {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use './prod.scss';
 </style>

@@ -1,96 +1,70 @@
 <template>
+  <!--下方第二个页面 - 分类-->
   <view class="container">
-    <!-- 头部搜索区 -->
-    <view class="search-bar">
-      <view
-          class="search-box"
-          @tap="toSearchPage"
-      >
-        <image
-            src="@/static/images/icon/search.png"
-            class="search-img"
-        />
-        <text class="sear-input">
-          搜索您想要的商品
-        </text>
-      </view>
-    </view>
-    <!-- 滚动内容区 -->
+
     <view class="main">
-      <!-- 左侧菜单start -->
-      <scroll-view
-          scroll-y="true"
-          class="leftmenu"
+
+      <!--左侧菜单-->
+      <scroll-view class="leftmenu"
+                   scroll-y="true"
       >
-        <block
-            v-for="(item, index) in categoryList"
-            :key="index"
+        <block v-for="(item, index) in categoryList"
+               :key="index"
         >
           <view
-              :class="'menu-item ' + (selIndex==index?'active':'') + ' '"
-              :data-index="index"
-              :data-id="item.categoryId"
-              @tap="onMenuTab"
+            :class="'menu-item ' + (selIndex === index? 'active':'') + ' '"
+            :data-id="item.categoryId"
+            :data-index="index"
+            @tap="onMenuTab"
           >
             {{ item.categoryName }}
           </view>
         </block>
-        <view
-            v-if="!categoryList || !categoryList.length"
-            class="ca-empty"
-        >
-          {{ categoryList && categoryList.length ? '该分类下暂无商品' : '暂无商品' }}
-        </view>
-      </scroll-view>
-      <!-- 左侧菜单end -->
 
-      <!-- 右侧内容start -->
-      <scroll-view
-          scroll-y="true"
-          class="rightcontent"
+      </scroll-view>
+
+
+      <!-- 右半边 - 对应商品分页拉取 TODO -->
+      <scroll-view class="rightcontent"
+                   scroll-y="true"
       >
-        <view class="adver-map">
-          <view class="item-a">
-            <image
-                :src="util.checkFileUrl(categoryImg)"
-                mode="widthFix"
-            />
-          </view>
-        </view>
-        <!-- 子分类 -->
-        <view
-            v-if="subCategoryList.length"
-            class="th-cate-con"
+
+        <!-- 子分类文字 -->
+        <!--        TODO: 删除-->
+        <view v-if="subCategoryList.length"
+              class="th-cate-con"
         >
+
           <block
-              v-for="(thCateItem, index) in subCategoryList"
-              :key="index"
+            v-for="(thCateItem, index) in subCategoryList"
+            :key="index"
           >
             <view class="sub-category">
               <view
-                  class="sub-category-item"
-                  :data-categoryid="thCateItem.categoryId"
-                  :data-parentid="thCateItem.parentId"
-                  @tap="toCatePage"
+                :data-categoryid="thCateItem.categoryId"
+                :data-parentid="thCateItem.parentId"
+                class="sub-category-item"
+                @tap="toCatePage"
               >
                 <image
-                    :src="util.checkFileUrl(thCateItem.pic)"
-                    class="more-pic"
-                    mode="widthFix"
+                  :src="util.checkFileUrl(thCateItem.pic)"
+                  class="more-pic"
+                  mode="widthFix"
                 />
                 <text>{{ thCateItem.categoryName }}</text>
               </view>
             </view>
           </block>
+
         </view>
-        <view
-            v-else
-            class="cont-item empty"
+        <view v-else
+              class="cont-item empty"
         >
-          该分类下暂无子分类~
+          等待转移
         </view>
+
+
       </scroll-view>
-      <!-- 右侧内容end -->
     </view>
   </view>
 </template>
@@ -98,53 +72,49 @@
 <script setup>
 import util from '@/utils/util.js'
 
-const categoryList = ref([])
-const subCategoryList = ref([])
-const categoryImg = ref('')
-const parentId = ref('')
-/**
- * 生命周期函数--监听页面加载
- */
+const categoryList = ref([]) // 分类列表
+const parentId = ref('') // 父分类id
+const selIndex = ref(0) // 选中的分类索引
+const subCategoryList = ref([]) //todo删除
+
+//? trigger
+
 onLoad(() => {
-  // 加载分类列表
-  http.request({
+
+  http.request({// 加载分类列表(全拉取)
     url: '/category/categoryInfo',
     method: 'GET',
     data: {
       parentId: ''
     }
   })
-      .then(({ data }) => {
-        categoryImg.value = data[0].pic
-        categoryList.value = data
-        getProdList(data[0].categoryId)
-        parentId.value = categoryList.value[0].categoryId
-      })
+    .then(({data}) => {
+      categoryList.value = data
+      getProdList(data[0].categoryId)
+      parentId.value = categoryList.value[0].categoryId
+    })
 })
 
-const selIndex = ref(0)
+
+//? 操作
+
 /**
- * 分类点击事件
+ * 点击左侧分类列表事件处理
  */
 const onMenuTab = (e) => {
-  const index = e.currentTarget.dataset.index
-  getProdList(categoryList.value[index].categoryId)
+  const index = e.currentTarget.dataset.index // 索引
+  getProdList(categoryList.value[index].categoryId) //
   parentId.value = categoryList.value[index].categoryId
-  categoryImg.value = categoryList.value[index].pic
   selIndex.value = index
 }
 
-/**
- * 跳转搜索页
- */
-const toSearchPage = () => {
-  uni.navigateTo({
-    url: '/pages/search-page/search-page'
-  })
-}
+//? 加载项目
 
+/**
+ * 加载分类列表
+ * @param categoryId
+ */
 const getProdList = (categoryId) => {
-  // 加载分类列表
   http.request({
     url: '/category/categoryInfo',
     method: 'GET',
@@ -152,16 +122,19 @@ const getProdList = (categoryId) => {
       parentId: categoryId
     }
   })
-      .then(({ data }) => {
-        subCategoryList.value = data
-      })
+    .then(({data}) => {
+      subCategoryList.value = data
+    })
 }
+
+//? 页面跳转
 
 /**
  * 跳转子分类商品页面
+ * ! note: 这里的逻辑与我的后端还是有重大问题, 只能有一级分类, 一级分类下面就是对应的展示页面. 之后需要把子页面嫁接到这里
  */
 const toCatePage = (e) => {
-  const { categoryid } = e.currentTarget.dataset
+  const {categoryid} = e.currentTarget.dataset
   uni.navigateTo({
     url: `/pages/sub-category/sub-category?parentId=${parentId.value}&categoryId=${categoryid}`
   })
@@ -169,6 +142,6 @@ const toCatePage = (e) => {
 
 </script>
 
-<style scoped lang="scss">
-@import "./category.scss";
+<style lang="scss" scoped>
+@use "./category.scss";
 </style>

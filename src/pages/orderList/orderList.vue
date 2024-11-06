@@ -3,37 +3,37 @@
     <!-- 头部菜单 -->
     <view class="order-tit">
       <text
-          data-sts="0"
-          :class="sts==0?'on':''"
-          @tap="onStsTap"
+        :class="sts===0?'on':''"
+        data-sts="0"
+        @tap="onStsTap"
       >
         全部
       </text>
       <text
-          data-sts="1"
-          :class="sts==1?'on':''"
-          @tap="onStsTap"
+        :class="sts===1?'on':''"
+        data-sts="1"
+        @tap="onStsTap"
       >
         待支付
       </text>
       <text
-          data-sts="2"
-          :class="sts==2?'on':''"
-          @tap="onStsTap"
+        :class="sts===2?'on':''"
+        data-sts="2"
+        @tap="onStsTap"
       >
         待发货
       </text>
       <text
-          data-sts="3"
-          :class="sts==3?'on':''"
-          @tap="onStsTap"
+        :class="sts===3?'on':''"
+        data-sts="3"
+        @tap="onStsTap"
       >
         待收货
       </text>
       <text
-          data-sts="5"
-          :class="sts==5?'on':''"
-          @tap="onStsTap"
+        :class="sts===5?'on':''"
+        data-sts="5"
+        @tap="onStsTap"
       >
         已完成
       </text>
@@ -41,37 +41,37 @@
     <!-- end 头部菜单 -->
     <view class="main">
       <view
-          v-if="list.length==0"
-          class="empty"
+        v-if="list.length===0"
+        class="empty"
       >
         还没有任何相关订单
       </view>
       <!-- 订单列表 -->
       <block
-          v-for="(item, index) in list"
-          :key="index"
+        v-for="(item, index) in list"
+        :key="index"
       >
         <view class="prod-item">
           <view class="order-num">
             <text>订单编号：{{ item.orderNumber }}</text>
             <view class="order-state">
               <text
-                  :class="'order-sts  ' + (item.status==1?'red':'') + '  ' + ((item.status==5||item.status==6)?'gray':'')"
+                :class="'order-sts  ' + (item.status===1?'red':'') + '  ' + ((item.status===5||item.status===6)?'gray':'')"
               >
                 {{
-                item.status == 1 ? '待支付' : (item.status == 2 ? '待发货' : (item.status == 3 ? '待收货' : (item.status == 5 ? '已完成' : '已取消')))
+                  item.status === 1 ? '待支付' : (item.status === 2 ? '待发货' : (item.status === 3 ? '待收货' : (item.status === 5 ? '已完成' : '已取消')))
                 }}
               </text>
 
               <view
-                  v-if="item.status==5 || item.status==6"
-                  class="clear-btn"
+                v-if="item.status===5 || item.status===6"
+                class="clear-btn"
               >
                 <image
-                    src="@/static/images/icon/clear-his.png"
-                    class="clear-list-btn"
-                    :data-ordernum="item.orderNumber"
-                    @tap="delOrderList"
+                  :data-ordernum="item.orderNumber"
+                  class="clear-list-btn"
+                  src="@/static/images/icon/clear-his.png"
+                  @tap="delOrderList"
                 />
               </view>
             </view>
@@ -79,16 +79,16 @@
 
           <!-- 商品列表 -->
           <!-- 一个订单单个商品的显示 -->
-          <block v-if="item.orderItemDtos.length==1">
+          <block v-if="item.orderItemDtos.length===1">
             <block
-                v-for="(prod, index2) in item.orderItemDtos"
-                :key="index2"
+              v-for="(prod, index2) in item.orderItemDtos"
+              :key="index2"
             >
               <view>
                 <view
-                    class="item-cont"
-                    :data-ordernum="item.orderNumber"
-                    @tap="toOrderDetailPage"
+                  :data-ordernum="item.orderNumber"
+                  class="item-cont"
+                  @tap="toOrderDetailPage"
                 >
                   <view class="prod-pic">
                     <image :src="prod.pic"/>
@@ -124,19 +124,19 @@
           <!-- 一个订单多个商品时的显示 -->
           <block v-else>
             <view
-                class="item-cont"
-                :data-ordernum="item.orderNumber"
-                @tap="toOrderDetailPage"
+              :data-ordernum="item.orderNumber"
+              class="item-cont"
+              @tap="toOrderDetailPage"
             >
               <scroll-view
-                  scroll-x="true"
-                  scroll-left="0"
-                  scroll-with-animation="false"
-                  class="categories"
+                class="categories"
+                scroll-left="0"
+                scroll-with-animation="false"
+                scroll-x="true"
               >
                 <block
-                    v-for="(prod, index2) in item.orderItemDtos"
-                    :key="index2"
+                  v-for="(prod, index2) in item.orderItemDtos"
+                  :key="index2"
                 >
                   <view class="prod-pic">
                     <image :src="prod.pic"/>
@@ -167,38 +167,38 @@
           <view class="prod-foot">
             <view class="btn">
               <text
-                  v-if="item.status==1"
-                  class="button"
-                  :data-ordernum="item.orderNumber"
-                  hover-class="none"
-                  @tap="onCancelOrder"
+                v-if="item.status===1"
+                :data-ordernum="item.orderNumber"
+                class="button"
+                hover-class="none"
+                @tap="onCancelOrder"
               >
                 取消订单
               </text>
               <text
-                  v-if="item.status==1"
-                  class="button warn"
-                  :data-ordernum="item.orderNumber"
-                  hover-class="none"
-                  @tap="normalPay"
+                v-if="item.status===1"
+                :data-ordernum="item.orderNumber"
+                class="button warn"
+                hover-class="none"
+                @tap="normalPay"
               >
                 付款
               </text>
               <text
-                  v-if="item.status==3 || item.status==5"
-                  class="button"
-                  :data-ordernum="item.orderNumber"
-                  hover-class="none"
-                  @tap="toDeliveryPage"
+                v-if="item.status===3 || item.status===5"
+                :data-ordernum="item.orderNumber"
+                class="button"
+                hover-class="none"
+                @tap="toDeliveryPage"
               >
                 查看物流
               </text>
               <text
-                  v-if="item.status==3"
-                  class="button warn"
-                  :data-ordernum="item.orderNumber"
-                  hover-class="none"
-                  @tap="onConfirmReceive"
+                v-if="item.status===3"
+                :data-ordernum="item.orderNumber"
+                class="button warn"
+                hover-class="none"
+                @tap="onConfirmReceive"
               >
                 确认收货
               </text>
@@ -253,19 +253,19 @@ const loadOrderData = (sts, currentParam) => {
       status: sts
     }
   })
-      .then(({ data }) => {
-        let listParam = []
-        if (data.current === 1) {
-          listParam = data.records
-        } else {
-          listParam = list.value
-          Array.prototype.push.apply(listParam, data.records)
-        }
-        list.value = listParam
-        pages.value = data.pages
-        current.value = data.current
-        uni.hideLoading()
-      })
+    .then(({data}) => {
+      let listParam
+      if (data.current === 1) {
+        listParam = data.records
+      } else {
+        listParam = list.value
+        Array.prototype.push.apply(listParam, data.records)
+      }
+      list.value = listParam
+      pages.value = data.pages
+      current.value = data.current
+      uni.hideLoading()
+    })
 }
 
 /**
@@ -298,7 +298,7 @@ const onCancelOrder = (e) => {
     cancelText: '否',
     confirmText: '是',
 
-    success (res) {
+    success(res) {
       if (res.confirm) {
         uni.showLoading({
           mask: true
@@ -308,10 +308,10 @@ const onCancelOrder = (e) => {
           method: 'PUT',
           data: {}
         })
-            .then(() => {
-              loadOrderData(sts.value, 1)
-              uni.hideLoading()
-            })
+          .then(() => {
+            loadOrderData(sts.value, 1)
+            uni.hideLoading()
+          })
       }
     }
   })
@@ -332,25 +332,25 @@ const normalPay = (e) => {
       orderNumbers: e.currentTarget.dataset.ordernum
     }
   })
-      .then(({ data }) => {
-        uni.hideLoading()
-        if (data) {
-          uni.showToast({
-            title: '模拟支付成功',
-            icon: 'none'
+    .then(({data}) => {
+      uni.hideLoading()
+      if (data) {
+        uni.showToast({
+          title: '模拟支付成功',
+          icon: 'none'
+        })
+        setTimeout(() => {
+          uni.navigateTo({
+            url: '/pages/pay-result/pay-result?sts=1&orderNumbers=' + e.currentTarget.dataset.ordernum
           })
-          setTimeout(() => {
-            uni.navigateTo({
-              url: '/pages/pay-result/pay-result?sts=1&orderNumbers=' + e.currentTarget.dataset.ordernum
-            })
-          }, 1200)
-        } else {
-          uni.showToast({
-            title: '支付失败！',
-            icon: 'none'
-          })
-        }
-      })
+        }, 1200)
+      } else {
+        uni.showToast({
+          title: '支付失败！',
+          icon: 'none'
+        })
+      }
+    })
 }
 
 /**
@@ -371,7 +371,7 @@ const onConfirmReceive = (e) => {
     content: '我已收到货？',
     confirmColor: '#eb2444',
 
-    success (res) {
+    success(res) {
       if (res.confirm) {
         uni.showLoading({
           mask: true
@@ -380,10 +380,10 @@ const onConfirmReceive = (e) => {
           url: '/p/myOrder/receipt/' + e.currentTarget.dataset.ordernum,
           method: 'PUT'
         })
-            .then(() => {
-              loadOrderData(sts.value, 1)
-              uni.hideLoading()
-            })
+          .then(() => {
+            loadOrderData(sts.value, 1)
+            uni.hideLoading()
+          })
       }
     }
   })
@@ -399,7 +399,7 @@ const delOrderList = (e) => {
     content: '确定要删除此订单吗？',
     confirmColor: '#eb2444',
 
-    success (res) {
+    success(res) {
       if (res.confirm) {
         const ordernum = e.currentTarget.dataset.ordernum
         uni.showLoading()
@@ -408,10 +408,10 @@ const delOrderList = (e) => {
           url: '/p/myOrder/' + ordernum,
           method: 'DELETE'
         })
-            .then(() => {
-              loadOrderData(sts.value, 1)
-              uni.hideLoading()
-            })
+          .then(() => {
+            loadOrderData(sts.value, 1)
+            uni.hideLoading()
+          })
       }
     }
   })
@@ -419,6 +419,6 @@ const delOrderList = (e) => {
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use './orderList.scss';
 </style>

@@ -309,7 +309,7 @@ swiper {
     font-size: 12px;
     text-align: center;
     color: #333;
-    padding: 0px 10px;
+    padding: 0 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 40px;
@@ -628,7 +628,6 @@ rich-text {
       font-size: 12px;
       text-align: center;
       border: none;
-      background: #f7f7f7;
     }
   }
 }
@@ -689,7 +688,7 @@ rich-text {
   left: 0;
   width: 100%;
   display: flex;
-  flex-direction: row nowrap;
+  flex-direction: row;
   height: 98rpx;
   z-index: 999;
   box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05);
