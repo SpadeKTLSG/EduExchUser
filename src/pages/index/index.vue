@@ -25,10 +25,8 @@
       <!-- 轮播图 -->
       <swiper
         :circular="true"
-        :duration="duration"
-        :indicator-active-color="indicatorActiveColor + ' '"
-        :indicator-color="indicatorColor"
-        :interval="interval"
+        :duration=1000
+        :interval=3000
         class="pic-swiper"
         indicator-active-color="#d1e5fb"
         indicator-dots
@@ -57,37 +55,39 @@
         <view
           class="item"
           data-sts="1"
-          @tap="toClassifyPage"
+          @tap="toProdClassifyPage"
         >
           <image src="@/static/images/icon/newProd.png"/>
-          <text>新品推荐</text>
+          <text>Upshow</text>
         </view>
         <view
           class="item"
           data-sts="1"
-          @tap="toClassifyPage"
+          @tap="toProdClassifyPage"
         >
           <image src="@/static/images/icon/timePrice.png"/>
-          <text>限时特惠</text>
+          <text>Hotsearch</text>
         </view>
-        <view
-          class="item"
-          data-sts="3"
-          @tap="toClassifyPage"
+
+        <view class="item"
+              data-sts="3"
+              @tap="toProdClassifyPage"
         >
           <image src="@/static/images/icon/neweveryday.png"/>
-          <text>每日疯抢</text>
+          <text>TODO</text>
         </view>
-        <view
-          class="item"
-          @tap="toCouponCenter"
+
+
+        <view class="item"
+              @tap="toVoucherCenter"
         >
           <image src="@/static/images/icon/newprods.png"/>
-          <text>领优惠券</text>
+          <text>领券</text>
         </view>
-        <view
-          class="item"
-          @tap="toCouponCenter"
+
+
+        <view class="item"
+              @tap="toNoticePage"
         >
           <image src="@/static/images/icon/newprods.png"/>
           <text>公告</text>
@@ -96,15 +96,16 @@
 
     </view>
 
-    <!-- 首页展示商品 -->
-    <view v-if="updata"
-          class="updata"
-    >
+    <!-- 首页展示区域: Upshow + Hotsearch -->
+    <view class="updata">
+      <!--      FIXME note: 这里的逻辑不对, 和我的拉取数据策略不一致, 需要未来大改. 这里是一起把所有商品都拉出来, 然后根据他们的
+      所谓tag进行分组展示, 但是我的后端是, 直接把对应的Upshow和Hotsearch实体一起拉取出来, 放到对应的位置去, 因此实际上这个方案是没法实现的-->
+
       <block
         v-for="(item, index) in taglist"
         :key="index"
       >
-        <!-- 提升表 -->
+        <!-- Upshow 大列表 -->
         <view v-if="item.style==='2' && item.prods && item.prods.length"
               class="up-to-date"
         >
@@ -115,7 +116,7 @@
               :data-title="item.title"
               class="more-prod-cont"
               data-sts="0"
-              @tap="toClassifyPage"
+              @tap="toProdClassifyPage"
             >
               <text class="more">
                 查看更多
@@ -147,10 +148,7 @@
                       ￥
                     </text>
                     <text class="big-num">
-                      {{ wxs.parsePrice(prod.price)[0] }}
-                    </text>
-                    <text class="small-num">
-                      .{{ wxs.parsePrice(prod.price)[1] }}
+                      {{ prod.price.toString() }}
                     </text>
                   </view>
                 </view>
@@ -159,10 +157,9 @@
           </view>
         </view>
 
-        <!-- 商城热卖 -->
-        <view
-          v-if="item.style==='1' && item.prods && item.prods.length"
-          class="hot-sale"
+        <!-- Hotsearch -->
+        <view v-if="item.style==='1' && item.prods && item.prods.length"
+              class="hot-sale"
         >
           <view class="title">
             <text>{{ item.title }}</text>
@@ -171,7 +168,7 @@
               :data-title="item.title"
               class="more-prod-cont"
               data-sts="0"
-              @tap="toClassifyPage"
+              @tap="toProdClassifyPage"
             >
               <text class="more">
                 更多
@@ -205,20 +202,11 @@
                   </view>
                   <view class="prod-text-info">
                     <view class="price">
-                      <text class="symbol">
-                        ￥
-                      </text>
+                      <text class="symbol"> ￥</text>
                       <text class="big-num">
-                        {{ wxs.parsePrice(prod.price)[0] }}
-                      </text>
-                      <text class="small-num">
-                        .{{ wxs.parsePrice(prod.price)[1] }}
+                        {{ prod.price.toString() }}
                       </text>
                     </view>
-                    <image
-                      class="basket-img"
-                      src="@/static/images/icon/basket-sel.png"
-                    />
                   </view>
                 </view>
               </view>
@@ -226,60 +214,6 @@
           </view>
         </view>
 
-        <!-- 更多宝贝 -->
-        <view
-          v-if="item.style==='0' && item.prods && item.prods.length"
-          class="more-prod"
-        >
-          <view class="title">
-            {{ item.title }}
-          </view>
-          <view class="prod-show">
-            <block
-              v-for="(prod, index2) in item.prods"
-              :key="index2"
-            >
-              <view
-                :data-prodid="prod.prodId"
-                class="show-item"
-                @tap="toProdPage"
-              >
-                <view class="more-prod-pic">
-                  <img-show
-                    :class-list="['more-pic']"
-                    :src="prod.pic"
-                  />
-                </view>
-                <view class="prod-text-right">
-                  <view class="prod-text more">
-                    {{ prod.prodName }}
-                  </view>
-                  <view class="prod-info">
-                    {{ prod.brief }}
-                  </view>
-                  <view class="b-cart">
-                    <view class="price">
-                      <text class="symbol">
-                        ￥
-                      </text>
-                      <text class="big-num">
-                        {{ wxs.parsePrice(prod.price)[0] }}
-                      </text>
-                      <text class="small-num">
-                        .{{ wxs.parsePrice(prod.price)[1] }}
-                      </text>
-                    </view>
-                    <image
-                      class="basket-img"
-                      src="@/static/images/icon/basket-sel.png"
-                      @tap.stop="addToCart(prod)"
-                    />
-                  </view>
-                </view>
-              </view>
-            </block>
-          </view>
-        </view>
       </block>
     </view>
   </view>
@@ -289,17 +223,15 @@
 <script setup>
 import ImgShow from "@/components/img-show/img-show.vue"; // 图片展示组件
 
-const wxs = number()
-const indicatorColor = ref('#d1e5fb')
-const indicatorActiveColor = ref('#1b7dec')
-const interval = ref(2000)
-const duration = ref(1000)
 const indexImgs = ref([])
 const seq = ref(0)
-const taglist = ref([])
-const updata = ref(true)
+const taglist = ref([]) //FIXME 没有tag之说
 
+//? trigger
 
+/**
+ * 页面加载时触发
+ */
 onLoad(() => {
   getAllData()
 })
@@ -324,34 +256,14 @@ onShow(() => {
   http.getCartCount() // 重新计算购物车总数量
 })
 
-onPullDownRefresh(() => {
-  // 模拟加载
-  setTimeout(() => {
-    getAllData()
-    uni.stopPullDownRefresh() // 停止下拉刷新
-  }, 100)
-})
 
-const getAllData = () => {
-  http.getCartCount()// 重新计算购物车总数量
-  getIndexImgs()
-  getTag()
-}
+//? 操作
 
-const toProdPage = (e) => {
-  const prodid = e.currentTarget.dataset.prodid
-
-  if (prodid) {
-    uni.navigateTo({
-      url: '/pages/prod/prod?prodid=' + prodid
-    })
-  }
-}
 /**
- * 加入购物车
+ * 加入收藏 TODO
  * @param item
  */
-const addToCart = (item) => {
+const addToCollect = (item) => {
   uni.showLoading({
     mask: true
   })
@@ -378,15 +290,29 @@ const addToCart = (item) => {
           uni.hideLoading()
           http.getCartCount() // 重新计算购物车总数量
           uni.showToast({
-            title: '加入购物车成功',
+            title: '加入收藏成功',
             icon: 'none'
           })
         })
     })
 }
 
-const toCouponCenter = () => {
 
+//? 页面跳转
+
+/**
+ * 跳转搜索页 TODO
+ */
+const toSearchPage = () => {
+  uni.navigateTo({
+    url: '/pages/search-page/search-page'
+  })
+}
+
+/**
+ * 跳转领券 TODO
+ */
+const toVoucherCenter = () => {
   uni.showToast({
     icon: 'none',
     title: '该功能未实现, 跳转至公告列表页'
@@ -398,24 +324,29 @@ const toCouponCenter = () => {
   })
 }
 
+
 /**
- * 跳转搜索页
+ * 跳转商品详情页 TODO
+ * @param e
  */
-const toSearchPage = () => {
-  uni.navigateTo({
-    url: '/pages/search-page/search-page'
-  })
+const toProdPage = (e) => {
+  const prodid = e.currentTarget.dataset.prodid
+  if (prodid) {
+    uni.navigateTo({
+      url: '/pages/prod/prod?prodid=' + prodid
+    })
+  }
 }
 
 /**
- * 跳转商品页面
+ * 跳转商品页面 TODO
  * @param e
  */
-const toClassifyPage = (e) => {
+const toProdClassifyPage = (e) => {
   let url = '/pages/prod-classify/prod-classify?sts=' + e.currentTarget.dataset.sts
   const id = e.currentTarget.dataset.id
   const title = e.currentTarget.dataset.title
-
+  //手拼url
   if (id) {
     url += '&tagid=' + id + '&title=' + title
   }
@@ -425,17 +356,30 @@ const toClassifyPage = (e) => {
   })
 }
 
+
 /**
- * 跳转公告列表页面
+ * 跳转公告页面 TODO
  */
-const onNewsPage = () => {
+const toNoticePage = () => {
   uni.navigateTo({
     url: '/pages/recent-news/recent-news'
   })
 }
 
+
+//? 加载项目
+
 /**
- * 加载轮播图
+ * 获取所有数据
+ */
+const getAllData = () => {
+  http.getCartCount() // 重新计算收藏总数量
+  getIndexImgs()
+  getTag()
+}
+
+/**
+ * 加载轮播图  TODO
  */
 const getIndexImgs = () => {
   http.request({
@@ -451,7 +395,7 @@ const getIndexImgs = () => {
 
 
 /**
- * 加载商品标题分组列表
+ * 加载商品标题分组列表 TODO
  */
 const getTag = () => {
   http.request({
@@ -462,30 +406,25 @@ const getTag = () => {
     .then(({data}) => {
       taglist.value = data
       for (let i = 0; i < data.length; i++) {
-        updata.value = false
-        updata.value = true
-        getTagProd(data[i].id, i)
+        //getTagProd
+        http.request({
+          url: '/prod/prodListByTagId',
+          method: 'GET',
+          data: {
+            tagId: data[i].id,
+            size: 6
+          }
+        })
+          .then(({data: prodData}) => {
+            const taglistParam = taglist.value
+            taglistParam[i].prods = prodData.records
+            taglist.value = taglistParam
+          })
       }
     })
 }
 
-const getTagProd = (id, index) => {
-  http.request({
-    url: '/prod/prodListByTagId',
-    method: 'GET',
-    data: {
-      tagId: id,
-      size: 6
-    }
-  })
-    .then(({data}) => {
-      updata.value = false
-      updata.value = true
-      const taglistParam = taglist.value
-      taglistParam[index].prods = data.records
-      taglist.value = taglistParam
-    })
-}
+
 </script>
 
 <style lang="scss" scoped>

@@ -109,7 +109,7 @@ const http = {
   },
 
   /**
-   *  获取购物车数量
+   *  获取收藏数量
    */
   getCartCount: () => {
     if (!uni.getStorageSync('Token')) {
