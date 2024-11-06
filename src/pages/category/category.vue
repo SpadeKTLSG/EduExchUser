@@ -1,20 +1,8 @@
 <template>
+  <!--下方第二个页面 - 分类-->
   <view class="container">
-    <!-- 头部搜索区 -->
-    <view class="search-bar">
-      <view
-        class="search-box"
-        @tap="toSearchPage"
-      >
-        <image
-          class="search-img"
-          src="@/static/images/icon/search.png"
-        />
-        <text class="sear-input">
-          搜索您想要的商品
-        </text>
-      </view>
-    </view>
+
+
     <!-- 滚动内容区 -->
     <view class="main">
       <!-- 左侧菜单start -->
@@ -45,23 +33,25 @@
       <!-- 左侧菜单end -->
 
       <!-- 右侧内容start -->
-      <scroll-view
-        class="rightcontent"
-        scroll-y="true"
+      <scroll-view class="rightcontent"
+                   scroll-y="true"
       >
+        <!-- 分类图片 -->
         <view class="adver-map">
           <view class="item-a">
             <image
-              :src="util.checkFileUrl(categoryImg)"
+              :src="util.checkFileUrl()"
               mode="widthFix"
             />
           </view>
         </view>
-        <!-- 子分类 -->
-        <view
-          v-if="subCategoryList.length"
-          class="th-cate-con"
+
+        <!-- 子分类文字 -->
+        <!--        TODO: 删除-->
+        <view v-if="subCategoryList.length"
+              class="th-cate-con"
         >
+
           <block
             v-for="(thCateItem, index) in subCategoryList"
             :key="index"
@@ -82,13 +72,15 @@
               </view>
             </view>
           </block>
+
         </view>
-        <view
-          v-else
-          class="cont-item empty"
+        <view v-else
+              class="cont-item empty"
         >
           该分类下暂无子分类~
         </view>
+
+
       </scroll-view>
       <!-- 右侧内容end -->
     </view>
@@ -99,15 +91,15 @@
 import util from '@/utils/util.js'
 
 const categoryList = ref([])
-const subCategoryList = ref([])
-const categoryImg = ref('')
+const subCategoryList = ref([]) //todo删除
+const categoryImg = ref('') //不需要
 const parentId = ref('')
-/**
- * 生命周期函数--监听页面加载
- */
+const selIndex = ref(0)
+
+
 onLoad(() => {
-  // 加载分类列表
-  http.request({
+
+  http.request({// 加载分类列表(全拉取)
     url: '/category/categoryInfo',
     method: 'GET',
     data: {
@@ -122,9 +114,9 @@ onLoad(() => {
     })
 })
 
-const selIndex = ref(0)
+
 /**
- * 分类点击事件
+ * 分类点击事件处理
  */
 const onMenuTab = (e) => {
   const index = e.currentTarget.dataset.index
