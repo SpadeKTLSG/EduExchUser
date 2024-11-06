@@ -1,5 +1,7 @@
 <template>
-  <view class="Mall4j container">
+  <!--下方第二个页面 - 分类 todo merge to main one-->
+  <view class="container">
+    
     <!-- 顶部子分类tab -->
     <scroll-view
       :scroll-into-view="intoView"
@@ -21,6 +23,7 @@
         </view>
       </block>
     </scroll-view>
+
     <!-- 商品列表 -->
     <view class="prod-item">
       <block v-if="prodList.length">
@@ -75,9 +78,15 @@
 
 <script setup>
 const wxs = number()
-
 const parentId = ref('')
 const categoryId = ref(0)
+const current = ref(1)
+const pages = ref(0)
+const intoView = ref('')
+const subCategoryList = ref([])
+const prodList = ref([])
+
+
 /**
  * 生命周期函数--监听页面加载
  */
@@ -88,8 +97,7 @@ onLoad((options) => {
   getProdList()
 })
 
-const current = ref(1)
-const pages = ref(0)
+
 /**
  * 页面上拉触底事件的处理函数
  */
@@ -100,8 +108,7 @@ onReachBottom(() => {
   }
 })
 
-const intoView = ref('')
-const subCategoryList = ref([])
+
 /**
  * 获取顶栏子分类数据
  */
@@ -121,13 +128,11 @@ const getSubCategory = () => {
     })
 }
 
-const prodList = ref([])
-const isLoaded = ref(false) // 列表是否加载完毕
+
 /**
  * 根据分类id获取商品列表数据
  */
 const getProdList = () => {
-  isLoaded.value = false
 
   http.request({
     url: '/prod/pageProd',
@@ -141,7 +146,6 @@ const getProdList = () => {
     }
   })
     .then(({data}) => {
-      isLoaded.value = true
       prodList.value = data.current === 1 ? data.records : prodList.value.concat(data.records)
       current.value = data.current
       pages.value = data.pages
@@ -158,6 +162,7 @@ const onSubCategoryTap = (e) => {
   intoView.value = 'sw' + e.currentTarget.dataset.id
   getProdList()
 }
+
 
 /**
  * 跳转商品下详情
