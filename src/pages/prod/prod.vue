@@ -55,7 +55,7 @@
       </view>
       <view
         class="btn buy"
-        @tap="buyNow"
+        @tap="toOrderPage"
       >
         <text>立即沟通</text>
       </view>
@@ -67,9 +67,8 @@
 </template>
 
 <script setup>
+
 const wxs = number()
-
-
 let shopId = 1 //todo 获取店铺id
 let prodId = 0
 const skuList = ref([])
@@ -89,80 +88,24 @@ const allProperties = ref([])
 const findSku = ref(true)
 const skuGroupList = ref([])
 
+
+//? trigger
+
 /**
  * 生命周期函数--监听页面加载
  */
 onLoad((options) => { //options是页面跳转带来的参数
   prodId = options.prodid
   getProdInfo() // 加载商品数据
-  // 查看用户是否关注
-  getCollection()
+  getCollection()  // 查看用户是否收藏
 })
 
 
-/**
- * 获取是否关注信息
- */
-const getCollection = () => {
-  uni.showLoading()
-  http.request({
-    url: '/p/user/collection/isCollection',
-    method: 'GET',
-    data: {
-      prodId
-    }
-  })
-    .then(({data}) => {
-      isCollection.value = data
-      uni.hideLoading()
-    })
-}
-
-/**
- * 添加或者取消收藏商品
- */
-const addOrCannelCollection = () => {
-  uni.showLoading()
-  http.request({
-    url: '/p/user/collection/addOrCancel',
-    method: 'POST',
-    data: prodId
-  })
-    .then(() => {
-      isCollection.value = !isCollection.value
-      uni.hideLoading()
-    })
-}
+//? 操作
 
 
 /**
- * 获取商品信息
- */
-const getProdInfo = () => { //传参要使用LocateVO传递
-  http.request({
-    url: '/prod/prodInfo',
-    method: 'GET',
-    data: {
-      prodId
-    }
-  })
-    .then(({data}) => {
-      imgs.value = data.imgs?.split(',')
-      content.value = util.formatHtml(data.content)
-      price.value = data.price
-      prodName.value = data.prodName
-      prodId = data.prodId
-      brief.value = data.brief
-      skuList.value = data.skuList
-      pic.value = data.pic
-      // 组装sku
-      groupSkuProp(data.skuList, data.price)
-    })
-}
-
-
-/**
- * 组装SKU todo 无用
+ * 组装SKU todo 全无用
  */
 const groupSkuProp = (skuList, defaultPrice) => {
   if (skuList.length === 1 && !skuList[0].properties) {
@@ -178,6 +121,7 @@ const groupSkuProp = (skuList, defaultPrice) => {
   const selectedPropObjListParam = []
 
   let defaultSkuParam = null
+
   for (let i = 0; i < skuList.length; i++) {
     let isDefault = false
     if (!defaultSkuParam && skuList[i].price === defaultPrice) {
@@ -212,19 +156,26 @@ const groupSkuProp = (skuList, defaultPrice) => {
       _skuGroupList.push(propListItem)
     }
   }
+
   defaultSku.value = defaultSkuParam
   propKeys.value = _propKeys
   selectedPropObj.value = _selectedPropObj
   skuGroup.value = skuGroupParam
   selectedPropObjList = selectedPropObjListParam
-  skuGroupList.value = unique(_skuGroupList)
+
+  skuGroupList.value = (_skuGroupList) => {
+    const map = {}
+    _skuGroupList.forEach(item => {
+      const obj = {}
+      Object.keys(item).sort().map(key => (obj[key] = item[key]))
+      map[JSON.stringify(obj)] = item
+    })
+    return Object.keys(map).map(key => JSON.parse(key))
+  }
   allProperties.value = _allProperties
   parseSelectedObjToVals(skuList)
 }
-
-
 const selectedPropList = ref(null)
-
 /**
  * 将已选的 {key:val,key2:val2}转换成 [val,val2]
  */
@@ -259,23 +210,28 @@ const parseSelectedObjToVals = (skuList) => {
 
 
 /**
- * 去重
+ * 添加或者取消收藏
  */
-const unique = (arr) => {
-  const map = {}
-  arr.forEach(item => {
-    const obj = {}
-    Object.keys(item).sort().map(key => (obj[key] = item[key]))
-    map[JSON.stringify(obj)] = item
+const addOrCannelCollection = () => {
+  uni.showLoading()
+  http.request({
+    url: '/p/user/collection/addOrCancel',
+    method: 'POST',
+    data: prodId
   })
-  return Object.keys(map).map(key => JSON.parse(key))
+    .then(() => {
+      isCollection.value = !isCollection.value
+      uni.hideLoading()
+    })
 }
 
+//? 页面跳转
 
 /**
- * 立即购买
+ * 跳转购买页面
  */
-const buyNow = () => {
+const toOrderPage = () => {
+  //页面跳转的传递参数: 保存本地
   uni.setStorageSync('orderItem', JSON.stringify({
     prodId,
     skuId: defaultSku.value.skuId,
@@ -285,6 +241,51 @@ const buyNow = () => {
   uni.navigateTo({
     url: '/pages/submit-order/submit-order?orderEntry=1'
   })
+}
+
+
+//? 加载项目
+
+
+/**
+ * 获取是否收藏信息
+ */
+const getCollection = () => {
+  http.request({
+    url: '/p/user/collection/isCollection',
+    method: 'GET',
+    data: {
+      prodId
+    }
+  })
+    .then(({data}) => {
+      isCollection.value = data
+    })
+}
+
+/**
+ * 获取商品信息
+ */
+const getProdInfo = () => { //传参要使用LocateVO传递
+  http.request({
+    url: '/prod/prodInfo',
+    method: 'GET',
+    data: {
+      prodId
+    }
+  })
+    .then(({data}) => {
+      imgs.value = data.imgs?.split(',')
+      content.value = util.formatHtml(data.content)
+      price.value = data.price
+      prodName.value = data.prodName
+      prodId = data.prodId
+      brief.value = data.brief
+      skuList.value = data.skuList
+      pic.value = data.pic
+      // 组装sku
+      groupSkuProp(data.skuList, data.price)
+    })
 }
 
 

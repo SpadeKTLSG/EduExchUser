@@ -330,6 +330,7 @@ const orderItems = ref([])
 const totalCount = ref(0)
 const transfee = ref(0)
 const shopReduce = ref('')
+
 /**
  * 加载订单数据
  */
@@ -387,6 +388,7 @@ const loadOrderData = () => {
       chooseCouponErrHandle(err)
     })
 }
+
 
 /**
  * 优惠券选择出错处理方法
