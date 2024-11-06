@@ -131,6 +131,8 @@
 </template>
 
 <script setup>
+import Production from "@/components/production/production.vue";
+
 const wxs = number()
 const prodName = ref('')
 /**

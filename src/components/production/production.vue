@@ -62,7 +62,9 @@ const props = defineProps({
   }
 })
 
-
+/**
+ * 跳转到商品详情页
+ */
 const toProdPage = (e) => {
   const prodid = e.currentTarget.dataset.prodid
   uni.navigateTo({
