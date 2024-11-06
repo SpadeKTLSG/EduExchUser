@@ -18,6 +18,8 @@
 </template>
 
 <script setup>
+import Production from "@/components/production/production.vue";
+
 const sts = ref(0)
 const title = ref('')
 const current = ref(1)
