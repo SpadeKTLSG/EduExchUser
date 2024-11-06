@@ -1,47 +1,29 @@
 <template>
   <!--下方第二个页面 - 分类 todo merge to main one-->
   <view class="container">
-    
-    <!-- 顶部子分类tab -->
-    <scroll-view
-      :scroll-into-view="intoView"
-      :scroll-with-animation="true"
-      class="category-tit"
-      scroll-x="true"
-    >
-      <block
-        v-for="(item, index) in subCategoryList"
-        :key="index"
-      >
-        <view
-          :id="'sw' + item.categoryId"
-          :class="'category-item ' + (item.categoryId===categoryId? 'on':'')"
-          :data-id="item.categoryId"
-          @tap="onSubCategoryTap"
-        >
-          {{ item.categoryName }}
-        </view>
-      </block>
-    </scroll-view>
 
     <!-- 商品列表 -->
     <view class="prod-item">
+
       <block v-if="prodList.length">
-        <block
-          v-for="(prod, key) in prodList"
-          :key="key"
+
+        <block v-for="(prod, key) in prodList"
+               :key="key"
         >
-          <view
-            :data-prodid="prod.prodId"
-            class="prod-items"
-            @tap="toProdPage"
+          <!--商品对象-->
+          <view :data-prodid="prod.prodId"
+                class="prod-items"
+                @tap="toProdPage"
           >
+            <!--图片 -->
             <view class="hot-imagecont">
               <image
                 :src="prod.pic"
                 class="hotsaleimg"
               />
             </view>
+
+            <!--名称+描述-->
             <view class="hot-text">
               <view class="hotprod-text">
                 {{ prod.prodName }}
@@ -49,85 +31,48 @@
               <view class="prod-info">
                 {{ prod.brief }}
               </view>
-              <view class="prod-text-info">
-                <view class="price">
-                  <text class="symbol">
-                    ￥
-                  </text>
-                  <text class="big-num">
-                    {{ wxs.parsePrice(prod.price)[0] }}
-                  </text>
-                  <text class="small-num">
-                    .{{ wxs.parsePrice(prod.price)[1] }}
-                  </text>
-                </view>
-              </view>
             </view>
           </view>
         </block>
       </block>
+
       <view
         v-else
         class="empty-wrap"
       >
-        暂无商品数据~
+        暂无商品数据
       </view>
     </view>
   </view>
 </template>
 
+
 <script setup>
-const wxs = number()
-const parentId = ref('')
+const parentId = ref('') //todo merge
 const categoryId = ref(0)
-const current = ref(1)
-const pages = ref(0)
-const intoView = ref('')
-const subCategoryList = ref([])
+const current = ref(1) //页码
 const prodList = ref([])
 
 
-/**
- * 生命周期函数--监听页面加载
- */
-onLoad((options) => {
+//? trigger
+
+onLoad((options) => { //可以获取到上个页面传递过来的参数
   parentId.value = options.parentId
   categoryId.value = options.categoryId
-  getSubCategory()
   getProdList()
 })
 
 
 /**
- * 页面上拉触底事件的处理函数
+ * 页面上拉触底事件 - 修改current来继续分页
  */
 onReachBottom(() => {
-  if (current.value < pages.value) {
-    current.value = current.value + 1
-    getProdList()
-  }
+  current.value = current.value + 1
+  getProdList()
 })
 
 
-/**
- * 获取顶栏子分类数据
- */
-const getSubCategory = () => {
-  http.request({
-    url: '/category/categoryInfo',
-    method: 'GET',
-    data: {
-      parentId: parentId.value
-    }
-  })
-    .then(({data}) => {
-      subCategoryList.value = data
-      nextTick(() => {
-        intoView.value = 'sw' + categoryId.value
-      })
-    })
-}
-
+//? 加载项目
 
 /**
  * 根据分类id获取商品列表数据
@@ -148,33 +93,25 @@ const getProdList = () => {
     .then(({data}) => {
       prodList.value = data.current === 1 ? data.records : prodList.value.concat(data.records)
       current.value = data.current
-      pages.value = data.pages
     })
 }
 
-/**
- * 切换顶部分类
- */
-const onSubCategoryTap = (e) => {
-  categoryId.value = e.currentTarget.dataset.id
-  current.value = 1
-  pages.value = 0
-  intoView.value = 'sw' + e.currentTarget.dataset.id
-  getProdList()
-}
 
+//? 页面跳转
 
 /**
- * 跳转商品下详情
+ * 跳转商品详情
  */
 const toProdPage = (e) => {
   const prodid = e.currentTarget.dataset.prodid
+
   if (prodid) {
     uni.navigateTo({
       url: '/pages/prod/prod?prodid=' + prodid
     })
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
