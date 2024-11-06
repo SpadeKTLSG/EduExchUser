@@ -1,8 +1,9 @@
 <template>
   <view class="con">
-    <image src="@/static/logo.png"/>
+    <!--头像-->
+    <image src="@/static/images/icon/head04.png"/>
 
-    <!-- 登录 -->
+    <!-- 登录表单 -->
     <view class="login-form">
 
       <view :class="['item',errorTips===1? 'error':'']">
@@ -60,22 +61,21 @@
           class="to-register"
           @tap="toRegitser"
         >
-          还没有账号？
-          <text>去注册></text>
+          还没有账号？click here
         </view>
       </view>
     </view>
 
+
+    <!-- 登录按钮 -->
     <view>
-      <button
-        class="authorized-btn"
-        @tap="login"
+      <button class="authorized-btn"
+              @tap="login"
       >
         登录
       </button>
-      <button
-        class="to-idx-btn"
-        @tap="toHomepage"
+      <button class="to-idx-btn"
+              @tap="toHomepage"
       >
         回到首页
       </button>
@@ -86,22 +86,20 @@
 
 <script setup>
 
-/**
- * 生命周期函数--监听页面显示
- */
-onShow(() => {
-  // 头部导航标题
-  uni.setNavigationBarTitle({
-    title: '用户登录'
-  })
-})
-
 const account = ref('') // 账号
 const password = ref('') // 密码
 const errorTips = ref(0) // 错误提示
 
+
+onShow(() => {
+  uni.setNavigationBarTitle({  // 头部导航标题
+    title: '用户登录'
+  })
+})
+
+
 /**
- *  监听器, 当傻不隆冬的用户开始动弹时, 清理当前的错误提示计数器
+ *  监听器, 当傻不隆冬的用户操作到密码位置时, 清理当前的错误提示计数器
  */
 watch(
   () => password.value,
@@ -127,12 +125,14 @@ const getInputVal = (e) => {
  * 登录
  */
 const login = () => {
-  if (account.value.length === 0) { //
+  //校验
+  if (account.value.length === 0) {
     errorTips.value = 1
   } else if (password.value.length === 0) {
     errorTips.value = 2
   } else {
-    errorTips.value = 0
+    errorTips.value = 0 // 清空错误提示
+
     http.request({
       url: '/login',
       method: 'post',
@@ -142,16 +142,17 @@ const login = () => {
       }
     })
       .then(({data}) => {
+        // 调用登陆后逻辑, 传入自定义方法fn
         http.loginSuccess(data, () => {
-          uni.showToast({
+          uni.showToast({ // 展示提示
             title: '登录成功',
             icon: 'none',
-            complete: () => {
-              setTimeout(() => {
+            complete: () => { //完成后操作
+              setTimeout(() => { //延迟操作
                 wx.switchTab({
-                  url: '/pages/index/index'
+                  url: '/pages/index/index' //首页
                 })
-              }, 1000)
+              }, 500)
             }
           })
         })
