@@ -118,8 +118,6 @@ const toRegister = () => {
   } else {
     errorTips.value = 0
 
-    uni.showLoading() // 显示加载中
-
     http.request({
       url: '/user/register',
       method: 'post',
@@ -129,7 +127,6 @@ const toRegister = () => {
       }
     })
       .then(() => {
-        uni.hideLoading() // 隐藏加载中
 
         uni.showToast({ // 提示注册成功
           title: '注册成功，请登录',
