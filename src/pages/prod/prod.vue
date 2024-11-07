@@ -67,7 +67,7 @@
 </template>
 
 <script setup>
-
+//note: 之后那个价格直接用int就行, 后端实现是这样的
 const wxs = number()
 let shopId = 1 //todo 获取店铺id
 let prodId = 0
