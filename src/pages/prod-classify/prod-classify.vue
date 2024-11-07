@@ -5,30 +5,47 @@
         v-for="(item, index) in prodList"
         :key="index"
       >
-        <production :item="item"/>
+        <view :data-prodid="item.prodId"
+              class="prod-items"
+              @tap="toProdPage"
+        >
+          <view class="hot-imagecont">
+            <image
+              :src="item.pic"
+              class="hotsaleimg"
+            />
+          </view>
+
+          <view class="hot-text">
+            <view class="hotprod-text">
+              {{ item.prodName }}
+            </view>
+          </view>
+        </view>
+
       </block>
       <view
         v-if="!prodList.length"
         class="empty"
       >
-        暂无数据
+        暂未实现
       </view>
     </view>
   </view>
 </template>
 
 <script setup>
-import Production from "@/components/production/production.vue";
+//Note: 这个是prod商品展示的改版, 被展示在用户收藏里面; 拉取数据仍然是错的, 应该直接从商品进行拉取.
 
-const sts = ref(0)
+const sts = ref(0) // todo 0: 分组标签商品列表, 1: 新品推荐, 2: 限时特惠, 3: 每日疯抢, 4: 优惠券商品列表, 5: 收藏商品列表
 const title = ref('')
 const current = ref(1)
 const size = ref(10)
 const pages = ref(0)
 const tagid = ref(0)
-/**
- * 生命周期函数--监听页面加载
- */
+const prodList = ref([])
+
+
 onLoad((options) => {
   current.value = 1
   pages.value = 0
@@ -92,6 +109,18 @@ onReachBottom(() => {
   }
 })
 
+
+/**
+ * 跳转到商品详情页
+ */
+const toProdPage = (e) => {
+  const prodid = e.currentTarget.dataset.prodid
+  uni.navigateTo({
+    url: '/pages/prod/prod?prodid=' + prodid
+  })
+}
+
+
 /**
  * 加载商品数据
  */
@@ -122,7 +151,7 @@ const loadProdData = (options) => {
   }
 }
 
-const prodList = ref([])
+
 const getActProd = (url) => {
   uni.showLoading()
   http.request({

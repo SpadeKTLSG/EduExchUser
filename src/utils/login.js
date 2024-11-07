@@ -1,4 +1,5 @@
 const loginMethods = {
+
   /**
    * 刷新token
    */
@@ -24,6 +25,7 @@ const loginMethods = {
       uni.setStorageSync('isRefreshingToken', false)
     })
   },
+
 
   /**
    * 设置登录后的跳转地址

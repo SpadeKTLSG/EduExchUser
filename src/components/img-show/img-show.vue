@@ -78,6 +78,7 @@ const handleTap = () => {
 }
 </script>
 
+
 <style scoped>
 image {
   width: 100%;

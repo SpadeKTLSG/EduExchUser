@@ -7,22 +7,13 @@
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTextStyle": "black",
         "enablePullDownRefresh": true,
-        "navigationBarTitleText": "mall4j"
+        "navigationBarTitleText": "首页"
       }
     },
     {
       "path": "pages/user/user",
       "style": {
         "navigationBarTitleText": "个人中心"
-      }
-    },
-    {
-      "path": "pages/basket/basket",
-      "style": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "购物车",
-        "navigationBarTextStyle": "black"
       }
     },
     {
@@ -45,24 +36,6 @@
         "navigationBarTitleText": "搜索",
         "navigationBarTextStyle": "black",
         "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/delivery-address/delivery-address",
-      "style": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "收货地址",
-        "navigationBarTextStyle": "black"
-      }
-    },
-    {
-      "path": "pages/editAddress/editAddress",
-      "style": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "编辑收货地址",
-        "navigationBarTextStyle": "black"
       }
     },
     {
@@ -93,24 +66,6 @@
       }
     },
     {
-      "path": "pages/express-delivery/express-delivery",
-      "style": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "物流查询",
-        "navigationBarTextStyle": "black"
-      }
-    },
-    {
-      "path": "pages/pay-result/pay-result",
-      "style": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "支付结果",
-        "navigationBarTextStyle": "black"
-      }
-    },
-    {
       "path": "pages/search-prod-show/search-prod-show",
       "style": {
         "backgroundTextStyle": "light",
@@ -122,7 +77,7 @@
     {
       "path": "pages/prod/prod",
       "style": {
-        "navigationBarTitleText": "商品详情"
+        "navigationBarTitleText": "详情"
       }
     },
     {
@@ -171,12 +126,6 @@
         "text": "分类",
         "iconPath": "/static/images/icon/category.png",
         "selectedIconPath": "/static/images/icon/category-sel.png"
-      },
-      {
-        "pagePath": "pages/basket/basket",
-        "text": "购物车",
-        "iconPath": "/static/images/icon/basket.png",
-        "selectedIconPath": "/static/images/icon/basket-sel.png"
       },
       {
         "pagePath": "pages/user/user",

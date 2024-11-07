@@ -1,64 +1,35 @@
 <template>
+  <!--搜索唤起页面-->
   <view class="container">
     <!-- 搜索框 -->
     <view class="search-bar">
+
       <view class="search-box">
-        <input
-          :value="prodName"
-          class="sear-input"
-          confirm-type="search"
-          placeholder="输入关键字搜索"
-          @confirm="toSearchProdPage"
-          @input="getSearchContent"
+        <input :value="prodName"
+               class="sear-input"
+               confirm-type="search"
+               placeholder="在这里搜索~"
+               @confirm="toSearchProdPage"
+               @input="getSearchContent"
         >
         <image
           class="search-img"
           src="@/static/images/icon/search.png"
         />
       </view>
-      <text
-        class="search-hint"
-        @tap="goBackIndex"
+
+      <text class="search-hint"
+            @tap="goBackIndex"
       >
         取消
       </text>
     </view>
 
     <view class="search-display">
-      <!-- 热门搜索 -->
-      <view class="hot-search">
-        <view class="title-text">
-          热门搜索
-        </view>
-        <view
-          v-if="hotSearchList && hotSearchList.length"
-          class="hot-search-tags"
-        >
-          <block
-            v-for="(item, index) in hotSearchList"
-            :key="index"
-          >
-            <text
-              :data-name="item.content"
-              class="tags"
-              @tap="onHistSearch"
-            >
-              {{ item.title }}
-            </text>
-          </block>
-        </view>
-        <view
-          v-else
-          class="search-tit-empty"
-        >
-          暂无数据
-        </view>
-      </view>
 
       <!-- 搜索历史 -->
-      <view
-        v-if="recentSearch && recentSearch.length"
-        class="history-search"
+      <view v-if="recentSearch && recentSearch.length"
+            class="history-search"
       >
         <view class="title-text history-line">
           搜索历史
@@ -90,9 +61,12 @@
 
 <script setup>
 const hotSearchList = ref([])
-/**
- * 生命周期函数--监听页面显示
- */
+const recentSearch = ref([])
+const prodName = ref('')
+
+
+//? trigger
+
 onShow(() => {
   http.request({
     url: '/search/hotSearchByShopId',
@@ -110,7 +84,7 @@ onShow(() => {
   getRecentSearch()
 })
 
-const prodName = ref('')
+
 /**
  * 生命周期函数--监听页面隐藏
  */
@@ -118,49 +92,6 @@ onHide(() => {
   prodName.value = ''
 })
 
-const recentSearch = ref([])
-/**
- * 获取历史搜索
- */
-const getRecentSearch = () => {
-  recentSearch.value = uni.getStorageSync('recentSearch')
-}
-
-/**
- * 搜索提交
- */
-const toSearchProdPage = () => {
-  if (prodName.value.trim()) {
-    // 记录最近搜索
-    let recentSearchStorage = uni.getStorageSync('recentSearch') || []
-    recentSearchStorage = recentSearchStorage.filter(item => item !== prodName.value)
-    recentSearchStorage.unshift(prodName.value)
-    if (recentSearchStorage.length > 10) {
-      recentSearchStorage.pop()
-    }
-    uni.setStorageSync('recentSearch', recentSearchStorage) // 跳转到商品列表页
-    uni.navigateTo({
-      url: '/pages/search-prod-show/search-prod-show?prodName=' + prodName.value
-    })
-  }
-}
-
-/**
- * 清空搜索历史
- */
-const clearSearch = () => {
-  uni.removeStorageSync('recentSearch')
-  getRecentSearch()
-}
-
-/**
- * 返回首页
- */
-const goBackIndex = () => {
-  uni.navigateBack({
-    url: '/pages/search-page/search-page'
-  })
-}
 
 /**
  * 输入商品名获取数据 || 绑定输入值
@@ -176,6 +107,64 @@ const onHistSearch = (e) => {
   prodName.value = e.currentTarget.dataset.name
   toSearchProdPage()
 }
+
+
+//? 操作
+
+
+/**
+ * 清空搜索历史
+ */
+const clearSearch = () => {
+  uni.removeStorageSync('recentSearch')
+  getRecentSearch()
+}
+
+/**
+ * 获取历史搜索
+ */
+const getRecentSearch = () => {
+  recentSearch.value = uni.getStorageSync('recentSearch')
+}
+
+
+//? 页面跳转
+
+/**
+ * 返回
+ */
+const goBackIndex = () => {
+  uni.navigateBack({
+    url: '/pages/search-page/search-page'
+  })
+}
+
+
+/**
+ * 搜索提交
+ */
+const toSearchProdPage = () => {
+  if (prodName.value.trim()) {
+    // 记录到最近搜索(前端实现)
+    let recentSearchStorage = uni.getStorageSync('recentSearch') || []
+    recentSearchStorage = recentSearchStorage.filter(item => item !== prodName.value)
+    recentSearchStorage.unshift(prodName.value)
+    if (recentSearchStorage.length > 10) {
+      recentSearchStorage.pop()
+    }
+
+    // 跳转到搜索结果页面
+    uni.setStorageSync('recentSearch', recentSearchStorage)
+    uni.navigateTo({
+      url: '/pages/search-prod-show/search-prod-show?prodName=' + prodName.value
+    })
+  }
+}
+
+
+//? 加载项目
+
+
 </script>
 
 <style lang="scss" scoped>

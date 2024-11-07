@@ -1,53 +1,25 @@
 <template>
   <view class="container">
+
+
     <!-- 用户信息 -->
-    <view
-      v-if="isAuthInfo"
-      class="userinfo"
-    >
+    <view class="userinfo">
       <view class="userinfo-con">
         <view class="userinfo-avatar">
           <image
-            :src="
-              loginResult.pic
-                ?
-                  (loginResult.pic.indexOf('http') === -1 ? picDomain + loginResult.pic : loginResult.pic)
-                :
-                  '/static/images/icon/head04.png'
-            "
+            :src="picDomain + loginResult.pic"
           />
         </view>
         <view class="userinfo-name">
-          <view>{{ loginResult.nickName ? loginResult.nickName : "用户昵称" }}</view>
+          <view>{{ loginResult.nickName }}</view>
         </view>
       </view>
     </view>
 
-    <view
-      v-if="!isAuthInfo"
-      class="userinfo-none"
-    >
-      <view
-        class="default-pic"
-        @tap="toLogin"
-      >
-        <image src="@/static/images/icon/head04.png"/>
-      </view>
-      <view
-        class="none-login"
-        @tap="toLogin"
-      >
-        <button class="unlogin">
-          未登录
-        </button>
-        <button class="click-login">
-          点击登录账号
-        </button>
-      </view>
-    </view>
-    <!-- end 用户信息 -->
 
+    <!-- 卖家买家信息  -->
     <view class="list-cont">
+
       <!-- 订单状态 -->
       <view class="total-order">
         <view class="order-tit">
@@ -57,264 +29,228 @@
           <view
             class="checkmore"
             data-sts="0"
-            @tap="toOrderListPage"
+            @tap="toOrderPage"
           >
             <text>查看全部</text>
             <text class="arrowhead"/>
           </view>
         </view>
+
         <view class="procedure">
-          <view
-            class="items"
-            data-sts="1"
-            @tap="toOrderListPage"
+
+          <view class="items"
+                data-sts="1"
+                @tap="toOrderPage"
           >
             <image src="@/static/images/icon/toPay.png"/>
             <text>待支付</text>
-            <text
-              v-if="orderAmount.unPay>0"
-              class="num-badge"
-            >
-              {{ orderAmount.unPay }}
-            </text>
           </view>
-          <view
-            class="items"
-            data-sts="2"
-            @tap="toOrderListPage"
+
+          <view class="items"
+                data-sts="2"
+                @tap="toOrderPage"
           >
             <image src="@/static/images/icon/toDelivery.png"/>
             <text>待发货</text>
-            <text
-              v-if="orderAmount.payed>0"
-              class="num-badge"
-            >
-              {{ orderAmount.payed }}
-            </text>
           </view>
-          <view
-            class="items"
-            data-sts="3"
-            @tap="toOrderListPage"
+          <view class="items"
+                data-sts="3"
+                @tap="toOrderPage"
           >
             <image src="@/static/images/icon/toTake.png"/>
             <text>待收货</text>
-            <text
-              v-if="orderAmount.consignment>0"
-              class="num-badge"
-            >
-              {{ orderAmount.consignment }}
-            </text>
           </view>
-          <view
-            class="items"
-            data-sts="5"
-            @tap="toOrderListPage"
+          <view class="items"
+                data-sts="5"
+                @tap="toOrderPage"
           >
             <image src="@/static/images/icon/toComment.png"/>
             <text>已完成</text>
           </view>
         </view>
       </view>
-      <!--end 订单状态 -->
 
+      <!-- 用户功能横置列表 -->
       <view class="prod-col">
-        <view
-          class="col-item"
-          @tap="myCollectionHandle"
+
+        <view class="col-item"
+              @tap="toCollectionPage"
         >
-          <view
-            v-if="loginResult"
-            class="num"
-          >
+          <view class="num">
             {{ collectionCount }}
-          </view>
-          <view
-            v-else
-            class="num"
-          >
-            --
           </view>
           <view class="tit">
             我的收藏
           </view>
         </view>
-        <view
-          class="col-item"
-          @tap="handleTips"
+
+
+        <view class="col-item"
+              @tap="wait4Fill"
         >
-          <view
-            v-if="loginResult"
-            class="num"
-          >
-            5
-          </view>
-          <view
-            v-else
-            class="num"
-          >
-            --
+          <view class="num">
+            FIXME
           </view>
           <view class="tit">
-            我的消息
+            TODO
           </view>
         </view>
-        <view
-          class="col-item"
-          @tap="handleTips"
+
+        <view class="col-item"
+              @tap="wait4Fill"
         >
-          <view
-            v-if="loginResult"
-            class="num"
-          >
-            3
+          <view class="num">
+            FIXME
           </view>
-          <view
-            v-else
-            class="num"
-          >
-            --
-          </view>
+
           <view class="tit">
-            我的足迹
+            TODO
           </view>
         </view>
+
       </view>
 
-      <view class="my-menu">
 
+      <!-- 用户功能下方列表功能区域 -->
+      <view class="my-menu">
 
         <view
           class="memu-item"
-          @tap="toCouponCenter"
+          @tap="toVoucherCenterPage"
         >
           <view class="i-name">
             <image src="@/static/images/icon/getCoupon.png"/>
-            <text>领券中心</text>
+            <text>领券部门</text>
           </view>
           <view class="arrowhead"/>
         </view>
 
         <view
           class="memu-item"
-          @tap="toMyCouponPage"
+          @tap="toUserVoucherPage"
         >
           <view class="i-name">
             <image src="@/static/images/icon/myCoupon.png"/>
-            <text>我的优惠券</text>
+            <text>我的券</text>
           </view>
           <view class="arrowhead"/>
         </view>
 
         <view
           class="memu-item"
-          @tap="toAddressList"
         >
           <view class="i-name">
             <image src="@/static/images/icon/myAddr.png"/>
-            <text>收货地址</text>
+            <text>个人信息-未实现</text>
           </view>
           <view class="arrowhead"/>
         </view>
 
       </view>
 
-      <!--end 列表项 -->
-
-      <view
-        v-if="isAuthInfo"
-        class="log-out"
-        @tap="logout"
+      <!-- 退出登陆 -->
+      <view class="log-out"
+            @tap="logout"
       >
         <view class="log-out-n">
-          <text>退出登录</text>
+          <text>滚出去</text>
         </view>
       </view>
+
+
     </view>
   </view>
 </template>
 
 <script setup>
-const picDomain = import.meta.env.VITE_APP_RESOURCES_URL
+//todo : 之后加上个人信息, 直接读取个人UserAllDTO的内容
+//todo: 这个页面调用的逻辑是, 首先用户进入的就是登陆页面, 没有存在没有登录的情况. 因此页面删除了未登录的情况
 
-const isAuthInfo = ref(false)
+const picDomain = import.meta.env.VITE_APP_RESOURCES_URL // 图片域名
 const loginResult = ref('')
 const orderAmount = ref('')
+const collectionCount = ref(0)
+
+
+//? trigger
+
+
 /**
  * 生命周期函数--监听页面显示
  */
-onShow(() => {
-  loginResult.value = uni.getStorageSync('loginResult')
-  isAuthInfo.value = !!loginResult.value
-  // 加载订单数字
-  if (isAuthInfo.value) {
-    uni.showLoading()
-    http.request({
-      url: '/p/myOrder/orderCount',
-      method: 'GET',
-      data: {}
-    })
-      .then(({data}) => {
-        uni.hideLoading()
-        orderAmount.value = data
-      })
-    showCollectionCount()
-  }
+onLoad(() => {
+  getAllData()
 })
 
 
-const toCouponCenter = () => {
+//? 操作
+
+
+/**
+ * 退出登录
+ */
+const logout = () => {
+  http.request({
+    url: '/logOut',
+    method: 'post'
+  })
+    .then(() => {
+      uni.removeStorageSync('loginResult')
+      uni.removeStorageSync('token')
+
+      uni.showToast({
+        title: '滚出去了',
+        icon: 'none'
+      })
+
+      setTimeout(() => {
+        uni.switchTab({
+          url: '/pages/accountLogin/accountLogin'
+        })
+      }, 1000)
+    })
+}
+
+
+//? 页面跳转
+
+/**
+ * 跳转领劵中心
+ */
+const toVoucherCenterPage = () => {
   uni.showToast({
     icon: 'none',
-    title: '该功能未开源'
-  })
-}
-const toMyCouponPage = () => {
-  uni.showToast({
-    icon: 'none',
-    title: '该功能未开源'
-  })
-}
-const handleTips = () => {
-  uni.showToast({
-    icon: 'none',
-    title: '该功能未开源'
-  })
-}
-const toAddressList = () => {
-  uni.navigateTo({
-    url: '/pages/delivery-address/delivery-address'
+    title: '该功能未实现'
   })
 }
 
-const toOrderListPage = (e) => {
+/**
+ * 跳转我的劵
+ */
+const toUserVoucherPage = () => {
+  uni.showToast({
+    icon: 'none',
+    title: '该功能未实现'
+  })
+}
+
+
+/**
+ * 跳转订单列表
+ * @param e
+ */
+const toOrderPage = (e) => {
   const sts = e.currentTarget.dataset.sts
   uni.navigateTo({
     url: '/pages/orderList/orderList?sts=' + sts
   })
 }
 
-const collectionCount = ref(0)
-/**
- * 查询所有的收藏量
- */
-const showCollectionCount = () => {
-  uni.showLoading()
-  http.request({
-    url: '/p/user/collection/count',
-    method: 'GET',
-    data: {}
-  })
-    .then(({data}) => {
-      uni.hideLoading()
-      collectionCount.value = data
-    })
-}
 
 /**
- * 我的收藏跳转
+ * 跳转收藏
  */
-const myCollectionHandle = () => {
+const toCollectionPage = () => {
   let url = '/pages/prod-classify/prod-classify?sts=5'
   const id = 0
   const title = '我的收藏商品'
@@ -326,39 +262,56 @@ const myCollectionHandle = () => {
   })
 }
 
+
 /**
- * 登陆跳转
+ * 空位
  */
-const toLogin = () => {
-  uni.navigateTo({
-    url: '/pages/accountLogin/accountLogin'
+const wait4Fill = () => {
+  uni.showToast({
+    icon: 'none',
+    title: '该功能未实现'
   })
 }
 
+//? 加载项目
+
+const getAllData = () => {
+  showCollectionCount()
+  showOrderCount()
+  loginResult.value = uni.getStorageSync('loginResult')
+}
+
+
 /**
- * 退出登录
+ * 查询收藏量
  */
-const logout = () => {
+const showCollectionCount = () => {
   http.request({
-    url: '/logOut',
-    method: 'post'
+    url: '/p/user/collection/count',
+    method: 'GET',
+    data: {}
   })
-    .then(() => {
-      util.removeTabBadge()
-      uni.removeStorageSync('loginResult')
-      uni.removeStorageSync('token')
-      uni.showToast({
-        title: '退出成功',
-        icon: 'none'
-      })
-      orderAmount.value = ''
-      setTimeout(() => {
-        uni.switchTab({
-          url: '/pages/index/index'
-        })
-      }, 1000)
+    .then(({data}) => {
+      collectionCount.value = data
     })
 }
+
+
+/**
+ * 查询订单量 (待定)
+ */
+const showOrderCount = () => {
+  http.request({
+    url: '/p/myOrder/orderCount',
+    method: 'GET',
+    data: {}
+  })
+    .then(({data}) => {
+      orderAmount.value = data
+    })
+}
+
+
 </script>
 
 <style lang="scss" scoped>
