@@ -141,42 +141,46 @@ const login = () => {
         passWord: password.value
       }
     })
-      .then(({data}) => {
-        // 调用登陆后逻辑, 传入自定义方法fn
-        http.loginSuccess(data, () => {
-          uni.showToast({ // 展示提示
-            title: '登录成功',
-            icon: 'none',
-            complete: () => { //完成后操作
-              setTimeout(() => { //延迟操作
-                wx.switchTab({
-                  url: '/pages/index/index' //首页
-                })
-              }, 500)
-            }
-          })
+      .then(({data}) => { //登陆信息处理
+        wx.setStorageSync('loginResult', data)
+        wx.setStorageSync('hadLogin', true)      // 保存成功登录标识,token过期判断
+        const expiresTimeStamp = data.expiresIn * 1000 / 2 + new Date().getTime() // 缓存token的过期时间
+        uni.setStorageSync('expiresTimeStamp', expiresTimeStamp)
+        wx.setStorageSync('Token', data.accessToken) // 把token存入缓存，请求接口数据时要用
+      })
+      .then(() => {
+        uni.showToast({ // 展示提示
+          title: '登录成功',
+          icon: 'none',
+          complete: () => { //完成后操作
+            setTimeout(() => { //延迟操作
+              wx.switchTab({
+                url: '/pages/index/index' //首页
+              })
+            }, 500)
+          }
         })
       })
+
   }
-}
 
-/**
- * 去注册
- */
-const toRegitser = () => {
-  uni.navigateTo({
-    url: '/pages/register/register'
-  })
-}
+  /**
+   * 去注册
+   */
+  const toRegitser = () => {
+    uni.navigateTo({
+      url: '/pages/register/register'
+    })
+  }
 
-/**
- * 回到首页
- */
-const toHomepage = () => {
-  wx.switchTab({ //切换页面
-    url: '/pages/index/index'
-  })
-}
+  /**
+   * 回到首页
+   */
+  const toHomepage = () => {
+    wx.switchTab({ //切换页面
+      url: '/pages/index/index'
+    })
+  }
 </script>
 
 <style lang="scss" scoped>

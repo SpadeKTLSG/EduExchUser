@@ -1,6 +1,6 @@
 import loginMethods from './login'
 
-// 全局请求封装 (发送 + 接受)
+// http请求处理(请求/响应拦截)
 const http = {
 
   request: async function (params) {
@@ -114,36 +114,6 @@ const http = {
   },
 
   /**
-   *  获取收藏数量
-   */
-  getCartCount: () => {
-    if (!uni.getStorageSync('Token')) {
-      util.removeTabBadge()
-      return
-    }
-    http.request({
-      url: '/p/shopCart/prodCount',
-      method: 'GET',
-      dontTrunLogin: true,
-      data: {}
-    })
-      .then(({data}) => {
-        if (data > 0) {
-          uni.setTabBarBadge({
-            index: 2,
-            text: data + ''
-          })
-          getApp().globalData.totalCartCount = data
-        } else {
-          uni.removeTabBarBadge({
-            index: 2
-          })
-          getApp().globalData.totalCartCount = 0
-        }
-      })
-  },
-
-  /**
    * 请求异常处理
    */
   onRequestFail: (params, responseData) => {
@@ -151,26 +121,7 @@ const http = {
     console.log('接口地址: ', params.url)
     console.log('异常信息: ', responseData)
     console.error('============== 请求异常 end ==========')
-  },
-
-  /**
-   * 登录成功后执行
-   * @param {Object} result  登录成功返回的数据
-   * @param {Object} fn 登录成功后的回调
-   */
-  loginSuccess: (result, fn) => {
-    // 保存登陆信息
-    wx.setStorageSync('loginResult', result)
-    // 保存成功登录标识,token过期判断
-    wx.setStorageSync('hadLogin', true)
-    const expiresTimeStamp = result.expiresIn * 1000 / 2 + new Date().getTime()
-    // 缓存token的过期时间
-    uni.setStorageSync('expiresTimeStamp', expiresTimeStamp)
-
-    wx.setStorageSync('Token', result.accessToken) // 把token存入缓存，请求接口数据时要用
-    if (fn) {
-      fn()
-    }
   }
+
 }
 export default http

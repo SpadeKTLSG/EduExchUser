@@ -14,8 +14,7 @@ export default defineConfig({
         'uni-app'
       ],
       dirs: [
-        'src/utils',
-        'src/utils/wxs/**'
+        'src/utils'
       ],
       dts: 'auto-imports.d.ts',
       eslintrc: {

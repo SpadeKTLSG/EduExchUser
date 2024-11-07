@@ -40,7 +40,7 @@
     <!-- 商品详情 -->
     <view class="prod-detail">
       <view>
-        <rich-text :nodes="content"/>
+        <!--图片即可-->
       </view>
     </view>
 
@@ -274,7 +274,6 @@ const getProdInfo = () => { //传参要使用LocateVO传递
   })
     .then(({data}) => {
       imgs.value = data.imgs?.split(',')
-      content.value = util.formatHtml(data.content)
       price.value = data.price
       prodName.value = data.prodName
       prodId = data.prodId

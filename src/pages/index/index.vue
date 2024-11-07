@@ -223,7 +223,8 @@
 </template>
 
 <script setup>
-import ImgShow from "@/components/img-show/img-show.vue"; // 图片展示组件
+import ImgShow from "@/components/img-show/img-show.vue";
+import func from "../../utils/api"; // 图片展示组件
 
 const indexImgs = ref([])
 const seq = ref(0)
@@ -255,7 +256,7 @@ onShow(() => {
     }
   })
   // #endif
-  http.getCartCount() // 重新计算购物车总数量
+  func.getCartCount() // 重新计算购物车总数量
 })
 
 
@@ -266,9 +267,7 @@ onShow(() => {
  * @param item
  */
 const addToCollect = (item) => {
-  uni.showLoading({
-    mask: true
-  })
+
   http.request({
     url: '/prod/prodInfo',
     method: 'GET',
@@ -289,8 +288,7 @@ const addToCollect = (item) => {
         }
       })
         .then(() => {
-          uni.hideLoading()
-          http.getCartCount() // 重新计算购物车总数量
+          func.getCartCount() // 重新计算购物车总数量
           uni.showToast({
             title: '加入收藏成功',
             icon: 'none'
@@ -375,7 +373,7 @@ const toNoticePage = () => {
  * 获取所有数据
  */
 const getAllData = () => {
-  http.getCartCount() // 重新计算收藏总数量
+  func.getCartCount() // 重新计算收藏总数量
   getIndexImgs()
   getTag()
 }
