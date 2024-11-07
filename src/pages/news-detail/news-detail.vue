@@ -1,26 +1,30 @@
 <template>
+  <!--公告详情-->
   <view class="container">
+
     <view class="news-detail">
+
       <view class="news-detail-title">
         {{ news.title }}
       </view>
-      <rich-text
-        :nodes="news.content"
-        class="content"
+
+      <rich-text :nodes="news.content"
+                 class="content"
       />
+
     </view>
   </view>
 </template>
 
 <script setup>
+
 const news = ref({
   title: '',
   content: '',
   id: null
 })
-/**
- * 生命周期函数--监听页面加载
- */
+
+
 onLoad((options) => {
   // 加载公告详情
   http.request({
@@ -34,6 +38,8 @@ onLoad((options) => {
       news.value = data
     })
 })
+
+
 </script>
 
 <style lang="scss" scoped>
