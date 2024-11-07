@@ -1,4 +1,5 @@
 <template>
+  <!--搜索结果页面-->
   <view class="container">
     <!-- 搜索框 -->
     <view class="fixed-box">
