@@ -17,15 +17,6 @@
       }
     },
     {
-      "path": "pages/basket/basket",
-      "style": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "购物车",
-        "navigationBarTextStyle": "black"
-      }
-    },
-    {
       "path": "pages/category/category",
       "style": {
         "backgroundTextStyle": "light",
@@ -171,12 +162,6 @@
         "text": "分类",
         "iconPath": "/static/images/icon/category.png",
         "selectedIconPath": "/static/images/icon/category-sel.png"
-      },
-      {
-        "pagePath": "pages/basket/basket",
-        "text": "购物车",
-        "iconPath": "/static/images/icon/basket.png",
-        "selectedIconPath": "/static/images/icon/basket-sel.png"
       },
       {
         "pagePath": "pages/user/user",
