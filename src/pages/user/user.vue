@@ -235,11 +235,13 @@
 </template>
 
 <script setup>
+//todo : 之后加上个人信息, 直接读取个人UserAllDTO的内容
 const picDomain = import.meta.env.VITE_APP_RESOURCES_URL
 
 const isAuthInfo = ref(false)
 const loginResult = ref('')
 const orderAmount = ref('')
+
 /**
  * 生命周期函数--监听页面显示
  */
