@@ -66,15 +66,6 @@
       }
     },
     {
-      "path": "pages/express-delivery/express-delivery",
-      "style": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "物流查询",
-        "navigationBarTextStyle": "black"
-      }
-    },
-    {
       "path": "pages/search-prod-show/search-prod-show",
       "style": {
         "backgroundTextStyle": "light",

@@ -91,9 +91,7 @@ const skuGroupList = ref([])
 
 //? trigger
 
-/**
- * 生命周期函数--监听页面加载
- */
+
 onLoad((options) => { //options是页面跳转带来的参数
   prodId = options.prodid
   getProdInfo() // 加载商品数据
