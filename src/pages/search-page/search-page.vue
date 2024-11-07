@@ -128,26 +128,6 @@ const getRecentSearch = () => {
 }
 
 
-/**
- * 搜索提交
- */
-const toSearchProdPage = () => {
-  if (prodName.value.trim()) {
-    // 记录最近搜索
-    let recentSearchStorage = uni.getStorageSync('recentSearch') || []
-    recentSearchStorage = recentSearchStorage.filter(item => item !== prodName.value)
-    recentSearchStorage.unshift(prodName.value)
-    if (recentSearchStorage.length > 10) {
-      recentSearchStorage.pop()
-    }
-    uni.setStorageSync('recentSearch', recentSearchStorage) // 跳转到商品列表页
-    uni.navigateTo({
-      url: '/pages/search-prod-show/search-prod-show?prodName=' + prodName.value
-    })
-  }
-}
-
-
 //? 页面跳转
 
 /**
@@ -157,6 +137,28 @@ const goBackIndex = () => {
   uni.navigateBack({
     url: '/pages/search-page/search-page'
   })
+}
+
+
+/**
+ * 搜索提交
+ */
+const toSearchProdPage = () => {
+  if (prodName.value.trim()) {
+    // 记录到最近搜索(前端实现)
+    let recentSearchStorage = uni.getStorageSync('recentSearch') || []
+    recentSearchStorage = recentSearchStorage.filter(item => item !== prodName.value)
+    recentSearchStorage.unshift(prodName.value)
+    if (recentSearchStorage.length > 10) {
+      recentSearchStorage.pop()
+    }
+
+    // 跳转到搜索结果页面
+    uni.setStorageSync('recentSearch', recentSearchStorage)
+    uni.navigateTo({
+      url: '/pages/search-prod-show/search-prod-show?prodName=' + prodName.value
+    })
+  }
 }
 
 
