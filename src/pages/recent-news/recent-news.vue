@@ -1,14 +1,16 @@
 <template>
+  <!-- 公告列表 -->
   <view class="container">
+
     <view class="recent-news">
+
       <block
         v-for="(item, index) in news"
         :key="index"
       >
-        <view
-          :data-id="item.id"
-          class="news-item"
-          @tap="toNewsDetail"
+        <view :data-id="item.id"
+              class="news-item"
+              @tap="toNewsDetail"
         >
           <view class="news-item-title">
             {{ item.title }}
@@ -18,21 +20,15 @@
           </view>
         </view>
       </block>
-      <view
-        v-if="!news || !news.length"
-        class="empty"
-      >
-        暂无数据
-      </view>
     </view>
+
   </view>
 </template>
 
 <script setup>
 const news = ref([])
-/**
- * 生命周期函数--监听页面显示
- */
+
+
 onShow(() => {
   // 加载公告
   http.request({
@@ -44,8 +40,9 @@ onShow(() => {
     })
 })
 
+
 /**
- * 跳转公告详情页
+ * 跳转新闻详情
  * @param e
  */
 const toNewsDetail = (e) => {
@@ -53,6 +50,8 @@ const toNewsDetail = (e) => {
     url: '/pages/news-detail/news-detail?id=' + e.currentTarget.dataset.id
   })
 }
+
+
 </script>
 
 <style lang="scss" scoped>
